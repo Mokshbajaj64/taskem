@@ -9,21 +9,27 @@ import {
   Text,
   IconButton,
   useColorMode,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import React from "react";
 import "../App.css";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill, BsFillEmojiSunglassesFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
+  const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
+  const [showPassword, setShowPassword] = React.useState(false);
   return (
     <div className="flex w-full min-h-screen overflow-y-hidden">
       <div className="flex w-[44%] clippath items-center">
-        <div className="fixed top-0 p-2 flex items-center gap-2">
-          <BsFillEmojiSunglassesFill size={20} color="white" />
-          <Heading as="h5" fontSize="lg" color="white">
-            Logo
+        <div className="fixed top-0 sm:p-2 p-0 flex items-center gap-2 sm:ml-3 ml-0">
+          <BsFillEmojiSunglassesFill size={30} color="white" />
+          <Heading as="h5" fontSize="2xl" color="white">
+            ShittyShit
           </Heading>
         </div>
         <img src="/bg1.svg" className="w-[70%] h-[70%]" />
@@ -55,7 +61,31 @@ const Login = () => {
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="email">Password</FormLabel>
-            <Input type="password" width="60%" placeholder="*********" />
+            <InputGroup width="60%">
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="*********"
+              />
+              <InputRightElement
+                children={
+                  showPassword ? (
+                    <AiFillEyeInvisible
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setShowPassword(false);
+                      }}
+                    />
+                  ) : (
+                    <AiFillEye
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setShowPassword(true);
+                      }}
+                    />
+                  )
+                }
+              />
+            </InputGroup>
           </FormControl>
           <Checkbox>Remember me</Checkbox>
           <div className="flex w-[60%]">
@@ -69,6 +99,9 @@ const Login = () => {
               size="md"
               color="blue.500"
               className="cursor-pointer hover:underline"
+              onClick={() => {
+                navigate("/register");
+              }}
             >
               Sign up
             </Text>
