@@ -23,16 +23,63 @@ const Register = () => {
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const [showPassword, setShowPassword] = React.useState(false);
+  const [color, setColor] = React.useState("blue");
   return (
     <div className="flex w-full min-h-screen overflow-y-hidden">
-      <div className="flex w-[44%] clippath items-center">
-        <div className="fixed top-0 sm:p-2 p-0 flex items-center gap-2 sm:ml-3 ml-0">
-          <BsFillEmojiSunglassesFill size={30} color="white" />
-          <Heading as="h5" fontSize="2xl" color="white">
-            ShittyShit
-          </Heading>
+      <div
+        className={
+          color === "blue"
+            ? "flex w-[44%] clippath items-center bg-blue-400"
+            : color === "purple"
+            ? "flex w-[44%] clippath items-center bg-purple-400"
+            : color === "green"
+            ? "flex w-[44%] clippath items-center bg-green-400"
+            : color === "pink"
+            ? "flex w-[44%] clippath items-center bg-pink-400"
+            : "flex w-[44%] clippath items-center bg-red-400"
+        }
+      >
+        <div className="flex fixed top-0 md:p-2 p-2 md:ml-3 ml-0 gap-28">
+          <div className="hidden items-center gap-2 md:flex">
+            <BsFillEmojiSunglassesFill size={30} color="white" />
+            <Heading as="h5" fontSize="2xl" color="white">
+              ShittyShit
+            </Heading>
+          </div>
+          <div className="flex items-center gap-4">
+            <div
+              className="flex p-2 bg-purple-400 rounded-full cursor-pointer"
+              onClick={() => {
+                setColor("purple");
+              }}
+            ></div>
+            <div
+              className="flex p-2 bg-green-400 rounded-full cursor-pointer"
+              onClick={() => {
+                setColor("green");
+              }}
+            ></div>
+            <div
+              className="flex p-2 bg-red-400 rounded-full cursor-pointer"
+              onClick={() => {
+                setColor("red");
+              }}
+            ></div>
+            <div
+              className="flex p-2 bg-pink-400 rounded-full cursor-pointer"
+              onClick={() => {
+                setColor("pink");
+              }}
+            ></div>
+            <div
+              className="flex p-2 bg-blue-400 rounded-full cursor-pointer"
+              onClick={() => {
+                setColor("blue");
+              }}
+            ></div>
+          </div>
         </div>
-        <img src="/bg1.svg" className="w-[70%] h-[70%]" />
+        <img src="/bg2.svg" className="w-[70%] h-[70%]" />
       </div>
       <div className="w-[56%] flex flex-col justify-center gap-8">
         <div className="w-[80%]">
