@@ -1,5 +1,6 @@
 import React from "react";
 import HomeAbout from "../components/HomeAbout";
+import HomeFooter from "../components/HomeFooter";
 import HomeHero from "../components/HomeHero";
 import HomeMoreStuff from "../components/HomeMoreStuff";
 import HomeNavbar from "../components/HomeNavbar";
@@ -15,6 +16,7 @@ const Home = () => {
       <HomeUsage />
       <HomeStuff />
       <HomeMoreStuff />
+      <HomeFooter />
     </div>
   );
 };
