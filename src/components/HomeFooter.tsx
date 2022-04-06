@@ -6,12 +6,12 @@ import { AiFillGithub } from "react-icons/ai";
 const HomeFooter = () => {
   return (
     <div className="flex justify-center items-start w-screen h-screen flex-col px-32">
-      <Divider className="pt-[10%]" />
-      <div className="flex h-full w-full justify-center items-center">
+      <Divider className="pt-[10%] lg:flex hidden" />
+      <div className="flex h-full w-full justify-center items-center md:flex-row flex-col">
         <Heading className="absolute bottom-0 mb-2" fontSize="xl" as="h3">
           Made with 💜 by varunboi
         </Heading>
-        <div className="flex justify-center items-center w-[30%] h-full">
+        <div className="hidden justify-center items-center md:w-[30%] w-[100%] h-full md:flex">
           <div className="flex flex-col gap-7">
             <BsEmojiHeartEyesFill size="30" />
             <Text color="gray.500" fontSize="xl">
@@ -23,7 +23,7 @@ const HomeFooter = () => {
             />
           </div>
         </div>
-        <div className="flex justify-center items-center w-[70%] h-full">
+        <div className="flex justify-center items-center md:w-[70%] w-[100%] h-full">
           <div className="flex w-full h-full gap-14 justify-center items-center">
             <div className="flex flex-col gap-4">
               <Text color="gray.400" fontSize="lg" className="mb-3">

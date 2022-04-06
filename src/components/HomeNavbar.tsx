@@ -54,7 +54,7 @@ const HomeNavbar = () => {
           onClick={() => {
             toggleColorMode();
           }}
-          className="mr-8"
+          className="mr-2 md:mr-8 ml-3 md:ml-0"
         />
         <Button
           colorScheme="linkedin"

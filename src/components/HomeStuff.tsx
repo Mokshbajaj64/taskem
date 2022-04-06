@@ -4,8 +4,8 @@ import { Heading, Text } from "@chakra-ui/react";
 const HomeStuff = () => {
   return (
     <div className="flex justify-center items-start w-screen h-screen">
-      <div className="flex w-full justify-center items-center h-full">
-        <div className="flex items-center flex-col w-[35%] justify-center ml-32">
+      <div className="flex w-full justify-center items-center h-full md:flex-row flex-col">
+        <div className="flex items-center flex-col w-[100%] md:w-[35%] justify-center md:ml-32 ml-8">
           <Heading as="h1" fontSize="5xl" lineHeight="3.5rem">
             A shit manager you can trust your life
           </Heading>
@@ -27,7 +27,7 @@ const HomeStuff = () => {
             query about our product
           </Text>
         </div>
-        <div className="flex items-center flex-col w-[65%] justify-center h-full">
+        <div className="flex items-center flex-col w-[100%] md:w-[65%] justify-center h-full">
           <img src="/bg4.svg" alt="" className="w-[70%] h-[70%]" />
         </div>
       </div>

@@ -19,7 +19,7 @@ const HomeUsage = () => {
             <TabPanel>
               <div className="flex items-center w-full gap-24 justify-center mb-10">
                 <div
-                  className="flex flex-col p-4 w-[40%]"
+                  className="flex flex-col p-4 w-[100%] md:w-[40%]"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
                   }}
@@ -56,7 +56,7 @@ const HomeUsage = () => {
             <TabPanel>
               <div className="flex items-center w-full gap-24 justify-center mb-10">
                 <div
-                  className="flex flex-col p-4 w-[40%]"
+                  className="flex flex-col p-4 w-[100%] md:w-[40%]"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
                   }}
@@ -93,7 +93,7 @@ const HomeUsage = () => {
             <TabPanel>
               <div className="flex items-center w-full gap-24 justify-center mb-10">
                 <div
-                  className="flex flex-col p-4 w-[40%]"
+                  className="flex flex-col p-4 w-[100%] md:w-[40%]"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
                   }}
@@ -130,7 +130,7 @@ const HomeUsage = () => {
             <TabPanel>
               <div className="flex items-center w-full gap-24 justify-center mb-10">
                 <div
-                  className="flex flex-col p-4 w-[40%]"
+                  className="flex flex-col p-4 w-[100%] md:w-[40%]"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
                   }}
@@ -167,7 +167,7 @@ const HomeUsage = () => {
             <TabPanel>
               <div className="flex items-center w-full gap-24 justify-center mb-10">
                 <div
-                  className="flex flex-col p-4 w-[40%]"
+                  className="flex flex-col p-4 w-[100%] md:w-[40%]"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
                   }}
@@ -204,7 +204,7 @@ const HomeUsage = () => {
             <TabPanel>
               <div className="flex items-center w-full gap-24 justify-center mb-10">
                 <div
-                  className="flex flex-col p-4 w-[40%]"
+                  className="flex flex-col p-4 w-[100%] md:w-[40%]"
                   style={{
                     boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
                   }}
@@ -243,8 +243,8 @@ const HomeUsage = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            marginLeft={"24.2%"}
-            marginRight={"24.2%"}
+            overflowX="auto"
+            className="md:ml-[24.2%] md:mr-[24.2%] ml-0 mr-0"
           >
             <Tab>Creatives</Tab>
             <Tab>Developers</Tab>
