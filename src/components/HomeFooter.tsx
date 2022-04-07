@@ -2,6 +2,7 @@ import { Divider, Text, Heading } from "@chakra-ui/react";
 import React from "react";
 import { BsEmojiHeartEyesFill } from "react-icons/bs";
 import { AiFillGithub } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 const HomeFooter = () => {
   return (
@@ -29,52 +30,124 @@ const HomeFooter = () => {
               <Text color="gray.400" fontSize="lg" className="mb-3">
                 Features
               </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                How it works
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                For Teams
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Pricing
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Templates
-              </Text>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  How it works
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  For Teams
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Pricing
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Templates
+                </Text>
+              </motion.div>
             </div>
             <div className="flex flex-col gap-4">
               <Text color="gray.400" fontSize="lg" className="mb-3">
                 Resources
               </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Download Apps
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Help Center
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Refer a friend
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Productivity Methods
-              </Text>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Download Apps
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Help Center
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Refer a friend
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Productivity Methods
+                </Text>
+              </motion.div>
             </div>
             <div className="flex flex-col gap-4">
               <Text color="gray.400" fontSize="lg" className="mb-3">
                 Company
               </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                About Us
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                We Are Hiring!
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Press
-              </Text>
-              <Text fontSize="xl" className="cursor-pointer hover:underline">
-                Twist
-              </Text>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  About Us
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  We Are Hiring!
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Press
+                </Text>
+              </motion.div>
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                  Twist
+                </Text>
+              </motion.div>
             </div>
           </div>
         </div>

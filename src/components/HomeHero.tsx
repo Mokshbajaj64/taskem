@@ -1,5 +1,6 @@
 import { Button, Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { motion } from "framer-motion";
 
 const HomeHero = () => {
   return (
@@ -13,22 +14,40 @@ const HomeHero = () => {
           are here to make it even worse.
         </Text>
         <div className="flex items-center gap-5">
-          <Button colorScheme="blue" width={"25%"} rounded={"full"}>
-            Get started
-          </Button>
-          <Button
-            colorScheme="blue"
-            width="25%"
-            rounded={"full"}
-            variant="outline"
+          <motion.div
+            className="w-auto"
+            whileHover={{
+              scale: 1.1,
+            }}
           >
-            Watch Demo
-          </Button>
+            <Button colorScheme="blue" width={"100%"} rounded={"full"}>
+              Get started
+            </Button>
+          </motion.div>
+          <motion.div
+            whileHover={{
+              scale: 1.1,
+            }}
+          >
+            <Button
+              colorScheme="blue"
+              width="100%"
+              rounded={"full"}
+              variant="outline"
+            >
+              Watch Demo
+            </Button>
+          </motion.div>
         </div>
       </div>
-      <div className="flex w-[100%] md:w-[60%] justify-center items-center h-full">
+      <motion.div
+        className="flex w-[100%] md:w-[60%] justify-center items-center h-full"
+        whileHover={{
+          scale: 1.1,
+        }}
+      >
         <img src="/bg3.svg" alt="" className="w-[90%]" />
-      </div>
+      </motion.div>
     </div>
   );
 };

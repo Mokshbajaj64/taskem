@@ -4,6 +4,7 @@ import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const HomeNavbar = () => {
   const navigate = useNavigate();
@@ -49,6 +50,9 @@ const HomeNavbar = () => {
         </div>
       </div>
       <div className="flex items-center md:gap-5 gap-2">
+        <motion.div whileHover={{
+            scale: 1.1,
+          }}>
         <IconButton
           aria-label="Dark mode"
           icon={colorMode === "light" ? <FaMoon /> : <BsSunFill />}
@@ -57,28 +61,47 @@ const HomeNavbar = () => {
           }}
           className="mr-2 md:mr-8 ml-3 md:ml-0"
         />
-        <Button
-          colorScheme="linkedin"
-          variant="outline"
-          rounded={"full"}
-          px={"10"}
-          onClick={() => {
-            navigate("/login");
+        </motion.div>
+        <motion.div
+          animate={{
+            x: [0, -10, 0, 10, 0],
+          }}
+          whileHover={{
+            scale: 1.1,
           }}
         >
-          Login
-        </Button>
-        <Button
-          colorScheme="linkedin"
-          variant="solid"
-          rounded={"full"}
-          px={"10"}
-          onClick={() => {
-            navigate("/register");
+          <Button
+            colorScheme="linkedin"
+            variant="outline"
+            rounded={"full"}
+            px={"10"}
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login
+          </Button>
+        </motion.div>
+        <motion.div
+          animate={{
+            x: [0, -10, 0, 10, 0],
+          }}
+          whileHover={{
+            scale: 1.1,
           }}
         >
-          Register
-        </Button>
+          <Button
+            colorScheme="linkedin"
+            variant="solid"
+            rounded={"full"}
+            px={"10"}
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            Register
+          </Button>
+        </motion.div>
       </div>
     </div>
   );

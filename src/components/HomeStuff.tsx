@@ -1,5 +1,6 @@
 import React from "react";
 import { Heading, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 const HomeStuff = () => {
   return (
@@ -27,9 +28,14 @@ const HomeStuff = () => {
             query about our product
           </Text>
         </div>
-        <div className="flex items-center flex-col w-[100%] md:w-[65%] justify-center h-full">
+        <motion.div
+          className="flex items-center flex-col w-[100%] md:w-[65%] justify-center h-full"
+          whileHover={{
+            scale: 1.1,
+          }}
+        >
           <img src="/bg4.svg" alt="" className="w-[70%] h-[70%]" />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
