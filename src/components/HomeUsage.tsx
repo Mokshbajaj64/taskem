@@ -244,6 +244,7 @@ const HomeUsage = () => {
             justifyContent="center"
             alignItems="center"
             overflowX="auto"
+            overflowY="hidden"
             className="md:ml-[24.2%] md:mr-[24.2%] ml-0 mr-0"
           >
             <Tab>Creatives</Tab>
