@@ -10,11 +10,21 @@ const HomeStuff = () => {
           <Heading as="h1" fontSize="5xl" lineHeight="3.5rem">
             A shit manager you can trust your life
           </Heading>
-          <Text fontSize="lg" marginTop="8" color="gray.500">
+          <Text
+            fontSize="lg"
+            marginTop="8"
+            color="gray.500"
+            className="mr-10 md:mr-0"
+          >
             In the 15 years and 67 days that we’ve been building Todoist, we’ve
             never considered selling out or becoming acquired
           </Text>
-          <Text fontSize="lg" marginTop="8" color="gray.500">
+          <Text
+            fontSize="lg"
+            marginTop="8"
+            color="gray.500"
+            className="mr-10 md:mr-0"
+          >
             Our team is committed to staying independent and earning your trust
             for as long as you need our apps
           </Text>
@@ -22,7 +32,7 @@ const HomeStuff = () => {
             fontSize="lg"
             marginTop="8"
             color="blue.500"
-            className="hover:underline cursor-pointer"
+            className="hover:underline cursor-pointer mr-10 md:mr-0"
           >
             Contact us if you need to know anything about us or you if have any
             query about our product

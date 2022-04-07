@@ -18,6 +18,7 @@ import { FaMoon } from "react-icons/fa";
 import { BsSunFill, BsFillEmojiSunglassesFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,7 +26,18 @@ const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [color, setColor] = React.useState("blue");
   return (
-    <div className="flex w-full min-h-screen overflow-y-hidden">
+    <motion.div
+      className="flex w-full min-h-screen overflow-y-hidden"
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{
+        opacity: 0,
+      }}
+    >
       <div
         className={
           color === "blue"
@@ -47,36 +59,51 @@ const Login = () => {
             </Heading>
           </div>
           <div className="flex items-center gap-4">
-            <div
+            <motion.div
               className="flex p-2 bg-purple-400 rounded-full cursor-pointer"
               onClick={() => {
                 setColor("purple");
               }}
-            ></div>
-            <div
+              whileHover={{
+                scale: 1.1,
+              }}
+            ></motion.div>
+            <motion.div
               className="flex p-2 bg-green-400 rounded-full cursor-pointer"
               onClick={() => {
                 setColor("green");
               }}
-            ></div>
-            <div
+              whileHover={{
+                scale: 1.1,
+              }}
+            ></motion.div>
+            <motion.div
               className="flex p-2 bg-red-400 rounded-full cursor-pointer"
               onClick={() => {
                 setColor("red");
               }}
-            ></div>
-            <div
+              whileHover={{
+                scale: 1.1,
+              }}
+            ></motion.div>
+            <motion.div
               className="flex p-2 bg-pink-400 rounded-full cursor-pointer"
               onClick={() => {
                 setColor("pink");
               }}
-            ></div>
-            <div
+              whileHover={{
+                scale: 1.1,
+              }}
+            ></motion.div>
+            <motion.div
               className="flex p-2 bg-blue-400 rounded-full cursor-pointer"
               onClick={() => {
                 setColor("blue");
               }}
-            ></div>
+              whileHover={{
+                scale: 1.1,
+              }}
+            ></motion.div>
           </div>
         </div>
         <img src="/bg1.svg" className="w-[70%] h-[70%]" />
@@ -135,11 +162,16 @@ const Login = () => {
             </InputGroup>
           </FormControl>
           <Checkbox>Remember me</Checkbox>
-          <div className="flex w-[60%]">
+          <motion.div
+            className="flex w-[60%]"
+            whileHover={{
+              scale: 1.05,
+            }}
+          >
             <Button colorScheme="blue" width="full">
               Sign in
             </Button>
-          </div>
+          </motion.div>
           <div className="flex items-center gap-1">
             <Text size="md">Don't have any account?</Text>
             <Text
@@ -155,7 +187,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

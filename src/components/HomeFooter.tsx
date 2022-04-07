@@ -25,7 +25,7 @@ const HomeFooter = () => {
           </div>
         </div>
         <div className="flex justify-center items-center md:w-[70%] w-[100%] h-full">
-          <div className="flex w-full h-full gap-14 justify-center items-center">
+          <div className="flex w-full h-full gap-14 justify-center items-center mr-20 ml-20 md:mr-0 md:ml-0">
             <div className="flex flex-col gap-4">
               <Text color="gray.400" fontSize="lg" className="mb-3">
                 Features

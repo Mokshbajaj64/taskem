@@ -23,7 +23,7 @@ const HomeMoreStuff = () => {
             as="h1"
             fontSize="5xl"
             lineHeight="3.5rem"
-            className="md:mr-10 mr-0 md:ml-0 ml-5"
+            className="md:mr-10 mr-5 md:ml-0 ml-5"
           >
             Make life meaningful with ShittyShit
           </Heading>
