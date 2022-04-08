@@ -1,8 +1,10 @@
 import React from "react";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import {useNavigate} from "react-router-dom";
 
 const HomeMoreStuff = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center items-start w-screen h-screen">
       <div className="flex w-full justify-center items-center h-full md:flex-row flex-col">
@@ -33,7 +35,9 @@ const HomeMoreStuff = () => {
               scale: 1.1,
             }}
           >
-            <Button colorScheme="blue" width="100%">
+            <Button colorScheme="blue" width="100%" onClick = {() => {
+              navigate("/login")
+            }}>
               Get started
             </Button>
           </motion.div>

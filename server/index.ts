@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import contactRouter from './routes/contact.route';
+import userRouter from './routes/user.route';
 
 const app: Express = express();
 
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/api/contact', contactRouter);
+app.use('/api/user', userRouter);
 
 dotenv.config({
   path: './config.env',
