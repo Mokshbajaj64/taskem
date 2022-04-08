@@ -3,6 +3,8 @@ import cors from 'cors';
 
 const app: Express = express();
 
+console.log('LOll');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
