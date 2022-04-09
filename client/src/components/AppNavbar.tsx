@@ -13,7 +13,7 @@ import {
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiSettings, FiLogOut } from "react-icons/fi";
 import { ImSearch } from "react-icons/im";
 import { IoAdd } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa";
@@ -27,6 +27,13 @@ import {
   PopoverBody,
   PopoverArrow,
   PopoverCloseButton,
+} from "@chakra-ui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
 } from "@chakra-ui/react";
 
 const AppNavbar = () => {
@@ -135,7 +142,33 @@ const AppNavbar = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Avatar name="SHIT" className="cursor-pointer" />
+        <Menu>
+          <MenuButton>
+            <Avatar name="SHIT" className="cursor-pointer" />
+          </MenuButton>
+          <MenuList>
+            <MenuItem className="flex gap-4 p-2 rounded-2xl">
+              <div className="flex flex-col items-start gap-3">
+                <Avatar name="SHIT" size="xl" />
+                <div className="flex items-center gap-2">
+                  <FiSettings size="20" color="gray" />
+                  <Text fontSize="md">Settings</Text>
+                </div>
+              </div>
+              <div className="flex flex-col items-start">
+                <Text fontSize="lg">SHIT BOI</Text>
+                <Text fontSize="lg" color="gray.500">
+                  shit@gmail.com
+                </Text>
+              </div>
+            </MenuItem>
+            <MenuDivider />
+            <MenuItem className="flex gap-3 items-center rounded-2xl">
+              <FiLogOut size="24" color="gray" />
+              <Text fontSize="lg">Log Out</Text>
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </div>
     </motion.div>
   );
