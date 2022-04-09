@@ -59,6 +59,9 @@ const HomeNavbar = () => {
               as="h6"
               fontSize="lg"
               className="cursor-pointer text-gray-400"
+              onClick={() => {
+                navigate("/about");
+              }}
             >
               About Us
             </Heading>
