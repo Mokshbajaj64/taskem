@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import NotFound from "./pages/NotFound";
 import Features from "./pages/Features";
 import About from "./pages/About";
+import Today from "./pages/Today";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/features" element={<Features />} />
           <Route path="/about" element={<About />} />
+          <Route path="/app/today" element={<Today />} />
         </Routes>
       </AnimatePresence>
     </Router>
