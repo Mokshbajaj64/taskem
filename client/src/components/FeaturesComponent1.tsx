@@ -10,9 +10,9 @@ const FeaturesComponent1 = () => {
   const { colorMode } = useColorMode();
   const [selected, setSelected] = useState("folder");
   return (
-    <div className="flex justify-center items-start w-screen h-screen">
+    <div className="flex justify-center items-start w-screen h-screen flex-col md:flex-row mt-20 md:mt-0">
       <motion.div
-        className="flex w-[100%] md:w-[60%] justify-center items-center h-full"
+        className="flex w-[100%] md:w-[60%] justify-center items-center h-full mb-11 md:mb-0"
         whileHover={{
           scale: 1.1,
         }}
@@ -34,13 +34,12 @@ const FeaturesComponent1 = () => {
         {colorMode === "light" ? (
           <div className="flex flex-col w-full gap-5">
             <div
-              className="flex gap-6 cursor-pointer p-2 rounded-md bg-[#f0f0f0]"
+              className="flex gap-6 cursor-pointer p-2 rounded-md hover:bg-[#f0f0f0]"
               onClick={() => {
                 setSelected("folder");
               }}
               style={{
-                backgroundColor:
-                  selected === "folder" ? "#f0f0f0" : "transparent",
+                backgroundColor: selected === "folder" ? "#f0f0f0" : "",
               }}
             >
               <AiFillFolder color="#00a0dc" size="30" />
@@ -59,8 +58,7 @@ const FeaturesComponent1 = () => {
                 setSelected("tags");
               }}
               style={{
-                backgroundColor:
-                  selected === "tags" ? "#f0f0f0" : "transparent",
+                backgroundColor: selected === "tags" ? "#f0f0f0" : "",
               }}
             >
               <FaTags color="#00a0dc" size="30" />
@@ -77,8 +75,7 @@ const FeaturesComponent1 = () => {
                 setSelected("search");
               }}
               style={{
-                backgroundColor:
-                  selected === "search" ? "#f0f0f0" : "transparent",
+                backgroundColor: selected === "search" ? "#f0f0f0" : "",
               }}
             >
               <FiSearch color="#00a0dc" size="30" />
@@ -95,8 +92,7 @@ const FeaturesComponent1 = () => {
                 setSelected("sort");
               }}
               style={{
-                backgroundColor:
-                  selected === "sort" ? "#f0f0f0" : "transparent",
+                backgroundColor: selected === "sort" ? "#f0f0f0" : "",
               }}
             >
               <BsSortDown color="#00a0dc" size="30" />
@@ -116,8 +112,7 @@ const FeaturesComponent1 = () => {
                 setSelected("folder");
               }}
               style={{
-                backgroundColor:
-                  selected === "folder" ? "#21242a" : "transparent",
+                backgroundColor: selected === "folder" ? "#21242a" : "",
               }}
             >
               <AiFillFolder color="#00a0dc" size="30" />
@@ -136,8 +131,7 @@ const FeaturesComponent1 = () => {
                 setSelected("tags");
               }}
               style={{
-                backgroundColor:
-                  selected === "tags" ? "#21242a" : "transparent",
+                backgroundColor: selected === "tags" ? "#21242a" : "",
               }}
             >
               <FaTags color="#00a0dc" size="30" />
@@ -154,8 +148,7 @@ const FeaturesComponent1 = () => {
                 setSelected("search");
               }}
               style={{
-                backgroundColor:
-                  selected === "search" ? "#21242a" : "transparent",
+                backgroundColor: selected === "search" ? "#21242a" : "",
               }}
             >
               <FiSearch color="#00a0dc" size="30" />
@@ -172,8 +165,7 @@ const FeaturesComponent1 = () => {
                 setSelected("sort");
               }}
               style={{
-                backgroundColor:
-                  selected === "sort" ? "#21242a" : "transparent",
+                backgroundColor: selected === "sort" ? "#21242a" : "",
               }}
             >
               <BsSortDown color="#00a0dc" size="30" />

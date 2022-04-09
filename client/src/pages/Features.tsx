@@ -4,6 +4,8 @@ import HomeNavbar from "../components/HomeNavbar";
 import FeaturesHero from "../components/FeaturesHero";
 import HomeFooter from "../components/HomeFooter";
 import FeaturesComponent1 from "../components/FeaturesComponent1";
+import FeaturesComponent2 from "../components/FeaturesComponent2";
+import HomeMoreStuff from "../components/HomeMoreStuff";
 
 const Features = () => {
   return (
@@ -22,6 +24,8 @@ const Features = () => {
       <HomeNavbar />
       <FeaturesHero />
       <FeaturesComponent1 />
+      <FeaturesComponent2 />
+      <HomeMoreStuff />
       <HomeFooter />
     </motion.div>
   );
