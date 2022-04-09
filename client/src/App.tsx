@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { AnimatePresence } from "framer-motion";
 import NotFound from "./pages/NotFound";
+import Features from "./pages/Features";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/features" element={<Features />} />
         </Routes>
       </AnimatePresence>
     </Router>

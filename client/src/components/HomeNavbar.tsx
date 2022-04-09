@@ -43,6 +43,9 @@ const HomeNavbar = () => {
               as="h6"
               fontSize="lg"
               className="cursor-pointer text-gray-400"
+              onClick={() => {
+                navigate("/features");
+              }}
             >
               Features
             </Heading>
