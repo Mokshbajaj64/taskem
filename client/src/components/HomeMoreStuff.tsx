@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HomeMoreStuff = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const HomeMoreStuff = () => {
             lineHeight="3.5rem"
             className="md:mr-10 mr-5 md:ml-0 ml-5"
           >
-            Make life meaningful with ShittyShit
+            Ready to be more productive?
           </Heading>
           <motion.div
             className="w-auto"
@@ -35,9 +35,13 @@ const HomeMoreStuff = () => {
               scale: 1.1,
             }}
           >
-            <Button colorScheme="blue" width="100%" onClick = {() => {
-              navigate("/login")
-            }}>
+            <Button
+              colorScheme="blue"
+              width="100%"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
               Get started
             </Button>
           </motion.div>

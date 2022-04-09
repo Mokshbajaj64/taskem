@@ -1,4 +1,5 @@
 import React from "react";
+import HomeAbout1 from "../components/HomeAbout1";
 import HomeAbout from "../components/HomeAbout";
 import HomeFooter from "../components/HomeFooter";
 import HomeHero from "../components/HomeHero";
@@ -25,6 +26,7 @@ const Home = () => {
       <HomeNavbar />
       <HomeHero />
       <HomeAbout />
+      <HomeAbout1 />
       <HomeUsage />
       <HomeStuff />
       <HomeMoreStuff />

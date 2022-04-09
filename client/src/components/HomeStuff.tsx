@@ -8,9 +8,9 @@ const HomeStuff = () => {
   return (
     <div className="flex justify-center items-start w-screen h-screen">
       <div className="flex w-full justify-center items-center h-full md:flex-row flex-col">
-        <div className="flex items-center flex-col w-[100%] md:w-[35%] justify-center md:ml-32 ml-8">
+        <div className="flex items-start flex-col w-[100%] md:w-[35%] justify-center md:ml-32 ml-8">
           <Heading as="h1" fontSize="5xl" lineHeight="3.5rem">
-            A shit manager you can trust your life
+            A task manager you can trust your life
           </Heading>
           <Text
             fontSize="lg"
@@ -18,8 +18,8 @@ const HomeStuff = () => {
             color="gray.500"
             className="mr-10 md:mr-0"
           >
-            In the 15 years and 67 days that we’ve been building Todoist, we’ve
-            never considered selling out or becoming acquired
+            Join millions of people to capture ideas, organize life, and do
+            something creative everyday.
           </Text>
           <Text
             fontSize="lg"
@@ -27,8 +27,7 @@ const HomeStuff = () => {
             color="gray.500"
             className="mr-10 md:mr-0"
           >
-            Our team is committed to staying independent and earning your trust
-            for as long as you need our apps
+            Getting things done has never been this easy.
           </Text>
           <Text
             fontSize="lg"

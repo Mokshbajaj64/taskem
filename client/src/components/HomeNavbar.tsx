@@ -34,20 +34,32 @@ const HomeNavbar = () => {
           </Heading>
         </div>
         <div className="hidden items-center gap-6 md:flex">
-          <Heading
-            as="h6"
-            fontSize="lg"
-            className="cursor-pointer text-gray-400"
+          <motion.div
+            whileHover={{
+              scale: 1.04,
+            }}
           >
-            Tasks
-          </Heading>
-          <Heading
-            as="h6"
-            fontSize="lg"
-            className="cursor-pointer text-gray-400"
+            <Heading
+              as="h6"
+              fontSize="lg"
+              className="cursor-pointer text-gray-400"
+            >
+              Features
+            </Heading>
+          </motion.div>
+          <motion.div
+            whileHover={{
+              scale: 1.04,
+            }}
           >
-            About Us
-          </Heading>
+            <Heading
+              as="h6"
+              fontSize="lg"
+              className="cursor-pointer text-gray-400"
+            >
+              About Us
+            </Heading>
+          </motion.div>
           <motion.div
             onClick={() => {
               onOpen();
