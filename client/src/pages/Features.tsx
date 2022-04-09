@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import HomeNavbar from "../components/HomeNavbar";
 import FeaturesHero from "../components/FeaturesHero";
 import HomeFooter from "../components/HomeFooter";
+import FeaturesComponent1 from "../components/FeaturesComponent1";
 
 const Features = () => {
   return (
@@ -20,6 +21,7 @@ const Features = () => {
     >
       <HomeNavbar />
       <FeaturesHero />
+      <FeaturesComponent1 />
       <HomeFooter />
     </motion.div>
   );
