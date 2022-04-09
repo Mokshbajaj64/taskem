@@ -19,8 +19,8 @@ const HomeAbout = () => {
             Organize everything in life
           </Heading>
           <Text color="gray.500" fontSize="xl">
-            Whether there is a work-related task or a personal goal, TickTick is
-            here to help you manage all your to-dos.
+            Whether there is a work-related task or a personal goal, ShittyShit
+            is here to help you manage all your to-dos.
           </Text>
         </div>
       </div>

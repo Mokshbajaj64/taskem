@@ -27,12 +27,20 @@ const HomeNavbar = () => {
       }}
     >
       <div className="flex items-center gap-12">
-        <div className="flex items-center gap-3">
+        <motion.div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+          whileHover={{
+            scale: 1.1,
+          }}
+        >
           <BsFillEmojiHeartEyesFill size={25} />
           <Heading as="h6" fontSize="2xl" className="md:flex hidden">
             ShittyShit
           </Heading>
-        </div>
+        </motion.div>
         <div className="hidden items-center gap-6 md:flex">
           <motion.div
             whileHover={{
@@ -46,6 +54,7 @@ const HomeNavbar = () => {
               onClick={() => {
                 navigate("/features");
               }}
+              color={window.location.pathname === "/features" ? "#9bdaf3" : ""}
             >
               Features
             </Heading>
@@ -62,6 +71,7 @@ const HomeNavbar = () => {
               onClick={() => {
                 navigate("/about");
               }}
+              color={window.location.pathname === "/about" ? "#9bdaf3" : ""}
             >
               About Us
             </Heading>
@@ -80,6 +90,19 @@ const HomeNavbar = () => {
               className="cursor-pointer text-gray-400"
             >
               Contact Us
+            </Heading>
+          </motion.div>
+          <motion.div
+            whileHover={{
+              scale: 1.04,
+            }}
+          >
+            <Heading
+              as="h6"
+              fontSize="lg"
+              className="cursor-pointer text-gray-400"
+            >
+              Reviews
             </Heading>
           </motion.div>
         </div>

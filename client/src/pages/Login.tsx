@@ -52,12 +52,20 @@ const Login = () => {
         }
       >
         <div className="flex fixed top-0 sm:p-2 p-0 sm:ml-3 ml-0 gap-28">
-          <div className="flex items-center gap-2">
+          <motion.div
+            className="flex items-center gap-2 cursor-pointer"
+            whileHover={{
+              scale: 1.1,
+            }}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <BsFillEmojiSunglassesFill size={30} color="white" />
             <Heading as="h5" fontSize="2xl" color="white">
               ShittyShit
             </Heading>
-          </div>
+          </motion.div>
           <div className="flex items-center gap-4">
             <motion.div
               className="flex p-2 bg-purple-400 rounded-full cursor-pointer"

@@ -9,6 +9,7 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 const HomeUsage = () => {
   return (
@@ -47,10 +48,13 @@ const HomeUsage = () => {
                     </Text>
                   </div>
                 </div>
-                <img
+                <motion.img
                   src="/tim.jpeg"
                   alt=""
                   className="w-[20%] h-[20%] rounded-xl"
+                  whileHover={{
+                    scale: 1.1,
+                  }}
                 />
               </div>
             </TabPanel>
@@ -83,10 +87,13 @@ const HomeUsage = () => {
                     </Text>
                   </div>
                 </div>
-                <img
+                <motion.img
                   src="/benawad.jpeg"
                   alt=""
                   className="w-[20%] h-[20%] rounded-xl"
+                  whileHover={{
+                    scale: 1.1,
+                  }}
                 />
               </div>
             </TabPanel>
@@ -119,10 +126,13 @@ const HomeUsage = () => {
                     </Text>
                   </div>
                 </div>
-                <img
+                <motion.img
                   src="/techlead.jpeg"
                   alt=""
                   className="w-[20%] h-[20%] rounded-xl"
+                  whileHover={{
+                    scale: 1.1,
+                  }}
                 />
               </div>
             </TabPanel>
@@ -155,10 +165,13 @@ const HomeUsage = () => {
                     </Text>
                   </div>
                 </div>
-                <img
+                <motion.img
                   src="/avob.png"
                   alt=""
                   className="w-[20%] h-[20%] rounded-xl"
+                  whileHover={{
+                    scale: 1.1,
+                  }}
                 />
               </div>
             </TabPanel>

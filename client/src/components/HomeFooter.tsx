@@ -1,10 +1,14 @@
-import { Divider, Text, Heading } from "@chakra-ui/react";
+import { Divider, Text, Heading, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { BsEmojiHeartEyesFill } from "react-icons/bs";
 import { AiFillGithub } from "react-icons/ai";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import ContactModal from "./ContactModal";
 
 const HomeFooter = () => {
+  const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div className="flex justify-center items-start w-screen h-screen flex-col px-32">
       <Divider className="pt-[10%] lg:flex hidden" />
@@ -35,7 +39,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    navigate("/features");
+                  }}
+                >
                   How it works
                 </Text>
               </motion.div>
@@ -44,8 +54,14 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
-                  For Teams
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    navigate("/features");
+                  }}
+                >
+                  Get started
                 </Text>
               </motion.div>
               <motion.div
@@ -53,7 +69,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    navigate("/features");
+                  }}
+                >
                   Pricing
                 </Text>
               </motion.div>
@@ -62,7 +84,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    navigate("/features");
+                  }}
+                >
                   Templates
                 </Text>
               </motion.div>
@@ -76,7 +104,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+                  }}
+                >
                   Download Apps
                 </Text>
               </motion.div>
@@ -85,7 +119,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+                  }}
+                >
                   Help Center
                 </Text>
               </motion.div>
@@ -94,7 +134,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+                  }}
+                >
                   Refer a friend
                 </Text>
               </motion.div>
@@ -103,7 +149,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+                  }}
+                >
                   Productivity Methods
                 </Text>
               </motion.div>
@@ -117,7 +169,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    navigate("/about");
+                  }}
+                >
                   About Us
                 </Text>
               </motion.div>
@@ -126,7 +184,13 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+                  }}
+                >
                   We Are Hiring!
                 </Text>
               </motion.div>
@@ -135,8 +199,14 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
-                  Press
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    onOpen();
+                  }}
+                >
+                  Contact Us
                 </Text>
               </motion.div>
               <motion.div
@@ -144,14 +214,21 @@ const HomeFooter = () => {
                   scale: 1.08,
                 }}
               >
-                <Text fontSize="xl" className="cursor-pointer hover:underline">
-                  Twist
+                <Text
+                  fontSize="xl"
+                  className="cursor-pointer hover:underline"
+                  onClick={() => {
+                    window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+                  }}
+                >
+                  Gift
                 </Text>
               </motion.div>
             </div>
           </div>
         </div>
       </div>
+      <ContactModal isOpen={isOpen} onClose={onClose} />
     </div>
   );
 };
