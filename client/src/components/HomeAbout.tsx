@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const HomeAbout = () => {
   return (
     <div className="flex justify-center items-start w-screen h-screen">
-      <div className="flex w-[95%] justify-center items-center h-full gap-14">
+      <div className="flex w-[95%] justify-center items-center h-full gap-14 md:flex-row flex-col">
         <motion.div
           className="flex items-center flex-col w-[100%] md:w-[50%] justify-center h-full"
           whileHover={{
@@ -14,7 +14,7 @@ const HomeAbout = () => {
         >
           <img src="/bg3.svg" alt="" className="w-[100%] h-[100%]" />
         </motion.div>
-        <div className="flex items-start flex-col w-[100%] md:w-[50%] justify-center h-full gap-6">
+        <div className="flex items-start flex-col w-[100%] md:w-[50%] justify-center h-full gap-6 md:ml-0 ml-8">
           <Heading as="h2" fontSize="5xl">
             Organize everything in life
           </Heading>

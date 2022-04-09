@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const HomeAbout1 = () => {
   return (
     <div className="flex justify-center items-start w-screen h-screen">
-      <div className="flex w-[95%] justify-center items-center h-full gap-10">
-        <div className="flex items-center flex-col w-[100%] md:w-[50%] justify-center h-full gap-6">
+      <div className="flex w-[95%] justify-center items-center h-full gap-10 md:flex-row flex-col">
+        <div className="flex items-center flex-col w-[100%] md:w-[50%] justify-center h-full gap-6 md:ml-0 ml-8">
           <Heading as="h2" fontSize="5xl">
             Get reminded anytime, anywhere
           </Heading>
