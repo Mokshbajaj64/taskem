@@ -2,12 +2,10 @@ import React from "react";
 import HomeAbout1 from "../components/HomeAbout1";
 import HomeAbout from "../components/HomeAbout";
 import HomeFooter from "../components/HomeFooter";
-import HomeHero from "../components/HomeHero";
 import HomeMoreStuff from "../components/HomeMoreStuff";
 import HomeNavbar from "../components/HomeNavbar";
-import HomeStuff from "../components/HomeStuff";
-import HomeUsage from "../components/HomeUsage";
 import { motion } from "framer-motion";
+import AboutHero from "../components/AboutHero";
 
 const About = () => {
   return (
@@ -24,7 +22,7 @@ const About = () => {
       }}
     >
       <HomeNavbar />
-      <HomeHero />
+      <AboutHero />
       <HomeAbout />
       <HomeAbout1 />
       <HomeMoreStuff />
