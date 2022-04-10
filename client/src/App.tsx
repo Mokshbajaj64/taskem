@@ -9,6 +9,7 @@ import Features from "./pages/Features";
 import About from "./pages/About";
 import Today from "./pages/Today";
 import Inbox from "./pages/Inbox";
+import Weekly from "./pages/Weekly";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/app/today" element={<Today />} />
           <Route path="/app/inbox" element={<Inbox />} />
+          <Route path="/app/week" element={<Weekly />} />
         </Routes>
       </AnimatePresence>
     </Router>

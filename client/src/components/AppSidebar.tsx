@@ -54,7 +54,7 @@ const AppSidebar = () => {
             >
               <div className="flex items-center gap-4">
                 <BsCalendarWeekFill size="22" />
-                <Text fontSize="md">Next 7 days</Text>
+                <Text fontSize="md">Weekly</Text>
               </div>
               <Text fontSize="md" color="gray.500">
                 4
@@ -111,7 +111,7 @@ const AppSidebar = () => {
             >
               <div className="flex items-center gap-4">
                 <BsCalendarWeekFill size="22" />
-                <Text fontSize="md">Next 7 days</Text>
+                <Text fontSize="md">Weekly</Text>
               </div>
               <Text fontSize="md" color="gray.500">
                 4
