@@ -7,6 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { IoAdd } from "react-icons/io5";
+import AccordianComponent from "./AccordianComponent";
 
 type Props = {
   title: string;
@@ -30,26 +31,18 @@ const SidebarAccordian = (props: Props) => {
           className="items-center justify-between"
         >
           <div className="flex items-center gap-2">
-            <AccordionIcon fontSize="2xl" />
-            <Text fontSize="lg">{props.title}</Text>
+            <AccordionIcon fontSize="2xl" color="gray.400" />
+            <Text fontSize="lg" color="gray.400">
+              {props.title}
+            </Text>
           </div>
-          {hover ? (
-            <IoAdd
-              size="20"
-              onClick={() => {
-                console.log("Clicked");
-              }}
-            />
-          ) : (
-            ""
-          )}
+          {hover ? <IoAdd size="20" /> : ""}
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        <AccordianComponent />
+        <AccordianComponent />
+        <AccordianComponent />
       </AccordionPanel>
     </AccordionItem>
   );

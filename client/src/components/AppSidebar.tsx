@@ -12,7 +12,7 @@ import SidebarAccordian from "./SidebarAccordian";
 const AppSidebar = () => {
   return (
     <div
-      className="w-[23%] overflow-y-auto fixed min-h-screen h-full"
+      className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
       style={{
         boxShadow:
           "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
