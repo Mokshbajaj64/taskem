@@ -8,8 +8,10 @@ import {
 } from "react-icons/bs";
 import { Accordion } from "@chakra-ui/react";
 import SidebarAccordian from "./SidebarAccordian";
+import { useNavigate } from "react-router-dom";
 
 const AppSidebar = () => {
+  const navigate = useNavigate();
   const { colorMode } = useColorMode();
   return (
     <div
@@ -28,6 +30,9 @@ const AppSidebar = () => {
                 backgroundColor:
                   window.location.pathname === "/app/today" ? "#21242a" : "",
               }}
+              onClick={() => {
+                navigate("/app/today");
+              }}
             >
               <div className="flex items-center gap-4">
                 <IoTodaySharp size="22" />
@@ -43,6 +48,9 @@ const AppSidebar = () => {
                 backgroundColor:
                   window.location.pathname === "/app/week" ? "#21242a" : "",
               }}
+              onClick={() => {
+                navigate("/app/week");
+              }}
             >
               <div className="flex items-center gap-4">
                 <BsCalendarWeekFill size="22" />
@@ -57,6 +65,9 @@ const AppSidebar = () => {
               style={{
                 backgroundColor:
                   window.location.pathname === "/app/inbox" ? "#21242a" : "",
+              }}
+              onClick={() => {
+                navigate("/app/inbox");
               }}
             >
               <div className="flex items-center gap-4">
@@ -76,6 +87,9 @@ const AppSidebar = () => {
                 backgroundColor:
                   window.location.pathname === "/app/today" ? "#f0f0f0" : "",
               }}
+              onClick={() => {
+                navigate("/app/today");
+              }}
             >
               <div className="flex items-center gap-4">
                 <IoTodaySharp size="22" />
@@ -91,6 +105,9 @@ const AppSidebar = () => {
                 backgroundColor:
                   window.location.pathname === "/app/week" ? "#f0f0f0" : "",
               }}
+              onClick={() => {
+                navigate("/app/week");
+              }}
             >
               <div className="flex items-center gap-4">
                 <BsCalendarWeekFill size="22" />
@@ -105,6 +122,9 @@ const AppSidebar = () => {
               style={{
                 backgroundColor:
                   window.location.pathname === "/app/inbox" ? "#f0f0f0" : "",
+              }}
+              onClick={() => {
+                navigate("/app/inbox");
               }}
             >
               <div className="flex items-center gap-4">
@@ -136,6 +156,9 @@ const AppSidebar = () => {
                     ? "#21242a"
                     : "",
               }}
+              onClick={() => {
+                navigate("/app/completed");
+              }}
             >
               <div className="flex items-center gap-4">
                 <IoCloudDoneSharp size="22" />
@@ -150,6 +173,9 @@ const AppSidebar = () => {
               style={{
                 backgroundColor:
                   window.location.pathname === "/app/trash" ? "#21242a" : "",
+              }}
+              onClick={() => {
+                navigate("/app/trash");
               }}
             >
               <div className="flex items-center gap-4">
@@ -171,6 +197,9 @@ const AppSidebar = () => {
                     ? "#f0f0f0"
                     : "",
               }}
+              onClick={() => {
+                navigate("/app/completed");
+              }}
             >
               <div className="flex items-center gap-4">
                 <IoCloudDoneSharp size="22" />
@@ -185,6 +214,9 @@ const AppSidebar = () => {
               style={{
                 backgroundColor:
                   window.location.pathname === "/app/trash" ? "#f0f0f0" : "",
+              }}
+              onClick={() => {
+                navigate("/app/trash");
               }}
             >
               <div className="flex items-center gap-4">
