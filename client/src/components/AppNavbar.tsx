@@ -50,7 +50,7 @@ const AppNavbar = () => {
       exit={{
         opacity: 0,
       }}
-      className="w-full p-5 flex items-center justify-between fixed h-[80px]"
+      className="w-full p-5 flex items-center justify-between fixed h-[80px] top-0"
       style={{
         boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
         backgroundColor: colorMode === "light" ? "#ffffff" : "#1a202c",
