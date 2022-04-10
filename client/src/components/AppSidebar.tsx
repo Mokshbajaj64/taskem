@@ -1,6 +1,6 @@
 import React from "react";
 import { IoTodaySharp, IoCloudDoneSharp } from "react-icons/io5";
-import { Divider, Text, Box } from "@chakra-ui/react";
+import { Divider, Text, useColorMode } from "@chakra-ui/react";
 import {
   BsInboxFill,
   BsCalendarWeekFill,
@@ -10,6 +10,7 @@ import { Accordion } from "@chakra-ui/react";
 import SidebarAccordian from "./SidebarAccordian";
 
 const AppSidebar = () => {
+  const { colorMode } = useColorMode();
   return (
     <div
       className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
@@ -19,53 +20,103 @@ const AppSidebar = () => {
       }}
     >
       <div className="flex flex-col pt-4 pl-4 w-full h-full pr-7 gap-4">
-        <div className="flex flex-col w-full gap-1">
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
-            style={{
-              backgroundColor:
-                window.location.pathname === "/app/today" ? "#21242a" : "",
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <IoTodaySharp size="22" />
-              <Text fontSize="md">Today</Text>
+        {colorMode === "dark" ? (
+          <div className="flex flex-col w-full gap-1">
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/today" ? "#21242a" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <IoTodaySharp size="22" />
+                <Text fontSize="md">Today</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                69
+              </Text>
             </div>
-            <Text fontSize="md" color="gray.500">
-              69
-            </Text>
-          </div>
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
-            style={{
-              backgroundColor:
-                window.location.pathname === "/app/week" ? "#21242a" : "",
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <BsCalendarWeekFill size="22" />
-              <Text fontSize="md">Next 7 days</Text>
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/week" ? "#21242a" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <BsCalendarWeekFill size="22" />
+                <Text fontSize="md">Next 7 days</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                4
+              </Text>
             </div>
-            <Text fontSize="md" color="gray.500">
-              4
-            </Text>
-          </div>
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
-            style={{
-              backgroundColor:
-                window.location.pathname === "/app/inbox" ? "#21242a" : "",
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <BsInboxFill size="22" />
-              <Text fontSize="md">Inbox</Text>
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/inbox" ? "#21242a" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <BsInboxFill size="22" />
+                <Text fontSize="md">Inbox</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                5
+              </Text>
             </div>
-            <Text fontSize="md" color="gray.500">
-              5
-            </Text>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col w-full gap-1">
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/today" ? "#f0f0f0" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <IoTodaySharp size="22" />
+                <Text fontSize="md">Today</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                69
+              </Text>
+            </div>
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/week" ? "#f0f0f0" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <BsCalendarWeekFill size="22" />
+                <Text fontSize="md">Next 7 days</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                4
+              </Text>
+            </div>
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/inbox" ? "#f0f0f0" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <BsInboxFill size="22" />
+                <Text fontSize="md">Inbox</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                5
+              </Text>
+            </div>
+          </div>
+        )}
         <Divider />
         <div className="flex flex-col w-full gap-1">
           <Accordion allowMultiple className="gap-1">
@@ -75,38 +126,77 @@ const AppSidebar = () => {
           </Accordion>
         </div>
         <Divider />
-        <div className="flex flex-col w-full gap-1">
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
-            style={{
-              backgroundColor:
-                window.location.pathname === "/app/completed" ? "#21242a" : "",
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <IoCloudDoneSharp size="22" />
-              <Text fontSize="md">Completed</Text>
+        {colorMode === "dark" ? (
+          <div className="flex flex-col w-full gap-1">
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/completed"
+                    ? "#21242a"
+                    : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <IoCloudDoneSharp size="22" />
+                <Text fontSize="md">Completed</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                0
+              </Text>
             </div>
-            <Text fontSize="md" color="gray.500">
-              0
-            </Text>
-          </div>
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
-            style={{
-              backgroundColor:
-                window.location.pathname === "/app/trash" ? "#21242a" : "",
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <BsFillTrashFill size="22" />
-              <Text fontSize="md">Trash</Text>
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/trash" ? "#21242a" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <BsFillTrashFill size="22" />
+                <Text fontSize="md">Trash</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                2
+              </Text>
             </div>
-            <Text fontSize="md" color="gray.500">
-              2
-            </Text>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col w-full gap-1">
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/completed"
+                    ? "#f0f0f0"
+                    : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <IoCloudDoneSharp size="22" />
+                <Text fontSize="md">Completed</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                0
+              </Text>
+            </div>
+            <div
+              className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
+              style={{
+                backgroundColor:
+                  window.location.pathname === "/app/trash" ? "#f0f0f0" : "",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <BsFillTrashFill size="22" />
+                <Text fontSize="md">Trash</Text>
+              </div>
+              <Text fontSize="md" color="gray.500">
+                2
+              </Text>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
