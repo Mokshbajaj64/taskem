@@ -15,6 +15,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import EditComponent from "./EditComponent";
+import { motion } from "framer-motion";
 
 const TaskComponent = () => {
   const [hover, setHover] = useState(false);
@@ -22,7 +23,12 @@ const TaskComponent = () => {
   const cancelRef = React.useRef(null);
   const [isEdit, setIsEdit] = useState(false);
   return (
-    <div className="flex flex-col w-full">
+    <motion.div
+      className="flex flex-col w-full"
+      whileHover={{
+        scale: 1.04,
+      }}
+    >
       {!isEdit ? (
         <div
           className="flex justify-between cursor-pointer w-full"
@@ -45,7 +51,13 @@ const TaskComponent = () => {
           {hover ? (
             <div className="flex gap-4 items-center">
               <IconButton icon={<MdDragIndicator />} aria-label="Drag" />
-              <IconButton icon={<AiOutlineEdit />} aria-label="Edit" />
+              <IconButton
+                icon={<AiOutlineEdit />}
+                aria-label="Edit"
+                onClick={() => {
+                  setIsEdit(true);
+                }}
+              />
               <Menu>
                 <MenuButton>
                   <IconButton
@@ -84,7 +96,7 @@ const TaskComponent = () => {
           )}
         </div>
       ) : (
-        <EditComponent />
+        <EditComponent setIsEdit={setIsEdit} />
       )}
       <Divider />
       {/* delete task modal stuff here */}
@@ -114,7 +126,7 @@ const TaskComponent = () => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-    </div>
+    </motion.div>
   );
 };
 

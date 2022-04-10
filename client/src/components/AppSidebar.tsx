@@ -9,6 +9,7 @@ import {
 import { Accordion } from "@chakra-ui/react";
 import SidebarAccordian from "./SidebarAccordian";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const AppSidebar = () => {
   const navigate = useNavigate();
@@ -24,7 +25,10 @@ const AppSidebar = () => {
       <div className="flex flex-col pt-4 pl-4 w-full h-full pr-7 gap-4">
         {colorMode === "dark" ? (
           <div className="flex flex-col w-full gap-1">
-            <div
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/today" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -41,8 +45,11 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 69
               </Text>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/week" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -59,8 +66,11 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 4
               </Text>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/inbox" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -77,11 +87,14 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 5
               </Text>
-            </div>
+            </motion.div>
           </div>
         ) : (
           <div className="flex flex-col w-full gap-1">
-            <div
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/today" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -98,8 +111,11 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 69
               </Text>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/week" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -116,8 +132,11 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 4
               </Text>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/inbox" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -134,7 +153,7 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 5
               </Text>
-            </div>
+            </motion.div>
           </div>
         )}
         <Divider />
@@ -148,7 +167,11 @@ const AppSidebar = () => {
         <Divider />
         {colorMode === "dark" ? (
           <div className="flex flex-col w-full gap-1">
-            <div
+            <motion.div
+              whileHover={{
+                scale:
+                  window.location.pathname === "/app/completed" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -167,8 +190,11 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 0
               </Text>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/trash" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#21242a] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -185,11 +211,15 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 2
               </Text>
-            </div>
+            </motion.div>
           </div>
         ) : (
           <div className="flex flex-col w-full gap-1">
-            <div
+            <motion.div
+              whileHover={{
+                scale:
+                  window.location.pathname === "/app/completed" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -208,8 +238,11 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 0
               </Text>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileHover={{
+                scale: window.location.pathname === "/app/trash" ? 1.0 : 1.05,
+              }}
               className="flex items-center justify-between cursor-pointer hover:bg-[#f0f0f0] p-4 rounded-md"
               style={{
                 backgroundColor:
@@ -226,7 +259,7 @@ const AppSidebar = () => {
               <Text fontSize="md" color="gray.500">
                 2
               </Text>
-            </div>
+            </motion.div>
           </div>
         )}
       </div>

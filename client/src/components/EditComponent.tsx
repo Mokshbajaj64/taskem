@@ -3,7 +3,11 @@ import React from "react";
 import { FaTags } from "react-icons/fa";
 import { BsFlagFill } from "react-icons/bs";
 
-const EditComponent = () => {
+type Props = {
+  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const EditComponent = (props: Props) => {
   return (
     <div className="flex w-full flex-col gap-5">
       <div
@@ -32,7 +36,14 @@ const EditComponent = () => {
       </div>
       <div className="flex items-center gap-4 mb-4">
         <Button colorScheme="blue">Update Task</Button>
-        <Button variant="outline">Cancel</Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            props.setIsEdit(false);
+          }}
+        >
+          Cancel
+        </Button>
       </div>
     </div>
   );

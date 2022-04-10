@@ -3,6 +3,7 @@ import { Text, Input, Textarea, IconButton, Button } from "@chakra-ui/react";
 import { IoMdAdd, IoMdAddCircle } from "react-icons/io";
 import { FaTags } from "react-icons/fa";
 import { BsFlagFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const AddTaskComponent = () => {
   const [hover, setHover] = useState(false);
@@ -43,7 +44,7 @@ const AddTaskComponent = () => {
           </div>
         </div>
       ) : (
-        <div
+        <motion.div
           className="flex items-center cursor-pointer gap-3"
           onMouseEnter={() => {
             setHover(true);
@@ -67,7 +68,7 @@ const AddTaskComponent = () => {
           ) : (
             <Text fontSize="md">Add task</Text>
           )}
-        </div>
+        </motion.div>
       )}
     </div>
   );
