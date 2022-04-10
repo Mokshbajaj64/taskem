@@ -1,6 +1,7 @@
 import { Heading, Text, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import { MdSort } from "react-icons/md";
+import AddTaskComponent from "./AddTaskComponent";
 import TaskComponent from "./TaskComponent";
 
 const TodayTask = () => {
@@ -36,6 +37,7 @@ const TodayTask = () => {
         <TaskComponent />
         <TaskComponent />
         <TaskComponent />
+        <AddTaskComponent />
       </div>
     </div>
   );
