@@ -11,6 +11,7 @@ import Today from "./pages/Today";
 import Inbox from "./pages/Inbox";
 import Weekly from "./pages/Weekly";
 import Completed from "./pages/Completed";
+import Trash from "./pages/Trash";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/app/inbox" element={<Inbox />} />
           <Route path="/app/week" element={<Weekly />} />
           <Route path="/app/completed" element={<Completed />} />
+          <Route path="/app/trash" element={<Trash />} />
         </Routes>
       </AnimatePresence>
     </Router>
