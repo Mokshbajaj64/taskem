@@ -161,7 +161,6 @@ const AppSidebar = () => {
           <Accordion allowMultiple className="gap-1">
             <SidebarAccordian title="Project" />
             <SidebarAccordian title="Tags" />
-            <SidebarAccordian title="Filters" />
           </Accordion>
         </div>
         <Divider />

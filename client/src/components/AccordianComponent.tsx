@@ -1,11 +1,22 @@
 import React from "react";
 import { Text, useColorMode } from "@chakra-ui/react";
 import { FcBiotech } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const AccordianComponent = () => {
+  const navigate = useNavigate();
   const { colorMode } = useColorMode();
   return colorMode === "dark" ? (
-    <div className="w-full hover:bg-[#21242a] p-4 rounded-md flex items-center justify-between cursor-pointer">
+    <motion.div
+      className="w-full hover:bg-[#21242a] p-4 rounded-md flex items-center justify-between cursor-pointer"
+      onClick={() => {
+        navigate("/project/eatshit");
+      }}
+      whileHover={{
+        scale: 1.06,
+      }}
+    >
       <div className="flex items-center gap-2">
         <FcBiotech size="20" />
         <Text fontSize="md">Lmao this</Text>
@@ -16,9 +27,17 @@ const AccordianComponent = () => {
           8
         </Text>
       </div>
-    </div>
+    </motion.div>
   ) : (
-    <div className="w-full hover:bg-[#f0f0f0] p-4 rounded-md flex items-center justify-between cursor-pointer">
+    <motion.div
+      className="w-full hover:bg-[#f0f0f0] p-4 rounded-md flex items-center justify-between cursor-pointer"
+      onClick={() => {
+        navigate("/project/eatshit");
+      }}
+      whileHover={{
+        scale: 1.06,
+      }}
+    >
       <div className="flex items-center gap-2">
         <FcBiotech size="20" />
         <Text fontSize="md">Lmao this</Text>
@@ -29,7 +48,7 @@ const AccordianComponent = () => {
           8
         </Text>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
