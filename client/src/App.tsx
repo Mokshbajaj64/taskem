@@ -32,7 +32,7 @@ function App() {
           <Route path="/app/completed" element={<Completed />} />
           <Route path="/app/trash" element={<Trash />} />
           <Route path="/project/:projectId" element={<Project />} />
-          <Route path="/tags/:tagsId" element={<Tags />} />
+          <Route path="/tag/:tagsId" element={<Tags />} />
         </Routes>
       </AnimatePresence>
     </Router>
