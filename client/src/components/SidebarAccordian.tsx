@@ -5,9 +5,12 @@ import {
   AccordionPanel,
   AccordionIcon,
   Text,
+  IconButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { IoAdd } from "react-icons/io5";
 import AccordianComponent from "./AccordianComponent";
+import CreateProjectModal from "./CreateProjectModal";
 
 type Props = {
   title: string;
@@ -15,6 +18,7 @@ type Props = {
 
 const SidebarAccordian = (props: Props) => {
   const [hover, setHover] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <AccordionItem
       border="none"
@@ -36,7 +40,19 @@ const SidebarAccordian = (props: Props) => {
               {props.title}
             </Text>
           </div>
-          {hover ? <IoAdd size="20" /> : ""}
+          {hover ? (
+            <IconButton
+              icon={<IoAdd />}
+              aria-label="Add Project"
+              size="sm"
+              rounded={"full"}
+              onClick={() => {
+                onOpen();
+              }}
+            />
+          ) : (
+            ""
+          )}
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
@@ -44,6 +60,7 @@ const SidebarAccordian = (props: Props) => {
         <AccordianComponent />
         <AccordianComponent />
       </AccordionPanel>
+      <CreateProjectModal isOpen={isOpen} onClose={onClose} />
     </AccordionItem>
   );
 };

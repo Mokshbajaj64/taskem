@@ -17,12 +17,11 @@ const AccordianComponent = () => {
         scale: 1.06,
       }}
     >
-      <div className="flex items-center gap-2">
-        <FcBiotech size="20" />
+      <div className="flex items-center gap-4">
+        <div className="bg-green-500 p-[0.4rem] rounded-full"></div>
         <Text fontSize="md">Lmao this</Text>
       </div>
-      <div className="flex items-center gap-4">
-        <div className="bg-green-500 p-1 rounded-full"></div>
+      <div className="flex items-center">
         <Text fontSize="md" color="gray.500">
           8
         </Text>
