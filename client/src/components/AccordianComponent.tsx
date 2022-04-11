@@ -4,14 +4,18 @@ import { FcBiotech } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const AccordianComponent = () => {
+type Props = {
+  isTag: boolean;
+};
+
+const AccordianComponent = (props: Props) => {
   const navigate = useNavigate();
   const { colorMode } = useColorMode();
   return colorMode === "dark" ? (
     <motion.div
       className="w-full hover:bg-[#21242a] p-4 rounded-md flex items-center justify-between cursor-pointer"
       onClick={() => {
-        navigate("/project/eatshit");
+        props.isTag ? navigate("/tag/eatshit") : navigate("/project/eatshit");
       }}
       whileHover={{
         scale: 1.06,

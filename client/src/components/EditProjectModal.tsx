@@ -29,23 +29,23 @@ type Props = {
   isTag: boolean;
 };
 
-const CreateProjectModal = (props: Props) => {
+const EditProjectModal = (props: Props) => {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          Add {props?.isTag === true ? "Tag" : "Project"}
+          Edit {props?.isTag === true ? "Tag" : "Project"}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <Input id="name" type="text" />
+            <Input id="name" type="text" defaultValue={"Shitt"} />
           </FormControl>
           <FormControl marginTop="5">
             <FormLabel htmlFor="desc">Description</FormLabel>
-            <Textarea id="desc" />
+            <Textarea id="desc" defaultValue={"Hello sup sup hello"} />
           </FormControl>
           <div className="flex w-full gap-4 mt-5 items-center">
             <Text fontSize="md">Color</Text>
@@ -76,11 +76,11 @@ const CreateProjectModal = (props: Props) => {
           <Button variant="outline" mr={3} onClick={props.onClose}>
             Close
           </Button>
-          <Button colorScheme="blue">Add</Button>
+          <Button colorScheme="blue">Edit</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
   );
 };
 
-export default CreateProjectModal;
+export default EditProjectModal;

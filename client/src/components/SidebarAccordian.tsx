@@ -14,6 +14,7 @@ import CreateProjectModal from "./CreateProjectModal";
 
 type Props = {
   title: string;
+  isTag: boolean;
 };
 
 const SidebarAccordian = (props: Props) => {
@@ -56,11 +57,15 @@ const SidebarAccordian = (props: Props) => {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <AccordianComponent />
-        <AccordianComponent />
-        <AccordianComponent />
+        <AccordianComponent isTag={props.isTag} />
+        <AccordianComponent isTag={props.isTag} />
+        <AccordianComponent isTag={props.isTag} />
       </AccordionPanel>
-      <CreateProjectModal isOpen={isOpen} onClose={onClose} />
+      <CreateProjectModal
+        isOpen={isOpen}
+        onClose={onClose}
+        isTag={props.isTag}
+      />
     </AccordionItem>
   );
 };

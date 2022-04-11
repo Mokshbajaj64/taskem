@@ -159,8 +159,8 @@ const AppSidebar = () => {
         <Divider />
         <div className="flex flex-col w-full gap-1">
           <Accordion allowMultiple className="gap-1">
-            <SidebarAccordian title="Projects" />
-            <SidebarAccordian title="Tags" />
+            <SidebarAccordian title="Projects" isTag={false} />
+            <SidebarAccordian title="Tags" isTag={true} />
           </Accordion>
         </div>
         <Divider />

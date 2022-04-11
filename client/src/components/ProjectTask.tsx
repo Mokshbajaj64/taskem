@@ -9,6 +9,16 @@ import { BiTime, BiShareAlt } from "react-icons/bi";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import CommentsModal from "./CommentsModal";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  Button,
+} from "@chakra-ui/react";
+import EditProjectModal from "./EditProjectModal";
 
 const ProjectTask = () => {
   const { colorMode } = useColorMode();
@@ -17,6 +27,17 @@ const ProjectTask = () => {
     onOpen: commentOnOpen,
     onClose: commentOnClose,
   } = useDisclosure();
+  const {
+    isOpen: deleteIsOpen,
+    onOpen: deleteOnOpen,
+    onClose: deleteOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: editIsOpen,
+    onOpen: editOnOpen,
+    onClose: editOnClose,
+  } = useDisclosure();
+  const cancelRef = React.useRef(null);
   return (
     <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
@@ -90,13 +111,23 @@ const ProjectTask = () => {
                 </div>
               </MenuButton>
               <MenuList>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    editOnOpen();
+                  }}
+                >
                   <AiOutlineEdit size="20" color="#9bdaf3" />
                   <Text fontSize="md" color="#9bdaf3">
                     Edit Project
                   </Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    deleteOnOpen();
+                  }}
+                >
                   <AiOutlineDelete size="20" color="#df3333" />
                   <Text fontSize="md" color="#df3333">
                     Delete Project
@@ -167,13 +198,23 @@ const ProjectTask = () => {
                 </div>
               </MenuButton>
               <MenuList>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    editOnOpen();
+                  }}
+                >
                   <AiOutlineEdit size="20" color="#9bdaf3" />
                   <Text fontSize="md" color="#9bdaf3">
                     Edit Project
                   </Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    deleteOnOpen();
+                  }}
+                >
                   <AiOutlineDelete size="20" color="#df3333" />
                   <Text fontSize="md" color="#df3333">
                     Delete Project
@@ -191,6 +232,38 @@ const ProjectTask = () => {
         <AddTaskComponent />
       </div>
       <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} />
+      {/* dleete project modal stuff */}
+      <AlertDialog
+        isOpen={deleteIsOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={deleteOnClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Delete Project
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure? You can't undo this action afterwards.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button onClick={deleteOnClose} ref={cancelRef}>
+                Cancel
+              </Button>
+              <Button colorScheme="red" onClick={deleteOnClose} ml={3}>
+                Delete
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+      <EditProjectModal
+        isOpen={editIsOpen}
+        isTag={false}
+        onClose={editOnClose}
+      />
     </div>
   );
 };
