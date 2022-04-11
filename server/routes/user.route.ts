@@ -4,6 +4,7 @@ import User, { UserModel } from '../models/user.model';
 import { omit } from 'lodash';
 import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
+import isAuthenticated from '../middlewares/isAuthenticated';
 
 const router: Router = express.Router();
 
@@ -118,10 +119,87 @@ router.post(
             }
           );
           res.status(200).json({
-            data: token,
+            token,
           });
         }
       }
+    }
+  }
+);
+
+//get profile without email / get others profile
+router.get('/profile/:userId', async (req: Request, res: Response) => {
+  await User.findById(req.params.userId)
+    .then((data) => {
+      const userboi = omit(data?.toJSON(), ['password', 'email']);
+      res.status(200).json(userboi);
+    })
+    .catch((err: any) => {
+      res.json({
+        error: err?.message,
+      });
+    });
+});
+
+//get profile with email / get your profile
+router.get('/profile', isAuthenticated, async (req: Request, res: Response) => {
+  await User.findById(res?.locals?.userId)
+    .then((data) => {
+      const userboi = omit(data?.toJSON(), ['password']);
+      res.status(200).json(userboi);
+    })
+    .catch((err: any) => {
+      res.json({
+        error: err?.message,
+      });
+    });
+});
+
+//update profile
+router.put(
+  '/update_profile',
+  body('username')
+    .exists()
+    .withMessage('username is required')
+    .isLength({
+      min: 4,
+      max: 20,
+    })
+    .withMessage('username must be between 4 and 20 characters'),
+  body('email')
+    .exists()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('email must be valid'),
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    const data: UserModel = req.body;
+    const user = await User.findById(res?.locals?.userId);
+    if (user) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.status(403).json({
+          error: errors.array()[0].msg,
+        });
+      } else {
+        await User.findByIdAndUpdate(res?.locals?.userId, {
+          username: data?.username?.trim(),
+          email: data?.email?.trim(),
+        })
+          .then((data) => {
+            const userboi = omit(data?.toJSON(), ['password']);
+            res.status(200).json(userboi);
+          })
+          .catch((error) => {
+            res.json({
+              error: error.message,
+            });
+          });
+      }
+    } else {
+      res.json({
+        error: 'User not found',
+      });
     }
   }
 );
