@@ -13,6 +13,7 @@ import Weekly from "./pages/Weekly";
 import Completed from "./pages/Completed";
 import Trash from "./pages/Trash";
 import Project from "./pages/Project";
+import Tags from "./pages/Tags";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/app/completed" element={<Completed />} />
           <Route path="/app/trash" element={<Trash />} />
           <Route path="/project/:projectId" element={<Project />} />
+          <Route path="/tags/:tagsId" element={<Tags />} />
         </Routes>
       </AnimatePresence>
     </Router>
