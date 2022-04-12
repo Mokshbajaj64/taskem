@@ -5,6 +5,7 @@ export interface UserModel extends mongoose.Document {
   username: string;
   email: string;
   password: string;
+  bio: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,8 +16,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Username is required'],
       unique: true,
-      min: 4,
-      max: 20,
     },
     email: {
       type: String,
@@ -26,8 +25,10 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
-      min: 8,
-      max: 20,
+    },
+    bio: {
+      type: String,
+      default: 'I love ShittyShit',
     },
   },
   {
