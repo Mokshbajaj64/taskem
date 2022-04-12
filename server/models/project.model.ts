@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface ProjectModel extends mongoose.Document {
-  title: string;
+  name: string;
   description: string;
   color: string;
   userId: string;
@@ -11,13 +11,11 @@ export interface ProjectModel extends mongoose.Document {
 
 const ProjectSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: false,
     },
     color: {
       type: String,

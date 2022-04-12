@@ -8,31 +8,38 @@ const router: Router = express.Router();
 //create a project
 router.post(
   '/',
-  body('title').exists().withMessage('Title is required'),
+  body('name')
+    .trim()
+    .exists()
+    .withMessage('Project name is required')
+    .isLength({
+      min: 1,
+      max: 50,
+    })
+    .withMessage('Project name must be between 1 and 50 characters'),
   isAuthenticated,
   async (req: Request, res: Response) => {
-    const userId = res?.locals?.userId;
-    const data: ProjectModel = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.status(403).json({
-        error: errors.array()[0].msg,
-      });
-    } else {
-      await Project.create({
-        title: data?.title?.trim(),
-        description: data?.description?.trim(),
-        color: data?.color?.trim(),
-        userId: userId,
-      })
-        .then((data) => {
-          res.status(201).json(data);
-        })
-        .catch((err) => {
-          res.status(500).json({
-            error: err.message,
-          });
+    try {
+      const userId = res?.locals?.userId;
+      const data: ProjectModel = req.body;
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.json({
+          error: errors.array()[0].msg,
         });
+      } else {
+        const project = await Project.create({
+          name: data?.name,
+          description: data?.description,
+          color: data?.color,
+          userId: userId,
+        });
+        res.json(project);
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
     }
   }
 );
@@ -42,18 +49,91 @@ router.delete(
   '/:projectId',
   isAuthenticated,
   async (req: Request, res: Response) => {
-    const userId = res?.locals?.userId;
-    const projectId = req.params.projectId;
-    await Project.findById(projectId).then(async (data) => {
-      await Project.findOneAndDelete({
+    try {
+      const userId = res?.locals?.userId;
+      const projectId = req?.params?.projectId;
+      const project = await Project.findOne({
+        _id: projectId,
         userId: userId,
-      }).then(() => {
-        res.status(200).json('Project deleted');
       });
-      res.status(403).json({
-        error: 'You cant delete other projects',
+      if (project === null) {
+        res.json({
+          error: 'Project not found',
+        });
+      } else {
+        await Project.findByIdAndDelete(projectId);
+        res.json('Project deleted');
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
       });
+    }
+  }
+);
+
+//get projects
+router.get('/', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const projects = await Project.find({
+      userId: userId,
     });
+    res.json(projects);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
+
+//update project
+router.put(
+  '/:projectId',
+  body('name')
+    .trim()
+    .exists()
+    .withMessage('Project name is required')
+    .isLength({
+      min: 1,
+      max: 50,
+    })
+    .withMessage('Project name must be between 1 and 50 characters'),
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    const data: ProjectModel = req.body;
+    try {
+      const userId = res?.locals?.userId;
+      const projectId = req?.params?.projectId;
+      const project = await Project.findOne({
+        _id: projectId,
+        userId: userId,
+      });
+      if (project === null) {
+        res.json({
+          error: 'Project not found',
+        });
+      } else {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          res.json({
+            error: errors.array()[0].msg,
+          });
+        } else {
+          await Project.findByIdAndUpdate(projectId, {
+            name: data?.name,
+            description: data?.description,
+            color: data?.color,
+          });
+          const projectboi = await Project.findById(projectId);
+          res.json(projectboi);
+        }
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
 );
 
