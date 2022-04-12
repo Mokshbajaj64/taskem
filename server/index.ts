@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import contactRouter from './routes/contact.route';
 import userRouter from './routes/user.route';
 import projectRouter from './routes/project.route';
+import tagRouter from './routes/tag.route';
 
 const app: Express = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use('/api/contact', contactRouter);
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
+app.use('/api/tag', tagRouter);
 
 dotenv.config({
   path: './config.env',
