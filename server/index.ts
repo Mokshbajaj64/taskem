@@ -6,6 +6,7 @@ import contactRouter from './routes/contact.route';
 import userRouter from './routes/user.route';
 import projectRouter from './routes/project.route';
 import tagRouter from './routes/tag.route';
+import taskRouter from './routes/task.route';
 
 const app: Express = express();
 
@@ -17,6 +18,7 @@ app.use('/api/contact', contactRouter);
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/tag', tagRouter);
+app.use('/api/task', taskRouter);
 
 dotenv.config({
   path: './config.env',
