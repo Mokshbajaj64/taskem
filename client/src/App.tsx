@@ -14,6 +14,8 @@ import Completed from "./pages/Completed";
 import Trash from "./pages/Trash";
 import Project from "./pages/Project";
 import Tags from "./pages/Tags";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
           <Route path="/tag/:tagsId" element={<Tags />} />
         </Routes>
       </AnimatePresence>
+      <ToastContainer />
     </Router>
   );
 }

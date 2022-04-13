@@ -12,19 +12,29 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill, BsFillEmojiSunglassesFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { login } from "../actions/user";
 
 const Login = () => {
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const [showPassword, setShowPassword] = React.useState(false);
   const [color, setColor] = React.useState("blue");
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  const loginBoi = () => {
+    dispatch(login(loginData));
+  };
   return (
     <motion.div
       className="flex w-full min-h-screen overflow-y-hidden"
@@ -138,8 +148,18 @@ const Login = () => {
         <div className="flex flex-col items-start gap-6">
           <FormControl>
             <FormLabel htmlFor="email">Email address</FormLabel>
-            <Input type="email" width="60%" placeholder="tim@twt.com" />
-            <FormHelperText>We'll never share your email.</FormHelperText>
+            <Input
+              type="email"
+              width="60%"
+              placeholder="tim@twt.com"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setLoginData({
+                  ...loginData,
+                  email: event?.target?.value,
+                });
+              }}
+            />
+            <FormHelperText>Email must be valid</FormHelperText>
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="email">Password</FormLabel>
@@ -147,6 +167,12 @@ const Login = () => {
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="*********"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setLoginData({
+                    ...loginData,
+                    password: event?.target?.value,
+                  });
+                }}
               />
               <InputRightElement
                 children={
@@ -168,6 +194,7 @@ const Login = () => {
                 }
               />
             </InputGroup>
+            <FormHelperText>Password must be between 8 and 20 characters</FormHelperText>
           </FormControl>
           <Checkbox>Remember me</Checkbox>
           <motion.div
@@ -176,9 +203,17 @@ const Login = () => {
               scale: 1.05,
             }}
           >
-            <Button colorScheme="blue" width="full">
-              Sign in
-            </Button>
+            {loginData?.email?.trim()?.includes("@") &&
+            loginData?.password?.trim()?.length >= 8 &&
+            loginData?.password?.trim()?.length <= 20 ? (
+              <Button colorScheme="blue" width="full" onClick={loginBoi}>
+                Sign in
+              </Button>
+            ) : (
+              <Button colorScheme="blue" width="full" isDisabled = {true}>
+                Sign in
+              </Button>
+            )}{" "}
           </motion.div>
           <div className="flex items-center gap-1">
             <Text size="md">Don't have any account?</Text>

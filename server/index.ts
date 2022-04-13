@@ -12,7 +12,11 @@ const app: Express = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
 
 app.use('/api/contact', contactRouter);
 app.use('/api/user', userRouter);
