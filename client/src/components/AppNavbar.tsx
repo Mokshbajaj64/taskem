@@ -34,11 +34,23 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
+  useDisclosure
 } from "@chakra-ui/react";
+import {useDispatch,useSelector} from "react-redux"
+import UpdateProfileModal from "./UpdateProfileModal"
 
 const AppNavbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const logout = () => {
+    dispatch({
+      type:"LOGOUT"
+    })
+    navigate("/login")
+  }
+  const userboi = useSelector((data:any) => data?.user?.authData)
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <motion.div
       initial={{
@@ -144,32 +156,35 @@ const AppNavbar = () => {
         </Popover>
         <Menu>
           <MenuButton>
-            <Avatar name="SHIT" className="cursor-pointer" />
+            <Avatar name={userboi?.username} className="cursor-pointer" />
           </MenuButton>
           <MenuList>
-            <MenuItem className="flex gap-4 p-2 rounded-2xl">
+            <MenuItem className="flex gap-4 p-2 rounded-2xl" onClick = {() => {
+              onOpen()
+            }}>
               <div className="flex flex-col items-start gap-3">
-                <Avatar name="SHIT" size="xl" />
+                <Avatar name={userboi?.username} size="xl" />
                 <div className="flex items-center gap-2">
                   <FiSettings size="20" color="gray" />
                   <Text fontSize="md">Settings</Text>
                 </div>
               </div>
               <div className="flex flex-col items-start">
-                <Text fontSize="lg">SHIT BOI</Text>
+                <Text fontSize="lg">{userboi?.username}</Text>
                 <Text fontSize="lg" color="gray.500">
-                  shit@gmail.com
+                  {userboi?.email}
                 </Text>
               </div>
             </MenuItem>
             <MenuDivider />
-            <MenuItem className="flex gap-3 items-center rounded-2xl">
+            <MenuItem className="flex gap-3 items-center rounded-2xl" onClick = {logout}>
               <FiLogOut size="24" color="gray" />
               <Text fontSize="lg">Log Out</Text>
             </MenuItem>
           </MenuList>
         </Menu>
       </div>
+      <UpdateProfileModal isOpen = {isOpen} onClose = {onClose}/>
     </motion.div>
   );
 };
