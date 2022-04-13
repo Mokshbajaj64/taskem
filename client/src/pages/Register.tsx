@@ -12,19 +12,30 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill, BsFillEmojiSunglassesFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { register } from "../actions/user";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { colorMode, toggleColorMode } = useColorMode();
   const [showPassword, setShowPassword] = React.useState(false);
   const [color, setColor] = React.useState("blue");
+  const [registerData, setRegisterData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const registerBoi = () => {
+    dispatch(register(registerData));
+  };
   return (
     <motion.div
       className="flex w-full min-h-screen overflow-y-hidden"
@@ -136,12 +147,44 @@ const Register = () => {
         <div className="flex flex-col items-start gap-6">
           <FormControl>
             <FormLabel htmlFor="email">Username</FormLabel>
-            <Input type="email" width="60%" placeholder="Tim Russica" />
+            <Input
+              type="email"
+              width="60%"
+              placeholder="Tim Russica"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setRegisterData({
+                  ...registerData,
+                  username: event?.target?.value,
+                });
+              }}
+            />
+            {registerData?.username?.trim()?.length >= 4 &&
+            registerData?.username?.trim()?.length <= 20 ? (
+              ""
+            ) : (
+              <FormHelperText>
+                Username must be between 4 and 20 characters
+              </FormHelperText>
+            )}
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="email">Email address</FormLabel>
-            <Input type="email" width="60%" placeholder="tim@twt.com" />
-            <FormHelperText>We'll never share your email.</FormHelperText>
+            <Input
+              type="email"
+              width="60%"
+              placeholder="tim@twt.com"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setRegisterData({
+                  ...registerData,
+                  email: event?.target?.value,
+                });
+              }}
+            />
+            {registerData?.email?.trim()?.includes("@") ? (
+              ""
+            ) : (
+              <FormHelperText>Email must be valid</FormHelperText>
+            )}
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="email">Password</FormLabel>
@@ -149,6 +192,12 @@ const Register = () => {
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="*********"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setRegisterData({
+                    ...registerData,
+                    password: event?.target?.value,
+                  });
+                }}
               />
               <InputRightElement
                 children={
@@ -170,6 +219,14 @@ const Register = () => {
                 }
               />
             </InputGroup>
+            {registerData?.password?.trim()?.length >= 8 &&
+            registerData?.password?.trim()?.length <= 20 ? (
+              ""
+            ) : (
+              <FormHelperText>
+                Password must be between 8 and 20 characters
+              </FormHelperText>
+            )}
           </FormControl>
           <motion.div
             className="flex w-[60%]"
@@ -177,9 +234,19 @@ const Register = () => {
               scale: 1.05,
             }}
           >
-            <Button colorScheme="blue" width="full">
-              Sign up
-            </Button>
+            {registerData?.email?.trim()?.includes("@") &&
+            registerData?.username?.trim()?.length >= 4 &&
+            registerData?.username?.trim()?.length <= 20 &&
+            registerData?.password?.trim()?.length >= 8 &&
+            registerData?.password?.trim()?.length <= 20 ? (
+              <Button colorScheme="blue" width="full" onClick={registerBoi}>
+                Sign up
+              </Button>
+            ) : (
+              <Button colorScheme="blue" width="full" isDisabled={true}>
+                Sign up
+              </Button>
+            )}
           </motion.div>
           <div className="flex items-center gap-1">
             <Text size="md">Already have any account?</Text>

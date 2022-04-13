@@ -159,7 +159,11 @@ const Login = () => {
                 });
               }}
             />
-            <FormHelperText>Email must be valid</FormHelperText>
+            {loginData?.email?.trim()?.includes("@") ? (
+              ""
+            ) : (
+              <FormHelperText>Email must be valid</FormHelperText>
+            )}
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="email">Password</FormLabel>
@@ -194,7 +198,14 @@ const Login = () => {
                 }
               />
             </InputGroup>
-            <FormHelperText>Password must be between 8 and 20 characters</FormHelperText>
+            {loginData?.password?.trim()?.length >= 8 &&
+            loginData?.password?.trim()?.length <= 20 ? (
+              ""
+            ) : (
+              <FormHelperText>
+                Password must be between 8 and 20 characters
+              </FormHelperText>
+            )}
           </FormControl>
           <Checkbox>Remember me</Checkbox>
           <motion.div
@@ -210,7 +221,7 @@ const Login = () => {
                 Sign in
               </Button>
             ) : (
-              <Button colorScheme="blue" width="full" isDisabled = {true}>
+              <Button colorScheme="blue" width="full" isDisabled={true}>
                 Sign in
               </Button>
             )}{" "}
