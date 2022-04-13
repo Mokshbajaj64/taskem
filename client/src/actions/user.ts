@@ -79,3 +79,36 @@ export const getUser =
       });
     }
   };
+
+export const updateUser =
+  (databoi: { username: string; email: string; bio: string }, token: string) =>
+  async (dispatch: Dispatch) => {
+    const { data } = await api.updateUser(databoi, token);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "UPDATE_USER",
+        data,
+      });
+      toast.success("Profile updated :)", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };

@@ -10,8 +10,10 @@ export const user = (state = { authData: null }, action: Action) => {
     case "GET_USER":
       return (state = { authData: action?.data });
     case "LOGOUT":
-      localStorage?.removeItem("token")
+      localStorage?.removeItem("token");
       return (state = { authData: null });
+    case "UPDATE_USER":
+      return (state = { authData: action?.data });
     default:
       return state;
   }

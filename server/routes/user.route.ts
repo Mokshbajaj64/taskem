@@ -202,7 +202,7 @@ router.put(
           bio: data?.bio,
         });
         const userboi = await User.findById(res?.locals?.userId);
-        const userboi2 = omit(userboi?.toJSON(), ['password', 'email']);
+        const userboi2 = omit(userboi?.toJSON(), ['password']);
         res.json(userboi2);
       }
     } catch (error: any) {

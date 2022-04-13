@@ -34,22 +34,22 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
-import {useDispatch,useSelector} from "react-redux"
-import UpdateProfileModal from "./UpdateProfileModal"
+import { useDispatch, useSelector } from "react-redux";
+import UpdateProfileModal from "./UpdateProfileModal";
 
 const AppNavbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const logout = () => {
     dispatch({
-      type:"LOGOUT"
-    })
-    navigate("/login")
-  }
-  const userboi = useSelector((data:any) => data?.user?.authData)
+      type: "LOGOUT",
+    });
+    navigate("/login");
+  };
+  const userboi = useSelector((data: any) => data?.user?.authData);
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <motion.div
@@ -159,9 +159,12 @@ const AppNavbar = () => {
             <Avatar name={userboi?.username} className="cursor-pointer" />
           </MenuButton>
           <MenuList>
-            <MenuItem className="flex gap-4 p-2 rounded-2xl" onClick = {() => {
-              onOpen()
-            }}>
+            <MenuItem
+              className="flex gap-4 p-2 rounded-2xl"
+              onClick={() => {
+                onOpen();
+              }}
+            >
               <div className="flex flex-col items-start gap-3">
                 <Avatar name={userboi?.username} size="xl" />
                 <div className="flex items-center gap-2">
@@ -177,14 +180,17 @@ const AppNavbar = () => {
               </div>
             </MenuItem>
             <MenuDivider />
-            <MenuItem className="flex gap-3 items-center rounded-2xl" onClick = {logout}>
+            <MenuItem
+              className="flex gap-3 items-center rounded-2xl"
+              onClick={logout}
+            >
               <FiLogOut size="24" color="gray" />
               <Text fontSize="lg">Log Out</Text>
             </MenuItem>
           </MenuList>
         </Menu>
       </div>
-      <UpdateProfileModal isOpen = {isOpen} onClose = {onClose}/>
+      <UpdateProfileModal isOpen={isOpen} onClose={onClose} username = {userboi?.username} email = {userboi?.email} bio =  {userboi?.bio}/>
     </motion.div>
   );
 };
