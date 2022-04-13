@@ -152,7 +152,7 @@ router.get('/profile/:userId', async (req: Request, res: Response) => {
 router.get('/profile', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const user = await User.findById(res?.locals?.userId);
-    const userboi = omit(user?.toJSON(), ['email']);
+    const userboi = omit(user?.toJSON(), ['password']);
     res.json(userboi);
   } catch (error: any) {
     res.json({

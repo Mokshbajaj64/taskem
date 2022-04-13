@@ -16,6 +16,8 @@ import Project from "./pages/Project";
 import Tags from "./pages/Tags";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./routes/PrivateRoute";
+import AuthPrivateRoute from "./routes/AuthPrivateRoute";
 
 function App() {
   return (
@@ -23,18 +25,102 @@ function App() {
       <AnimatePresence exitBeforeEnter>
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/app/today" element={<Today />} />
-          <Route path="/app/inbox" element={<Inbox />} />
-          <Route path="/app/week" element={<Weekly />} />
-          <Route path="/app/completed" element={<Completed />} />
-          <Route path="/app/trash" element={<Trash />} />
-          <Route path="/project/:projectId" element={<Project />} />
-          <Route path="/tag/:tagsId" element={<Tags />} />
+          <Route
+            path="/"
+            element={
+              <AuthPrivateRoute>
+                <Home />
+              </AuthPrivateRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <AuthPrivateRoute>
+                <Login />
+              </AuthPrivateRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <AuthPrivateRoute>
+                <Register />
+              </AuthPrivateRoute>
+            }
+          />
+          <Route
+            path="/features"
+            element={
+              <AuthPrivateRoute>
+                <Features />
+              </AuthPrivateRoute>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <AuthPrivateRoute>
+                <About />
+              </AuthPrivateRoute>
+            }
+          />
+          <Route
+            path="/app/today"
+            element={
+              <PrivateRoute>
+                <Today />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/app/inbox"
+            element={
+              <PrivateRoute>
+                <Inbox />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/app/week"
+            element={
+              <PrivateRoute>
+                <Weekly />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/app/completed"
+            element={
+              <PrivateRoute>
+                <Completed />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/app/trash"
+            element={
+              <PrivateRoute>
+                <Trash />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/project/:projectId"
+            element={
+              <PrivateRoute>
+                <Project />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/tag/:tagsId"
+            element={
+              <PrivateRoute>
+                <Tags />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </AnimatePresence>
       <ToastContainer />
