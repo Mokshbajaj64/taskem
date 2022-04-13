@@ -53,6 +53,7 @@ router.get('/today', isAuthenticated, async (req: Request, res: Response) => {
     const tasks = await Task.find({
       userId: userId,
       isTodayTask: true,
+      completed: false,
     });
     res.json(tasks);
   } catch (error: any) {
@@ -143,6 +144,38 @@ router.put(
   }
 );
 
+//complete a todaytask
+router.put(
+  '/today/complete/:id',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const task = await Task.findOne({
+        _id: req?.params?.id,
+        userId: userId,
+        isTodayTask: true,
+        completed: false,
+      });
+      if (task === null) {
+        res.json({
+          error: 'Task not found',
+        });
+      } else {
+        await Task.findByIdAndUpdate(req?.params?.id, {
+          completed: true,
+        });
+        const tasksboi = await Task.findById(req?.params?.id)
+        res.json(tasksboi)
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
+
 //create a inboxtask
 router.post(
   '/inbox',
@@ -191,6 +224,7 @@ router.get('/inbox', isAuthenticated, async (req: Request, res: Response) => {
     const tasks = await Task.find({
       userId: userId,
       isInboxTask: true,
+      completed: false
     });
     res.json(tasks);
   } catch (error: any) {
@@ -281,6 +315,39 @@ router.put(
   }
 );
 
+//complete a inboxtask
+router.put(
+  '/inbox/complete/:id',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const task = await Task.findOne({
+        _id: req?.params?.id,
+        userId: userId,
+        isInboxTask: true,
+        completed: false,
+      });
+      if (task === null) {
+        res.json({
+          error: 'Task not found',
+        });
+      } else {
+        await Task.findByIdAndUpdate(req?.params?.id, {
+          completed: true,
+        });
+        const tasksboi = await Task.findById(req?.params?.id)
+        res.json(tasksboi)
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
+
+
 //create a weeklytask
 router.post(
   '/weekly',
@@ -329,6 +396,7 @@ router.get('/weekly', isAuthenticated, async (req: Request, res: Response) => {
     const tasks = await Task.find({
       userId: userId,
       isWeeklyTask: true,
+      completed: false
     });
     res.json(tasks);
   } catch (error: any) {
@@ -410,6 +478,38 @@ router.put(
           });
           res.json(updatedTask);
         }
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
+
+//complete a weeklytask
+router.put(
+  '/weekly/complete/:id',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const task = await Task.findOne({
+        _id: req?.params?.id,
+        userId: userId,
+        isWeeklyTask: true,
+        completed: false,
+      });
+      if (task === null) {
+        res.json({
+          error: 'Task not found',
+        });
+      } else {
+        await Task.findByIdAndUpdate(req?.params?.id, {
+          completed: true,
+        });
+        const tasksboi = await Task.findById(req?.params?.id)
+        res.json(tasksboi)
       }
     } catch (error: any) {
       res.json({
