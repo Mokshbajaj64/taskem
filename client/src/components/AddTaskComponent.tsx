@@ -4,10 +4,32 @@ import { IoMdAdd, IoMdAddCircle } from "react-icons/io";
 import { FaTags } from "react-icons/fa";
 import { BsFlagFill } from "react-icons/bs";
 import { motion } from "framer-motion";
+import { createTodayTask } from "../actions/todaytask";
+import { useDispatch } from "react-redux";
 
-const AddTaskComponent = () => {
+type Props = {
+  isTodayTask?: boolean;
+};
+
+const AddTaskComponent = (props: Props) => {
+  const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [addTask, setAddTask] = useState(false);
+  const [addTaskData, setAddTaskData] = useState({
+    title: "",
+    description: "",
+  });
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const addTodayTaskBoi = () => {
+    dispatch(createTodayTask(addTaskData, token));
+    setAddTaskData({
+      title:"",
+      description:""
+    })
+  };
+  const addWeeklyTaskBoi = () => {
+    console.log(addTaskData)
+  }
   return (
     <div className="w-full">
       {addTask ? (
@@ -20,11 +42,28 @@ const AddTaskComponent = () => {
               border: "1px solid #e6e6e6",
             }}
           >
-            <Input variant="unstyled" placeholder="Task title" />
+            <Input
+              variant="unstyled"
+              placeholder="Task title"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setAddTaskData({
+                  ...addTaskData,
+                  title: event?.target?.value,
+                });
+              }}
+              value = {addTaskData?.title}
+            />
             <Textarea
               placeholder="Title description"
               variant="unstyled"
               resize="none"
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setAddTaskData({
+                  ...addTaskData,
+                  description: event?.target?.value,
+                });
+              }}
+              value = {addTaskData?.description}
             />
             <div className="flex items-center gap-4">
               <IconButton icon={<FaTags />} aria-label="Tags" />
@@ -32,7 +71,20 @@ const AddTaskComponent = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Button colorScheme="blue">Add Task</Button>
+            {addTaskData?.title?.trim()?.length >= 1 ? (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  {props?.isTodayTask ? addTodayTaskBoi() : addWeeklyTaskBoi()}
+                }}
+              >
+                Add Task
+              </Button>
+            ) : (
+              <Button colorScheme="blue" isDisabled={true}>
+                Add Task
+              </Button>
+            )}
             <Button
               variant="outline"
               onClick={() => {

@@ -17,7 +17,12 @@ import {
 import EditComponent from "./EditComponent";
 import { motion } from "framer-motion";
 
-const TaskComponent = () => {
+type Props = {
+  title: string
+  description: string
+}
+
+const TaskComponent = (props: Props) => {
   const [hover, setHover] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
@@ -42,9 +47,9 @@ const TaskComponent = () => {
           <div className="flex gap-3 items-start mb-4">
             <Checkbox className="mt-1" />
             <div className="flex flex-col gap-1">
-              <Text fontSize="md">Eat shit</Text>
+              <Text fontSize="md">{props?.title}</Text>
               <Text fontSize="md" color="gray.500">
-                Why eating shit is good for health
+                {props?.description}
               </Text>
             </div>
           </div>

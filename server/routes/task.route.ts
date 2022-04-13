@@ -36,7 +36,12 @@ router.post(
           isInboxTask: false,
           isWeeklyTask: false,
         });
-        res.json(task);
+        const tasks = await Task.find({
+          userId: userId,
+          isTodayTask: true,
+          completed: false,
+        });
+        res.json(tasks);
       }
     } catch (error: any) {
       res.json({
@@ -165,8 +170,8 @@ router.put(
         await Task.findByIdAndUpdate(req?.params?.id, {
           completed: true,
         });
-        const tasksboi = await Task.findById(req?.params?.id)
-        res.json(tasksboi)
+        const tasksboi = await Task.findById(req?.params?.id);
+        res.json(tasksboi);
       }
     } catch (error: any) {
       res.json({
@@ -224,7 +229,7 @@ router.get('/inbox', isAuthenticated, async (req: Request, res: Response) => {
     const tasks = await Task.find({
       userId: userId,
       isInboxTask: true,
-      completed: false
+      completed: false,
     });
     res.json(tasks);
   } catch (error: any) {
@@ -336,8 +341,8 @@ router.put(
         await Task.findByIdAndUpdate(req?.params?.id, {
           completed: true,
         });
-        const tasksboi = await Task.findById(req?.params?.id)
-        res.json(tasksboi)
+        const tasksboi = await Task.findById(req?.params?.id);
+        res.json(tasksboi);
       }
     } catch (error: any) {
       res.json({
@@ -346,7 +351,6 @@ router.put(
     }
   }
 );
-
 
 //create a weeklytask
 router.post(
@@ -396,7 +400,7 @@ router.get('/weekly', isAuthenticated, async (req: Request, res: Response) => {
     const tasks = await Task.find({
       userId: userId,
       isWeeklyTask: true,
-      completed: false
+      completed: false,
     });
     res.json(tasks);
   } catch (error: any) {
@@ -508,8 +512,8 @@ router.put(
         await Task.findByIdAndUpdate(req?.params?.id, {
           completed: true,
         });
-        const tasksboi = await Task.findById(req?.params?.id)
-        res.json(tasksboi)
+        const tasksboi = await Task.findById(req?.params?.id);
+        res.json(tasksboi);
       }
     } catch (error: any) {
       res.json({

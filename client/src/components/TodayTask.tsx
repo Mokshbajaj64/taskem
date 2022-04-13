@@ -6,11 +6,13 @@ import TaskComponent from "./TaskComponent";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 const TodayTask = () => {
+  const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
   const { colorMode } = useColorMode();
   return (
-    <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
+    <div className="pl-[30%] w-full h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -89,10 +91,10 @@ const TodayTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-        <TaskComponent />
-        <TaskComponent />
-        <TaskComponent />
-        <AddTaskComponent />
+        {todaytask?.map((task:any, index:React.Key) => (
+          <TaskComponent key={index} title = {task?.title} description = {task?.description}/>
+        ))}
+        <AddTaskComponent isTodayTask = {true}/>
       </div>
     </div>
   );

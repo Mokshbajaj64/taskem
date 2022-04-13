@@ -26,3 +26,20 @@ export const updateUser = (
       token: token,
     },
   });
+
+export const getTodayTasks = (token: string) =>
+  API.get("/task/today", {
+    headers: {
+      token: token,
+    },
+  });
+
+export const createTodayTask = (
+  data: { title: string; description: string },
+  token: string
+) =>
+  API.post("/task/today", data, {
+    headers: {
+      token: token,
+    },
+  });

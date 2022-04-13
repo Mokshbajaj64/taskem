@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoTodaySharp, IoCloudDoneSharp } from "react-icons/io5";
 import { Divider, Text, useColorMode } from "@chakra-ui/react";
 import {
@@ -10,10 +10,20 @@ import { Accordion } from "@chakra-ui/react";
 import SidebarAccordian from "./SidebarAccordian";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { getTodayTasks } from "../actions/todaytask";
 
 const AppSidebar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { colorMode } = useColorMode();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const todayTaskFetch = async () => {
+    dispatch(getTodayTasks(token));
+  };
+  useEffect(() => {
+    todayTaskFetch();
+  }, [token,dispatch]);
   return (
     <div
       className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
