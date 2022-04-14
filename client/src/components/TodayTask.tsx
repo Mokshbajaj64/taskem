@@ -91,10 +91,16 @@ const TodayTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-        {todaytask?.map((task:any, index:React.Key) => (
-          <TaskComponent key={index} title = {task?.title} description = {task?.description} id = {task?._id} isTodayTask = {true}/>
+        {todaytask?.map((task: any, index: React.Key) => (
+          <TaskComponent
+            key={index}
+            title={task?.title}
+            description={task?.description}
+            id={task?._id}
+            isTodayTask={true}
+          />
         ))}
-        <AddTaskComponent isTodayTask = {true}/>
+        <AddTaskComponent isTodayTask={true} />
       </div>
     </div>
   );

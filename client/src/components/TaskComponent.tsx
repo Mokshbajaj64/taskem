@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { deleteTodayTask, complteTodayTask } from "../actions/todaytask";
 import { deleteInboxTask, completeInboxTask } from "../actions/inboxtask";
+import { deleteWeeklyTask, completeWeeklyTask } from "../actions/weeklytask";
 
 type Props = {
   title: string;
@@ -47,13 +48,13 @@ const TaskComponent = (props: Props) => {
     onClose();
   };
   const deleteTaskBoiWeekly = () => {
-    console.log("Deleteboiweekly");
+    dispatch(deleteWeeklyTask(token, props?.id));
   };
   const completeTaskBoiInbox = () => {
     dispatch(completeInboxTask(token, props?.id));
   };
   const completeTaskBoiWeekly = () => {
-    console.log("Complete task week");
+    dispatch(completeWeeklyTask(token, props?.id));
   };
   return (
     <motion.div
@@ -143,8 +144,8 @@ const TaskComponent = (props: Props) => {
           title={props?.title}
           description={props?.description}
           id={props?.id}
-          isTodayTask = {props?.isTodayTask}
-          isInboxTask = {props?.isInboxTask}
+          isTodayTask={props?.isTodayTask}
+          isInboxTask={props?.isInboxTask}
         />
       )}
       <Divider />

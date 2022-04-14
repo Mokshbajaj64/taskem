@@ -6,7 +6,8 @@ import { BsFlagFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { createTodayTask } from "../actions/todaytask";
 import { useDispatch } from "react-redux";
-import {createInboxTask} from "../actions/inboxtask"
+import { createInboxTask } from "../actions/inboxtask";
+import { createWeeklyTask } from "../actions/weeklytask";
 
 type Props = {
   isTodayTask?: boolean;
@@ -30,14 +31,18 @@ const AddTaskComponent = (props: Props) => {
     });
   };
   const addInboxTaskBoi = () => {
-    dispatch(createInboxTask(addTaskData,token))
+    dispatch(createInboxTask(addTaskData, token));
     setAddTaskData({
       title: "",
       description: "",
     });
   };
   const addWeeklyTaskBoi = () => {
-    console.log(addTaskData);
+    dispatch(createWeeklyTask(addTaskData, token));
+    setAddTaskData({
+      title: "",
+      description: "",
+    });
   };
   return (
     <div className="w-full">

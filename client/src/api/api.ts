@@ -118,3 +118,49 @@ export const completeInboxTask = (token: string, taskId: string) =>
       },
     }
   );
+
+export const getWeeklyTasks = (token: string) =>
+  API.get("/task/weekly", {
+    headers: {
+      token: token,
+    },
+  });
+
+export const createWeeklyTask = (
+  data: { title: string; description: string },
+  token: string
+) =>
+  API.post("/task/weekly", data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const deleteWeeklyTask = (token: string, taskId: string) =>
+  API.delete(`/task/weekly/${taskId}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const updateWeeklyTask = (
+  data: { title: string; description: string },
+  token: string,
+  taskId: string
+) =>
+  API.put(`/task/weekly/${taskId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const completeWeeklyTask = (token: string, taskId: string) =>
+  API.put(
+    `/task/weekly/complete/${taskId}`,
+    {},
+    {
+      headers: {
+        token: token,
+      },
+    }
+  );

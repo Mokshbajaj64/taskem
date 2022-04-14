@@ -6,11 +6,15 @@ import TaskComponent from "./TaskComponent";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 const WeeklyTask = () => {
   const { colorMode } = useColorMode();
+  const weeklytask = useSelector(
+    (data: any) => data?.weeklytask?.weeklyTaskData
+  );
   return (
-    <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
+    <div className="pl-[30%] w-full h-screen p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -89,9 +93,14 @@ const WeeklyTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-        <TaskComponent />
-        <TaskComponent />
-        <TaskComponent />
+        {weeklytask?.map((task: any, index: React.Key) => (
+          <TaskComponent
+            key={index}
+            title={task?.title}
+            description={task?.description}
+            id={task?._id}
+          />
+        ))}
         <AddTaskComponent />
       </div>
     </div>

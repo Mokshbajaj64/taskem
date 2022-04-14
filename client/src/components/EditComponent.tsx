@@ -5,6 +5,7 @@ import { BsFlagFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { updateTodayTask } from "../actions/todaytask";
 import { updateInboxTask } from "../actions/inboxtask";
+import {updateWeeklyTask} from "../actions/weeklytask"
 
 type Props = {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +32,8 @@ const EditComponent = (props: Props) => {
     props?.setIsEdit(false);
   };
   const updateTaskBoiWeekly = () => {
-    console.log("Week boi")
+    dispatch(updateWeeklyTask(updateTaskData,token,props?.id))
+    props?.setIsEdit(false)
   };
   return (
     <div className="flex w-full flex-col gap-5">

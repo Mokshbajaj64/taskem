@@ -406,7 +406,12 @@ router.post(
           isInboxTask: false,
           isWeeklyTask: true,
         });
-        res.json(task);
+        const tasks = await Task.find({
+          userId: userId,
+          isWeeklyTask: true,
+          completed: false,
+        });
+        res.json(tasks);
       }
     } catch (error: any) {
       res.json({
@@ -451,7 +456,12 @@ router.delete(
         });
       } else {
         await Task.findByIdAndDelete(req?.params?.id);
-        res.json('Task deleted');
+        const tasks = await Task.find({
+          userId: userId,
+          isWeeklyTask: true,
+          completed: false,
+        });
+        res.json(tasks);
       }
     } catch (error: any) {
       res.json({
@@ -498,12 +508,12 @@ router.put(
             title: data?.title,
             description: data?.description,
           });
-          const updatedTask = await Task.findOne({
-            _id: req?.params?.id,
+          const tasks = await Task.find({
             userId: userId,
             isWeeklyTask: true,
+            completed: false,
           });
-          res.json(updatedTask);
+          res.json(tasks);
         }
       }
     } catch (error: any) {
@@ -535,8 +545,12 @@ router.put(
         await Task.findByIdAndUpdate(req?.params?.id, {
           completed: true,
         });
-        const tasksboi = await Task.findById(req?.params?.id);
-        res.json(tasksboi);
+        const tasks = await Task.find({
+          userId: userId,
+          isWeeklyTask: true,
+          completed: false,
+        });
+        res.json(tasks);
       }
     } catch (error: any) {
       res.json({

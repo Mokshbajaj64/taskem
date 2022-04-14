@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { getTodayTasks } from "../actions/todaytask";
 import { getInboxTasks } from "../actions/inboxtask";
+import { getWeeklyTasks } from "../actions/weeklytask";
 
 const AppSidebar = () => {
   const navigate = useNavigate();
@@ -25,9 +26,13 @@ const AppSidebar = () => {
   const inboxTaskFetch = async () => {
     dispatch(getInboxTasks(token));
   };
+  const weeklyTaskFetch = async () => {
+    dispatch(getWeeklyTasks(token));
+  };
   useEffect(() => {
     todayTaskFetch();
     inboxTaskFetch();
+    weeklyTaskFetch();
   }, [token, dispatch]);
   return (
     <div
