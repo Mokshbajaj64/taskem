@@ -145,4 +145,27 @@ router.put(
   }
 );
 
+//get a single project
+router.get("/:projectId",isAuthenticated,async(req:Request,res:Response) => {
+  try {
+      const userId = res?.locals?.userId;
+      const projectId = req?.params?.projectId;
+      const project = await Project.findOne({
+        _id: projectId,
+        userId: userId,
+      });
+      if (project === null) {
+        res.json({
+          error: 'Project not found',
+        });
+      } else {
+        res.json(project)
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+})
+
 export default router;

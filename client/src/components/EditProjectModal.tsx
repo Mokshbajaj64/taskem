@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -22,14 +22,32 @@ import {
   PopoverArrow,
   PopoverCloseButton,
 } from "@chakra-ui/react";
+import {useDispatch} from "react-redux"
+import {updateProject} from "../actions/project"
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   isTag: boolean;
+  color: string;
+  description: string;
+  name: string;
+  id: string
 };
 
 const EditProjectModal = (props: Props) => {
+  const dispatch = useDispatch()
+  const [projectData, setProjectData] = useState({
+    name: props?.name,
+    description: props?.description,
+    color: props?.color,
+  });
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const editProjectBoi = () => {
+    props?.onClose();
+    dispatch(updateProject(projectData,token,props?.id))
+  };
+  const editTagBoi = () => {};
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">
       <ModalOverlay />
@@ -41,11 +59,30 @@ const EditProjectModal = (props: Props) => {
         <ModalBody>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <Input id="name" type="text" defaultValue={"Shitt"} />
+            <Input
+              id="name"
+              type="text"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setProjectData({
+                  ...projectData,
+                  name: event?.target?.value,
+                });
+              }}
+              value={projectData?.name}
+            />
           </FormControl>
           <FormControl marginTop="5">
             <FormLabel htmlFor="desc">Description</FormLabel>
-            <Textarea id="desc" defaultValue={"Hello sup sup hello"} />
+            <Textarea
+              id="desc"
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setProjectData({
+                  ...projectData,
+                  description: event?.target?.value,
+                });
+              }}
+              value={projectData?.description}
+            />
           </FormControl>
           <div className="flex w-full gap-4 mt-5 items-center">
             <Text fontSize="md">Color</Text>
@@ -76,7 +113,18 @@ const EditProjectModal = (props: Props) => {
           <Button variant="outline" mr={3} onClick={props.onClose}>
             Close
           </Button>
-          <Button colorScheme="blue">Edit</Button>
+          {projectData?.name?.trim()?.length >= 1 ? (
+            <Button
+              colorScheme="blue"
+              onClick={props?.isTag === true ? editTagBoi : editProjectBoi}
+            >
+              Edit
+            </Button>
+          ) : (
+            <Button colorScheme="blue" isDisabled={true}>
+              Edit
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

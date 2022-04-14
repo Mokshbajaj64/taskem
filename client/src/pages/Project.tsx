@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import { motion } from "framer-motion";
 import ProjectTask from "../components/ProjectTask";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProject } from "../actions/singleproject";
 
 const Project = () => {
+  const dispatch = useDispatch();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const { projectId } = useParams();
+  useEffect(() => {
+    dispatch(getProject(token, projectId as string));
+  }, [projectId, dispatch, token]);
   return (
     <motion.div
       initial={{

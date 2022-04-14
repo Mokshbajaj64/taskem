@@ -19,8 +19,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import EditProjectModal from "./EditProjectModal";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProject } from "../actions/project";
+import { useNavigate } from "react-router-dom";
 
 const ProjectTask = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const project = useSelector((data: any) => data?.singleproject);
   const { colorMode } = useColorMode();
   const {
     isOpen: commentIsOpen,
@@ -37,16 +43,22 @@ const ProjectTask = () => {
     onOpen: editOnOpen,
     onClose: editOnClose,
   } = useDisclosure();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
   const cancelRef = React.useRef(null);
+  const deleteProjectBoi = () => {
+    dispatch(deleteProject(token, project?._id));
+    deleteOnClose();
+    navigate("/app/today");
+  };
   return (
-    <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
+    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
-            shitproject
+            {project?.name}
           </Heading>
           <Text fontSize="md" color="gray.500">
-            This is a shit project wbu :)
+            {project?.description}
           </Text>
         </div>
         {colorMode === "light" ? (
@@ -226,9 +238,10 @@ const ProjectTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
+        {/*        <TaskComponent />
         <TaskComponent />
         <TaskComponent />
-        <TaskComponent />
+*/}{" "}
         <AddTaskComponent />
       </div>
       <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} />
@@ -252,7 +265,7 @@ const ProjectTask = () => {
               <Button onClick={deleteOnClose} ref={cancelRef}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={deleteOnClose} ml={3}>
+              <Button colorScheme="red" onClick={deleteProjectBoi} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -263,6 +276,10 @@ const ProjectTask = () => {
         isOpen={editIsOpen}
         isTag={false}
         onClose={editOnClose}
+        name = {project?.name}
+        description = {project?.description}
+        color = {project?.color}
+        id = {project?._id}
       />
     </div>
   );

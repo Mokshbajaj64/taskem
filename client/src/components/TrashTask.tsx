@@ -89,10 +89,10 @@ const TrashTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
+{/*        <TaskComponent />
         <TaskComponent />
         <TaskComponent />
-        <TaskComponent />
-        <AddTaskComponent />
+*/}        <AddTaskComponent />
       </div>
     </div>
   );

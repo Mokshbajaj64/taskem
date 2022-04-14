@@ -6,6 +6,9 @@ import { motion } from "framer-motion";
 
 type Props = {
   isTag: boolean;
+  name: string
+  color: string
+  id: string
 };
 
 const AccordianComponent = (props: Props) => {
@@ -15,7 +18,7 @@ const AccordianComponent = (props: Props) => {
     <motion.div
       className="w-full hover:bg-[#21242a] p-4 rounded-md flex items-center justify-between cursor-pointer"
       onClick={() => {
-        props.isTag ? navigate("/tag/eatshit") : navigate("/project/eatshit");
+        props.isTag ? navigate("/tag/eatshit") : navigate(`/project/${props?.id}`);
       }}
       whileHover={{
         scale: 1.06,
@@ -23,7 +26,7 @@ const AccordianComponent = (props: Props) => {
     >
       <div className="flex items-center gap-4">
         <div className="bg-green-500 p-[0.4rem] rounded-full"></div>
-        <Text fontSize="md">Lmao this</Text>
+        <Text fontSize="md">{props?.name}</Text>
       </div>
       <div className="flex items-center">
         <Text fontSize="md" color="gray.500">
@@ -35,7 +38,7 @@ const AccordianComponent = (props: Props) => {
     <motion.div
       className="w-full hover:bg-[#f0f0f0] p-4 rounded-md flex items-center justify-between cursor-pointer"
       onClick={() => {
-        navigate("/project/eatshit");
+        props.isTag ? navigate("/tag/eatshit") : navigate(`/project/${props?.id}`);
       }}
       whileHover={{
         scale: 1.06,
@@ -43,7 +46,7 @@ const AccordianComponent = (props: Props) => {
     >
       <div className="flex items-center gap-2">
         <FcBiotech size="20" />
-        <Text fontSize="md">Lmao this</Text>
+        <Text fontSize="md">{props?.name}</Text>
       </div>
       <div className="flex items-center gap-4">
         <div className="bg-green-500 p-1 rounded-full"></div>

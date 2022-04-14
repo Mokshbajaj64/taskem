@@ -199,3 +199,9 @@ export const updateProject = (
       token: token,
     },
   });
+
+export const getProject = (token:string,projectId:string) => API.get(`/project/${projectId}`,{
+  headers:{
+    "token":token
+  }
+})

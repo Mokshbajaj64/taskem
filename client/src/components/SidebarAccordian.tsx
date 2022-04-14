@@ -59,9 +59,11 @@ const SidebarAccordian = (props: Props) => {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        {projects?.map((project: any, index: React.Key) => (
-          <AccordianComponent isTag={props.isTag} key={index} />
-        ))}
+        {props?.isTag === true
+          ? ""
+          : projects?.map((project: any, index: React.Key) => (
+              <AccordianComponent isTag={props.isTag} key={index} name = {project?.name} color = {project?.color} id = {project?._id}/>
+            ))}
       </AccordionPanel>
       <CreateProjectModal
         isOpen={isOpen}
