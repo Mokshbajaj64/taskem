@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import { motion } from "framer-motion";
 import TagsTask from "../components/TagsTask";
+import { getTag } from "../actions/singletag";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Tags = () => {
+  const dispatch = useDispatch();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const { tagId } = useParams();
+  useEffect(() => {
+    dispatch(getTag(token, tagId as string));
+  }, [tagId, dispatch, token]);
   return (
     <motion.div
       initial={{

@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { createProject } from "../actions/project";
+import { createTag } from "../actions/tag";
 
 type Props = {
   isOpen: boolean;
@@ -43,7 +44,7 @@ const CreateProjectModal = (props: Props) => {
     dispatch(createProject(projectData, token));
   };
   const tagCreateBoi = () => {
-    console.log("Tag boi");
+    dispatch(createTag(projectData, token));
   };
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">

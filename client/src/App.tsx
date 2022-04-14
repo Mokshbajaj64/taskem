@@ -114,7 +114,7 @@ function App() {
             }
           />
           <Route
-            path="/tag/:tagsId"
+            path="/tag/:tagId"
             element={
               <PrivateRoute>
                 <Tags />

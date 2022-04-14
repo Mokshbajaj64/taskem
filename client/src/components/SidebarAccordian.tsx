@@ -22,6 +22,7 @@ const SidebarAccordian = (props: Props) => {
   const [hover, setHover] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const projects = useSelector((data: any) => data?.project?.projectData);
+  const tags = useSelector((data:any) => data?.tag?.tagData)
   return (
     <AccordionItem
       border="none"
@@ -60,7 +61,9 @@ const SidebarAccordian = (props: Props) => {
       </h2>
       <AccordionPanel pb={4}>
         {props?.isTag === true
-          ? ""
+          ? tags?.map((tag:any,index:React.Key) => (
+              <AccordianComponent isTag={props.isTag} key={index} name = {tag?.name} color = {tag?.color} id = {tag?._id}/>
+            ))
           : projects?.map((project: any, index: React.Key) => (
               <AccordianComponent isTag={props.isTag} key={index} name = {project?.name} color = {project?.color} id = {project?._id}/>
             ))}

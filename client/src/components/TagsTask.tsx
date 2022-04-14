@@ -19,9 +19,16 @@ import {
   Button,
 } from "@chakra-ui/react";
 import EditProjectModal from "./EditProjectModal";
+import { useSelector } from "react-redux";
+import { deleteTag } from "../actions/tag";
+import { useDispatch } from "react-redux";
+import {useNavigate} from "react-router-dom"
 
 const TagsTask = () => {
   const { colorMode } = useColorMode();
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const tag = useSelector((data: any) => data?.singletag);
   const {
     isOpen: commentIsOpen,
     onOpen: commentOnOpen,
@@ -37,16 +44,22 @@ const TagsTask = () => {
     onOpen: editOnOpen,
     onClose: editOnClose,
   } = useDisclosure();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
   const cancelRef = React.useRef(null);
+  const deleteTagBoi = () => {
+    dispatch(deleteTag(token, tag?._id));
+    deleteOnClose();
+    navigate("/app/today");
+  };
   return (
-    <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
+    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
-            #shit
+            #{tag?.name}
           </Heading>
           <Text fontSize="md" color="gray.500">
-            My shitty tag
+            {tag?.description}
           </Text>
         </div>
         {colorMode === "light" ? (
@@ -206,7 +219,7 @@ const TagsTask = () => {
                 >
                   <AiOutlineEdit size="20" color="#9bdaf3" />
                   <Text fontSize="md" color="#9bdaf3">
-                    Edit Project
+                    Edit Tag
                   </Text>
                 </MenuItem>
                 <MenuItem
@@ -217,7 +230,7 @@ const TagsTask = () => {
                 >
                   <AiOutlineDelete size="20" color="#df3333" />
                   <Text fontSize="md" color="#df3333">
-                    Delete Project
+                    Delete Tag
                   </Text>
                 </MenuItem>
               </MenuList>
@@ -226,10 +239,11 @@ const TagsTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-{/*        <TaskComponent />
+        {/*        <TaskComponent />
         <TaskComponent />
         <TaskComponent />
-*/}        <AddTaskComponent />
+*/}{" "}
+        <AddTaskComponent />
       </div>
       <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} />
       <AlertDialog
@@ -240,7 +254,7 @@ const TagsTask = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Project
+              Delete Tag
             </AlertDialogHeader>
 
             <AlertDialogBody>
@@ -251,7 +265,7 @@ const TagsTask = () => {
               <Button onClick={deleteOnClose} ref={cancelRef}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={deleteOnClose} ml={3}>
+              <Button colorScheme="red" onClick={deleteTagBoi} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -262,6 +276,10 @@ const TagsTask = () => {
         isOpen={editIsOpen}
         isTag={true}
         onClose={editOnClose}
+        name = {tag?.name}
+        description = {tag?.description}
+        color = {tag?.color}
+        id = {tag?._id}
       />
     </div>
   );

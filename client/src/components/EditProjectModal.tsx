@@ -22,8 +22,9 @@ import {
   PopoverArrow,
   PopoverCloseButton,
 } from "@chakra-ui/react";
-import {useDispatch} from "react-redux"
-import {updateProject} from "../actions/project"
+import { useDispatch } from "react-redux";
+import { updateProject } from "../actions/project";
+import { updateTag } from "../actions/tag";
 
 type Props = {
   isOpen: boolean;
@@ -32,11 +33,11 @@ type Props = {
   color: string;
   description: string;
   name: string;
-  id: string
+  id: string;
 };
 
 const EditProjectModal = (props: Props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [projectData, setProjectData] = useState({
     name: props?.name,
     description: props?.description,
@@ -45,9 +46,12 @@ const EditProjectModal = (props: Props) => {
   const token = JSON.parse(localStorage?.getItem("token") as string);
   const editProjectBoi = () => {
     props?.onClose();
-    dispatch(updateProject(projectData,token,props?.id))
+    dispatch(updateProject(projectData, token, props?.id));
   };
-  const editTagBoi = () => {};
+  const editTagBoi = () => {
+    props?.onClose();
+    dispatch(updateTag(projectData, token, props?.id));
+  };
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">
       <ModalOverlay />
