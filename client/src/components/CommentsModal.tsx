@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -11,13 +11,27 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import CommentComponent from "./CommentComponent";
+import { useDispatch } from "react-redux"
+import { commentProject } from "../actions/project"
+import {commentTag} from "../actions/tag"
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  isTag?: boolean;
+  data?: any;
 };
 
 const CommentsModal = (props: Props) => {
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const dispatch = useDispatch()
+  const [comment, setComment] = useState("");
+  const commentBoi = () => {
+    dispatch(commentProject(token,props?.data?._id,comment))
+  }
+  const commentBoiTag = () => {
+    dispatch(commentTag(token,props?.data?._id,comment))
+  }
   return (
     <Modal
       isOpen={props.isOpen}
@@ -31,10 +45,12 @@ const CommentsModal = (props: Props) => {
         <ModalCloseButton />
         <ModalBody>
           <div className="w-full flex flex-col gap-4 items-start">
-            <CommentComponent />
-            <CommentComponent />
-            <CommentComponent />
-            <CommentComponent />
+            {props?.data?.comments?.map((comment: any, index: React.Key) => (
+              <CommentComponent
+                username={comment?.user?.username}
+                comment={comment?.comment}
+              />
+            ))}
           </div>
         </ModalBody>
 
@@ -47,10 +63,24 @@ const CommentsModal = (props: Props) => {
               border: "1px solid #e6e6e6",
             }}
           >
-            <Textarea placeholder="Comment" variant="unstyled" resize="none" />
-            <Button colorScheme="blue" width="30%">
-              Comment
-            </Button>
+            <Textarea
+              placeholder="Comment"
+              variant="unstyled"
+              resize="none"
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setComment(event?.target?.value);
+              }}
+              value={comment}
+            />
+            {comment?.trim()?.length >= 1 ? (
+              <Button colorScheme="blue" width="30%" onClick = {props?.isTag ? commentBoiTag : commentBoi}>
+                Comment
+              </Button>
+            ) : (
+              <Button colorScheme="blue" width="30%" isDisabled={true}>
+                Comment
+              </Button>
+            )}
           </div>
         </ModalFooter>
       </ModalContent>

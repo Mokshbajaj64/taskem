@@ -5,6 +5,7 @@ export interface ProjectModel extends mongoose.Document {
   description: string;
   color: string;
   userId: string;
+  comments:Array
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,6 +26,10 @@ const ProjectSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
+    comments:{
+      type:Array,
+      default:[]
+    }
   },
   {
     timestamps: true,

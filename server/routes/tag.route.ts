@@ -2,6 +2,8 @@ import express, { Request, Response, Router } from 'express';
 import isAuthenticated from '../middlewares/isAuthenticated';
 import Tag, { TagModel } from '../models/tag.model';
 import { body, validationResult } from 'express-validator';
+import User from "../models/user.model"
+import {omit} from "lodash"
 
 const router: Router = express.Router();
 
@@ -166,5 +168,60 @@ router.get("/:tagId",isAuthenticated,async(req:Request,res:Response) => {
       });
     }
 })
+
+router.put(
+  '/:tagId/comment',
+  body('comment')
+    .trim()
+    .exists()
+    .withMessage('Comment is required')
+    .isLength({
+      min: 1,
+      max: 50,
+    })
+    .withMessage('Comment must be between 1 and 100 characters'),
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const data = req.body;
+      const tagId = req?.params?.tagId;
+      const userboi = await User.findById(userId);
+      const userboi2 = omit(userboi.toJSON(), ['email', 'password']);
+      const tag = await Tag.findOne({
+        _id: tagId,
+      });
+      if (tag === null) {
+        res.json({
+          error: 'Tag not found',
+        });
+      } else {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          res.json({
+            error: errors.array()[0].msg,
+          });
+        } else {
+          await tag.updateOne({
+            $push: {
+              comments: {
+                comment: data?.comment,
+                user: userboi2,
+              },
+            },
+          });
+          const tags = await Tag.find({
+            userId: userId,
+          });
+          res.json(tags);
+        }
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
 
 export default router;

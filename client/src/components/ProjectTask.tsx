@@ -244,7 +244,8 @@ const ProjectTask = () => {
 */}{" "}
         <AddTaskComponent />
       </div>
-      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} />
+{/*      comment modal stuff
+*/}      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} data = {project}/>
       {/* dleete project modal stuff */}
       <AlertDialog
         isOpen={deleteIsOpen}

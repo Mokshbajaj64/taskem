@@ -246,3 +246,19 @@ export const getTag = (token:string,tagId:string) => API.get(`/tag/${tagId}`,{
     "token":token
   }
 })
+
+export const commentProject = (token: string, projectId: string, comment: string) => API.put(`/project/${projectId}/comment`,{
+  comment
+},{
+  headers:{
+    "token":token
+  }
+})
+
+export const commentTag = (token: string, tagId: string, comment: string) => API.put(`/tag/${tagId}/comment`,{
+  comment
+},{
+  headers:{
+    "token":token
+  }
+})

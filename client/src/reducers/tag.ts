@@ -13,6 +13,8 @@ export const tag = (state = { tagData: null }, action: Action) => {
       return (state = { tagData: action?.data });
     case "UPDATE_TAG":
       return (state = { tagData: action?.data });
+    case "COMMENT_TAG":
+      return (state = { tagData: action?.data })
     default:
       return state;
   }

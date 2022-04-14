@@ -2,6 +2,8 @@ import express, { Request, Response, Router } from 'express';
 import isAuthenticated from '../middlewares/isAuthenticated';
 import Project, { ProjectModel } from '../models/project.model';
 import { body, validationResult } from 'express-validator';
+import User from '../models/user.model';
+import { omit } from 'lodash';
 
 const router: Router = express.Router();
 
@@ -146,8 +148,11 @@ router.put(
 );
 
 //get a single project
-router.get("/:projectId",isAuthenticated,async(req:Request,res:Response) => {
-  try {
+router.get(
+  '/:projectId',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
       const userId = res?.locals?.userId;
       const projectId = req?.params?.projectId;
       const project = await Project.findOne({
@@ -159,13 +164,69 @@ router.get("/:projectId",isAuthenticated,async(req:Request,res:Response) => {
           error: 'Project not found',
         });
       } else {
-        res.json(project)
+        res.json(project);
       }
     } catch (error: any) {
       res.json({
         error: error.message,
       });
     }
-})
+  }
+);
+
+router.put(
+  '/:projectId/comment',
+  body('comment')
+    .trim()
+    .exists()
+    .withMessage('Comment is required')
+    .isLength({
+      min: 1,
+      max: 50,
+    })
+    .withMessage('Comment must be between 1 and 100 characters'),
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const data = req.body;
+      const projectId = req?.params?.projectId;
+      const userboi = await User.findById(userId);
+      const userboi2 = omit(userboi.toJSON(), ['email', 'password']);
+      const project = await Project.findOne({
+        _id: projectId,
+      });
+      if (project === null) {
+        res.json({
+          error: 'Project not found',
+        });
+      } else {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          res.json({
+            error: errors.array()[0].msg,
+          });
+        } else {
+          await project.updateOne({
+            $push: {
+              comments: {
+                comment: data?.comment,
+                user: userboi2,
+              },
+            },
+          });
+          const projects = await Project.find({
+            userId: userId,
+          });
+          res.json(projects);
+        }
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
 
 export default router;

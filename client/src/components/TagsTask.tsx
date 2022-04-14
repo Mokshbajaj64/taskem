@@ -245,7 +245,7 @@ const TagsTask = () => {
 */}{" "}
         <AddTaskComponent />
       </div>
-      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} />
+      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} isTag = {true} data = {tag}/>
       <AlertDialog
         isOpen={deleteIsOpen}
         leastDestructiveRef={cancelRef}

@@ -13,6 +13,8 @@ export const project = (state = { projectData: null }, action: Action) => {
       return (state = { projectData: action?.data });
     case "UPDATE_PROJECT":
       return (state = { projectData: action?.data });
+    case "COMMENT_PROJECT":
+      return (state = { projectData: action?.data });
     default:
       return state;
   }

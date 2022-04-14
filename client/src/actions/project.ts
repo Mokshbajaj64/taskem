@@ -97,3 +97,26 @@ export const updateProject =
       });
     }
   };
+
+export const commentProject = 
+  (token: string, projectId: string, comment: string) =>
+  async (dispatch: Dispatch) => {
+    const { data } = await api.commentProject(token, projectId, comment);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "COMMENT_PROJECT",
+        data,
+      });
+    }
+  };
