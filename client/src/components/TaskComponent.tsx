@@ -16,17 +16,25 @@ import {
 } from "@chakra-ui/react";
 import EditComponent from "./EditComponent";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { deleteTodayTask } from "../actions/todaytask";
 
 type Props = {
-  title: string
-  description: string
-}
+  title: string;
+  description: string;
+  id: string;
+};
 
 const TaskComponent = (props: Props) => {
+  const dispatch = useDispatch()
   const [hover, setHover] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
   const [isEdit, setIsEdit] = useState(false);
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const deleteTaskBoi = () => {
+    dispatch(deleteTodayTask(token, props?.id));
+  };
   return (
     <motion.div
       className="flex flex-col w-full"
@@ -101,7 +109,7 @@ const TaskComponent = (props: Props) => {
           )}
         </div>
       ) : (
-        <EditComponent setIsEdit={setIsEdit} />
+        <EditComponent setIsEdit={setIsEdit} title = {props?.title} description = {props?.description} id = {props?.id}/>
       )}
       <Divider />
       {/* delete task modal stuff here */}
@@ -124,7 +132,14 @@ const TaskComponent = (props: Props) => {
               <Button onClick={onClose} ref={cancelRef}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={onClose} ml={3}>
+              <Button
+                colorScheme="red"
+                onClick={onClose}
+                ml={3}
+                onClick={() => {
+                  deleteTaskBoi();
+                }}
+              >
                 Delete
               </Button>
             </AlertDialogFooter>

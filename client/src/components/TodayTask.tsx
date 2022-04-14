@@ -92,7 +92,7 @@ const TodayTask = () => {
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
         {todaytask?.map((task:any, index:React.Key) => (
-          <TaskComponent key={index} title = {task?.title} description = {task?.description}/>
+          <TaskComponent key={index} title = {task?.title} description = {task?.description} id = {task?._id}/>
         ))}
         <AddTaskComponent isTodayTask = {true}/>
       </div>

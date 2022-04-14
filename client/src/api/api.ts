@@ -43,3 +43,15 @@ export const createTodayTask = (
       token: token,
     },
   });
+
+export const deleteTodayTask = (token: string,taskId: string) => API.delete(`/task/today/${taskId}`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const updateTodayTask = (data:{title: string; description: string},token: string,taskId: string) => API.put(`/task/today/${taskId}`,data,{
+  headers:{
+    "token":token
+  }
+})

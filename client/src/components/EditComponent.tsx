@@ -1,13 +1,27 @@
 import { Button, IconButton, Input, Textarea } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { FaTags } from "react-icons/fa";
 import { BsFlagFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { updateTodayTask } from "../actions/todaytask";
 
 type Props = {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
+  description: string;
+  id: string;
 };
 
 const EditComponent = (props: Props) => {
+  const dispatch = useDispatch();
+  const [updateTaskData, setUpdateTaskData] = useState({
+    title: props?.title,
+    description: props?.description,
+  });
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const updateTaskBoi = () => {
+    dispatch(updateTodayTask(updateTaskData, token, props?.id));
+  };
   return (
     <div className="flex w-full flex-col gap-5">
       <div
@@ -21,13 +35,25 @@ const EditComponent = (props: Props) => {
         <Input
           variant="unstyled"
           placeholder="Task title"
-          defaultValue="Dumb"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setUpdateTaskData({
+              ...updateTaskData,
+              title: event?.target?.value,
+            });
+          }}
+          value={updateTaskData?.title}
         />
         <Textarea
           placeholder="Title description"
           variant="unstyled"
           resize="none"
-          defaultValue="I am dumb help"
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setUpdateTaskData({
+              ...updateTaskData,
+              description: event?.target?.value,
+            });
+          }}
+          value={updateTaskData?.description}
         />
         <div className="flex items-center gap-4">
           <IconButton icon={<FaTags />} aria-label="Tags" />
@@ -35,7 +61,15 @@ const EditComponent = (props: Props) => {
         </div>
       </div>
       <div className="flex items-center gap-4 mb-4">
-        <Button colorScheme="blue">Update Task</Button>
+        {updateTaskData?.title?.trim()?.length >= 1 ? (
+          <Button colorScheme="blue" onClick={updateTaskBoi}>
+            Update Task
+          </Button>
+        ) : (
+          <Button colorScheme="blue" isDisabled={true}>
+            Update Task
+          </Button>
+        )}
         <Button
           variant="outline"
           onClick={() => {

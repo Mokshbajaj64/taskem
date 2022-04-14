@@ -86,7 +86,12 @@ router.delete(
         });
       } else {
         await Task.findByIdAndDelete(req?.params?.id);
-        res.json('Task deleted');
+        const tasks = await Task.find({
+          userId: userId,
+          isTodayTask: true,
+          completed: false,
+        });
+        res.json(tasks);
       }
     } catch (error: any) {
       res.json({
@@ -138,7 +143,12 @@ router.put(
             userId: userId,
             isTodayTask: true,
           });
-          res.json(updatedTask);
+          const tasks = await Task.find({
+            userId: userId,
+            isTodayTask: true,
+            completed: false,
+          });
+          res.json(tasks);
         }
       }
     } catch (error: any) {
