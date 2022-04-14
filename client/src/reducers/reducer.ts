@@ -4,7 +4,8 @@ import { todaytask } from "./todaytask";
 import { inboxtask } from "./inboxtask";
 import { weeklytask } from "./weeklytask";
 import { project } from "./project";
-import {singleproject} from "./singleproject"
+import { singleproject } from "./singleproject";
+import { tag } from "./tag";
 
 export default combineReducers({
   user,
@@ -12,5 +13,6 @@ export default combineReducers({
   inboxtask,
   weeklytask,
   project,
-  singleproject
+  singleproject,
+  tag,
 });

@@ -205,3 +205,44 @@ export const getProject = (token:string,projectId:string) => API.get(`/project/$
     "token":token
   }
 })
+
+export const getTags = (token: string) =>
+  API.get("/tag", {
+    headers: {
+      token: token,
+    },
+  });
+
+export const createTag = (
+  data: { name: string; description: string; color: string },
+  token: string
+) =>
+  API.post("/tag", data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const deleteTag = (token: string, tagId: string) =>
+  API.delete(`/tag/${tagId}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const updateTag = (
+  data: { name: string; description: string; color: string },
+  token: string,
+  tagId: string
+) =>
+  API.put(`/tag/${tagId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const getTag = (token:string,tagId:string) => API.get(`/tag/${tagId}`,{
+  headers:{
+    "token":token
+  }
+})

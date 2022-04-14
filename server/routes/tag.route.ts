@@ -34,7 +34,10 @@ router.post(
           color: data?.color,
           userId: userId,
         });
-        res.json(tag);
+        const tags = await Tag.find({
+          userId: userId,
+        });
+        res.json(tags);
       }
     } catch (error: any) {
       res.json({
@@ -62,7 +65,10 @@ router.delete(
         });
       } else {
         await Tag.findByIdAndDelete(tagId);
-        res.json('Tag deleted');
+        const tags = await Tag.find({
+          userId: userId,
+        });
+        res.json(tags);
       }
     } catch (error: any) {
       res.json({
@@ -125,8 +131,10 @@ router.put(
             description: data?.description,
             color: data?.color,
           });
-          const tagboi = await Tag.findById(tagId);
-          res.json(tagboi);
+          const tags = await Tag.find({
+            userId: userId,
+          });
+          res.json(tags);
         }
       }
     } catch (error: any) {
@@ -136,5 +144,27 @@ router.put(
     }
   }
 );
+
+router.get("/:tagId",isAuthenticated,async(req:Request,res:Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tagId = req?.params?.tagId;
+      const tag = await Tag.findOne({
+        _id: tagId,
+        userId: userId,
+      });
+      if (tag === null) {
+        res.json({
+          error: 'Tag not found',
+        });
+      } else {
+        res.json(tag);
+      }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+})
 
 export default router;
