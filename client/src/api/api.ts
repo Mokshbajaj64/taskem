@@ -44,20 +44,77 @@ export const createTodayTask = (
     },
   });
 
-export const deleteTodayTask = (token: string,taskId: string) => API.delete(`/task/today/${taskId}`,{
-  headers:{
-    "token":token
-  }
-})
+export const deleteTodayTask = (token: string, taskId: string) =>
+  API.delete(`/task/today/${taskId}`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const updateTodayTask = (data:{title: string; description: string},token: string,taskId: string) => API.put(`/task/today/${taskId}`,data,{
-  headers:{
-    "token":token
-  }
-})
+export const updateTodayTask = (
+  data: { title: string; description: string },
+  token: string,
+  taskId: string
+) =>
+  API.put(`/task/today/${taskId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const complteTodayTask = (token: string, taskId:string) => API.put(`/task/today/complete/${taskId}`,{},{
-  headers:{
-    "token":token
-  }
-})
+export const complteTodayTask = (token: string, taskId: string) =>
+  API.put(
+    `/task/today/complete/${taskId}`,
+    {},
+    {
+      headers: {
+        token: token,
+      },
+    }
+  );
+
+export const getInboxTasks = (token: string) =>
+  API.get("/task/inbox", {
+    headers: {
+      token: token,
+    },
+  });
+
+export const createInboxTask = (
+  data: { title: string; description: string },
+  token: string
+) =>
+  API.post("/task/inbox", data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const deleteInboxTask = (token: string, taskId: string) =>
+  API.delete(`/task/inbox/${taskId}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const updateInboxTask = (
+  data: { title: string; description: string },
+  token: string,
+  taskId: string
+) =>
+  API.put(`/task/inbox/${taskId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const completeInboxTask = (token: string, taskId: string) =>
+  API.put(
+    `/task/inbox/complete/${taskId}`,
+    {},
+    {
+      headers: {
+        token: token,
+      },
+    }
+  );
