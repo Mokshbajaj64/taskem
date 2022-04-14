@@ -17,16 +17,19 @@ import {
 import EditComponent from "./EditComponent";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { deleteTodayTask,complteTodayTask } from "../actions/todaytask";
+import { deleteTodayTask, complteTodayTask } from "../actions/todaytask";
+import { deleteInboxTask, completeInboxTask } from "../actions/inboxtask";
 
 type Props = {
   title: string;
   description: string;
   id: string;
+  isTodayTask?: boolean;
+  isInboxTask?: boolean;
 };
 
 const TaskComponent = (props: Props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
@@ -34,10 +37,24 @@ const TaskComponent = (props: Props) => {
   const token = JSON.parse(localStorage?.getItem("token") as string);
   const deleteTaskBoi = () => {
     dispatch(deleteTodayTask(token, props?.id));
+    onClose();
   };
   const completeTaskBoi = () => {
-    dispatch(complteTodayTask(token,props?.id))
-  }
+    dispatch(complteTodayTask(token, props?.id));
+  };
+  const deleteTaskBoiInbox = () => {
+    dispatch(deleteInboxTask(token, props?.id));
+    onClose();
+  };
+  const deleteTaskBoiWeekly = () => {
+    console.log("Deleteboiweekly");
+  };
+  const completeTaskBoiInbox = () => {
+    dispatch(completeInboxTask(token, props?.id));
+  };
+  const completeTaskBoiWeekly = () => {
+    console.log("Complete task week");
+  };
   return (
     <motion.div
       className="flex flex-col w-full"
@@ -56,7 +73,16 @@ const TaskComponent = (props: Props) => {
           }}
         >
           <div className="flex gap-3 items-start mb-4">
-            <Checkbox className="mt-1" onChange = {completeTaskBoi}/>
+            <Checkbox
+              className="mt-1"
+              onChange={
+                props?.isTodayTask
+                  ? completeTaskBoi
+                  : props?.isInboxTask
+                  ? completeTaskBoiInbox
+                  : completeTaskBoiWeekly
+              }
+            />
             <div className="flex flex-col gap-1">
               <Text fontSize="md">{props?.title}</Text>
               <Text fontSize="md" color="gray.500">
@@ -112,7 +138,14 @@ const TaskComponent = (props: Props) => {
           )}
         </div>
       ) : (
-        <EditComponent setIsEdit={setIsEdit} title = {props?.title} description = {props?.description} id = {props?.id}/>
+        <EditComponent
+          setIsEdit={setIsEdit}
+          title={props?.title}
+          description={props?.description}
+          id={props?.id}
+          isTodayTask = {props?.isTodayTask}
+          isInboxTask = {props?.isInboxTask}
+        />
       )}
       <Divider />
       {/* delete task modal stuff here */}
@@ -137,10 +170,13 @@ const TaskComponent = (props: Props) => {
               </Button>
               <Button
                 colorScheme="red"
-                onClick={onClose}
                 ml={3}
                 onClick={() => {
-                  deleteTaskBoi();
+                  props?.isTodayTask
+                    ? deleteTaskBoi()
+                    : props?.isInboxTask
+                    ? deleteTaskBoiInbox()
+                    : deleteTaskBoiWeekly();
                 }}
               >
                 Delete

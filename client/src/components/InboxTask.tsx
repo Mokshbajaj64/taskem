@@ -98,6 +98,7 @@ const InboxTask = () => {
             title={task?.title}
             description={task?.description}
             id={task?._id}
+            isInboxTask = {true}
           />
         ))}
         <AddTaskComponent isInboxTask = {true}/>

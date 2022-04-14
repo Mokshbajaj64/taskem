@@ -4,12 +4,15 @@ import { FaTags } from "react-icons/fa";
 import { BsFlagFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { updateTodayTask } from "../actions/todaytask";
+import { updateInboxTask } from "../actions/inboxtask";
 
 type Props = {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   description: string;
   id: string;
+  isTodayTask?: boolean;
+  isInboxTask?: boolean;
 };
 
 const EditComponent = (props: Props) => {
@@ -21,7 +24,14 @@ const EditComponent = (props: Props) => {
   const token = JSON.parse(localStorage?.getItem("token") as string);
   const updateTaskBoi = () => {
     dispatch(updateTodayTask(updateTaskData, token, props?.id));
-    props?.setIsEdit(false)
+    props?.setIsEdit(false);
+  };
+  const updateTaskBoiInbox = () => {
+    dispatch(updateInboxTask(updateTaskData, token, props?.id));
+    props?.setIsEdit(false);
+  };
+  const updateTaskBoiWeekly = () => {
+    console.log("Week boi")
   };
   return (
     <div className="flex w-full flex-col gap-5">
@@ -63,7 +73,16 @@ const EditComponent = (props: Props) => {
       </div>
       <div className="flex items-center gap-4 mb-4">
         {updateTaskData?.title?.trim()?.length >= 1 ? (
-          <Button colorScheme="blue" onClick={updateTaskBoi}>
+          <Button
+            colorScheme="blue"
+            onClick={
+              props?.isTodayTask
+                ? updateTaskBoi
+                : props?.isInboxTask
+                ? updateTaskBoiInbox
+                : updateTaskBoiWeekly
+            }
+          >
             Update Task
           </Button>
         ) : (
