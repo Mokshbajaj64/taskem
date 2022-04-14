@@ -164,3 +164,38 @@ export const completeWeeklyTask = (token: string, taskId: string) =>
       },
     }
   );
+
+export const getProjects = (token: string) =>
+  API.get("/project", {
+    headers: {
+      token: token,
+    },
+  });
+
+export const createProject = (
+  data: { name: string; description: string; color: string },
+  token: string
+) =>
+  API.post("/project", data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const deleteProject = (token: string, projectId: string) =>
+  API.delete(`/project/${projectId}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const updateProject = (
+  data: { name: string; description: string; color: string },
+  token: string,
+  projectId: string
+) =>
+  API.put(`/project/${projectId}`, data, {
+    headers: {
+      token: token,
+    },
+  });

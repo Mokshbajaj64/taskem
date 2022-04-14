@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -22,6 +22,8 @@ import {
   PopoverArrow,
   PopoverCloseButton,
 } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { createProject } from "../actions/project";
 
 type Props = {
   isOpen: boolean;
@@ -30,6 +32,19 @@ type Props = {
 };
 
 const CreateProjectModal = (props: Props) => {
+  const dispatch = useDispatch();
+  const [projectData, setProjectData] = useState({
+    name: "",
+    description: "",
+    color: "green",
+  });
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const projectCreateBoi = () => {
+    dispatch(createProject(projectData, token));
+  };
+  const tagCreateBoi = () => {
+    console.log("Tag boi");
+  };
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="md">
       <ModalOverlay />
@@ -41,11 +56,28 @@ const CreateProjectModal = (props: Props) => {
         <ModalBody>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <Input id="name" type="text" />
+            <Input
+              id="name"
+              type="text"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setProjectData({
+                  ...projectData,
+                  name: event?.target?.value,
+                });
+              }}
+            />
           </FormControl>
           <FormControl marginTop="5">
             <FormLabel htmlFor="desc">Description</FormLabel>
-            <Textarea id="desc" />
+            <Textarea
+              id="desc"
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setProjectData({
+                  ...projectData,
+                  description: event?.target?.value,
+                });
+              }}
+            />
           </FormControl>
           <div className="flex w-full gap-4 mt-5 items-center">
             <Text fontSize="md">Color</Text>
@@ -76,7 +108,18 @@ const CreateProjectModal = (props: Props) => {
           <Button variant="outline" mr={3} onClick={props.onClose}>
             Close
           </Button>
-          <Button colorScheme="blue">Add</Button>
+          {projectData?.name?.trim()?.length >= 1 ? (
+            <Button
+              colorScheme="blue"
+              onClick={props?.isTag === true ? tagCreateBoi : projectCreateBoi}
+            >
+              Add
+            </Button>
+          ) : (
+            <Button colorScheme="blue" isDisabled={true}>
+              Add
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

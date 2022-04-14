@@ -98,6 +98,7 @@ export const updateWeeklyTask =
 export const completeWeeklyTask = 
   (token: string, taskId: string) => async (dispatch: Dispatch) => {
     const { data } = await api.completeWeeklyTask(token, taskId);
+    console.log(data)
     if (data?.error) {
       toast.error(data.error, {
         position: "top-right",
@@ -111,7 +112,7 @@ export const completeWeeklyTask =
       });
     } else {
       dispatch({
-        type: "COMPLETE_WEEKLY_TASK;",
+        type: "COMPLETE_WEEKLY_TASK",
         data,
       });
     }

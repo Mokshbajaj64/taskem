@@ -2,8 +2,8 @@ import * as api from "../api/api";
 import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 
-export const getInboxTasks = (token: string) => async (dispatch: Dispatch) => {
-  const { data } = await api.getInboxTasks(token);
+export const getProjects = (token: string) => async (dispatch: Dispatch) => {
+  const { data } = await api.getProjects(token);
   if (data?.error) {
     toast.error(data.error, {
       position: "top-right",
@@ -17,65 +17,19 @@ export const getInboxTasks = (token: string) => async (dispatch: Dispatch) => {
     });
   } else {
     dispatch({
-      type: "GET_INBOX_TASKS",
+      type: "GET_PROJECTS",
       data,
     });
   }
 };
 
-export const createInboxTask =
-  (databoi: { title: string; description: string }, token: string) =>
-  async (dispatch: Dispatch) => {
-    const { data } = await api.createInboxTask(databoi, token);
-    if (data?.error) {
-      toast.error(data.error, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      dispatch({
-        type: "ADD_INBOX_TASK",
-        data,
-      });
-    }
-  };
-
-export const deleteInboxTask =
-  (token: string, taskId: string) => async (dispatch: Dispatch) => {
-    const { data } = await api.deleteInboxTask(token, taskId);
-    if (data?.error) {
-      toast.error(data.error, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      dispatch({
-        type: "DELETE_INBOX_TASK",
-        data,
-      });
-    }
-  };
-
-export const updateInboxTask =
+export const createProject =
   (
-    databoi: { title: string; description: string },
-    token: string,
-    taskId: string
+    databoi: { name: string; description: string; color: string },
+    token: string
   ) =>
   async (dispatch: Dispatch) => {
-    const { data } = await api.updateInboxTask(databoi, token, taskId);
+    const { data } = await api.createProject(databoi, token);
     if (data?.error) {
       toast.error(data.error, {
         position: "top-right",
@@ -89,15 +43,15 @@ export const updateInboxTask =
       });
     } else {
       dispatch({
-        type: "UPDATE_INBOX_TASK",
+        type: "CREATE_PROJECT",
         data,
       });
     }
   };
 
-export const completeInboxTask = 
-  (token: string, taskId: string) => async (dispatch: Dispatch) => {
-    const { data } = await api.completeInboxTask(token, taskId);
+export const deleteProject =
+  (token: string, projectId: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.deleteProject(token, projectId);
     if (data?.error) {
       toast.error(data.error, {
         position: "top-right",
@@ -111,7 +65,34 @@ export const completeInboxTask =
       });
     } else {
       dispatch({
-        type: "COMPLETE_INBOX_TASK",
+        type: "DELETE_PROJECT",
+        data,
+      });
+    }
+  };
+
+export const updateProject =
+  (
+    databoi: { name: string; description: string; color: string },
+    token: string,
+    projectId: string
+  ) =>
+  async (dispatch: Dispatch) => {
+    const { data } = await api.updateProject(databoi, token, projectId);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "UPDATE_PROJECT",
         data,
       });
     }

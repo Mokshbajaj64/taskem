@@ -11,6 +11,7 @@ import {
 import { IoAdd } from "react-icons/io5";
 import AccordianComponent from "./AccordianComponent";
 import CreateProjectModal from "./CreateProjectModal";
+import { useSelector } from "react-redux";
 
 type Props = {
   title: string;
@@ -20,6 +21,7 @@ type Props = {
 const SidebarAccordian = (props: Props) => {
   const [hover, setHover] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const projects = useSelector((data: any) => data?.project?.projectData);
   return (
     <AccordionItem
       border="none"
@@ -57,9 +59,9 @@ const SidebarAccordian = (props: Props) => {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <AccordianComponent isTag={props.isTag} />
-        <AccordianComponent isTag={props.isTag} />
-        <AccordianComponent isTag={props.isTag} />
+        {projects?.map((project: any, index: React.Key) => (
+          <AccordianComponent isTag={props.isTag} key={index} />
+        ))}
       </AccordionPanel>
       <CreateProjectModal
         isOpen={isOpen}

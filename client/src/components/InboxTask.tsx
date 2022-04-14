@@ -12,7 +12,7 @@ const InboxTask = () => {
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const { colorMode } = useColorMode();
   return (
-    <div className="pl-[30%] w-full h-screen p-11 mr-9">
+    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -102,6 +102,16 @@ const InboxTask = () => {
           />
         ))}
         <AddTaskComponent isInboxTask = {true}/>
+        {inboxtask?.length === 0 ? (
+          <div className=" flex w-full justify-center items-center">
+            <div className="flex-col flex w-full items-center justify-center gap-3">
+              <img src = "/svgexport-27.svg"/>
+              <Heading fontSize = "2xl">Be productive, Start creating tasks</Heading>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

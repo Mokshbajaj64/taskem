@@ -34,7 +34,10 @@ router.post(
           color: data?.color,
           userId: userId,
         });
-        res.json(project);
+        const projects = await Project.find({
+          userId: userId,
+        });
+        res.json(projects);
       }
     } catch (error: any) {
       res.json({
@@ -62,7 +65,10 @@ router.delete(
         });
       } else {
         await Project.findByIdAndDelete(projectId);
-        res.json('Project deleted');
+        const projects = await Project.find({
+          userId: userId,
+        });
+        res.json(projects);
       }
     } catch (error: any) {
       res.json({
@@ -125,8 +131,10 @@ router.put(
             description: data?.description,
             color: data?.color,
           });
-          const projectboi = await Project.findById(projectId);
-          res.json(projectboi);
+          const projects = await Project.find({
+            userId: userId,
+          });
+          res.json(projects);
         }
       }
     } catch (error: any) {

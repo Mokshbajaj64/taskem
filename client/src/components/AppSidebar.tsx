@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import { getTodayTasks } from "../actions/todaytask";
 import { getInboxTasks } from "../actions/inboxtask";
 import { getWeeklyTasks } from "../actions/weeklytask";
+import { getProjects } from "../actions/project";
+import { useSelector } from "react-redux";
 
 const AppSidebar = () => {
   const navigate = useNavigate();
@@ -29,11 +31,20 @@ const AppSidebar = () => {
   const weeklyTaskFetch = async () => {
     dispatch(getWeeklyTasks(token));
   };
+  const projectsFetch = async () => {
+    dispatch(getProjects(token));
+  };
   useEffect(() => {
     todayTaskFetch();
     inboxTaskFetch();
     weeklyTaskFetch();
+    projectsFetch();
   }, [token, dispatch]);
+  const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
+  const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
+  const weeklytask = useSelector(
+    (data: any) => data?.weeklytask?.weeklyTaskData
+  );
   return (
     <div
       className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
@@ -63,7 +74,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Today</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                69
+                {todaytask?.length}
               </Text>
             </motion.div>
             <motion.div
@@ -84,7 +95,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Weekly</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                4
+                {weeklytask?.length}
               </Text>
             </motion.div>
             <motion.div
@@ -105,7 +116,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Inbox</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                5
+                {inboxtask?.length}
               </Text>
             </motion.div>
           </div>
