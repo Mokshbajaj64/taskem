@@ -6,9 +6,11 @@ import { BsFlagFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { createTodayTask } from "../actions/todaytask";
 import { useDispatch } from "react-redux";
+import {createInboxTask} from "../actions/inboxtask"
 
 type Props = {
   isTodayTask?: boolean;
+  isInboxTask?: boolean;
 };
 
 const AddTaskComponent = (props: Props) => {
@@ -23,13 +25,20 @@ const AddTaskComponent = (props: Props) => {
   const addTodayTaskBoi = () => {
     dispatch(createTodayTask(addTaskData, token));
     setAddTaskData({
-      title:"",
-      description:""
-    })
+      title: "",
+      description: "",
+    });
+  };
+  const addInboxTaskBoi = () => {
+    dispatch(createInboxTask(addTaskData,token))
+    setAddTaskData({
+      title: "",
+      description: "",
+    });
   };
   const addWeeklyTaskBoi = () => {
-    console.log(addTaskData)
-  }
+    console.log(addTaskData);
+  };
   return (
     <div className="w-full">
       {addTask ? (
@@ -51,7 +60,7 @@ const AddTaskComponent = (props: Props) => {
                   title: event?.target?.value,
                 });
               }}
-              value = {addTaskData?.title}
+              value={addTaskData?.title}
             />
             <Textarea
               placeholder="Title description"
@@ -63,7 +72,7 @@ const AddTaskComponent = (props: Props) => {
                   description: event?.target?.value,
                 });
               }}
-              value = {addTaskData?.description}
+              value={addTaskData?.description}
             />
             <div className="flex items-center gap-4">
               <IconButton icon={<FaTags />} aria-label="Tags" />
@@ -75,7 +84,13 @@ const AddTaskComponent = (props: Props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  {props?.isTodayTask ? addTodayTaskBoi() : addWeeklyTaskBoi()}
+                  {
+                    props?.isTodayTask
+                      ? addTodayTaskBoi()
+                      : props?.isInboxTask
+                      ? addInboxTaskBoi()
+                      : addWeeklyTaskBoi();
+                  }
                 }}
               >
                 Add Task

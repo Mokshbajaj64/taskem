@@ -6,11 +6,13 @@ import TaskComponent from "./TaskComponent";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill, BsChatLeftDots } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 const InboxTask = () => {
+  const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const { colorMode } = useColorMode();
   return (
-    <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
+    <div className="pl-[30%] w-full h-screen p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -19,12 +21,6 @@ const InboxTask = () => {
         </div>
         {colorMode === "light" ? (
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 p-2 cursor-pointer hover:bg-[#f0f0f0] rounded-md">
-              <BsChatLeftDots size="25" />
-              <Text color="gray.500" fontSize="md">
-                Comments
-              </Text>
-            </div>
             <Menu>
               <MenuButton
                 _hover={{
@@ -60,12 +56,6 @@ const InboxTask = () => {
           </div>
         ) : (
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 p-2 cursor-pointer hover:bg-[#21242a] rounded-md">
-              <BsChatLeftDots size="25" />
-              <Text color="gray.500" fontSize="md">
-                Comments
-              </Text>
-            </div>
             <Menu>
               <MenuButton
                 _hover={{
@@ -102,10 +92,15 @@ const InboxTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-        <TaskComponent />
-        <TaskComponent />
-        <TaskComponent />
-        <AddTaskComponent />
+        {inboxtask?.map((task: any, index: React.Key) => (
+          <TaskComponent
+            key={index}
+            title={task?.title}
+            description={task?.description}
+            id={task?._id}
+          />
+        ))}
+        <AddTaskComponent isInboxTask = {true}/>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { getTodayTasks } from "../actions/todaytask";
+import { getInboxTasks } from "../actions/inboxtask";
 
 const AppSidebar = () => {
   const navigate = useNavigate();
@@ -21,9 +22,13 @@ const AppSidebar = () => {
   const todayTaskFetch = async () => {
     dispatch(getTodayTasks(token));
   };
+  const inboxTaskFetch = async () => {
+    dispatch(getInboxTasks(token));
+  };
   useEffect(() => {
     todayTaskFetch();
-  }, [token,dispatch]);
+    inboxTaskFetch();
+  }, [token, dispatch]);
   return (
     <div
       className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
