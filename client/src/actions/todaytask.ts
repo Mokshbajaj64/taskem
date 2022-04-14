@@ -94,3 +94,25 @@ export const updateTodayTask =
       });
     }
   };
+
+export const complteTodayTask = 
+  (token: string, taskId: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.complteTodayTask(token, taskId);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "COMPLETE_TODAY_TASK",
+        data,
+      });
+    }
+  };

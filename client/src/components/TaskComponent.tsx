@@ -17,7 +17,7 @@ import {
 import EditComponent from "./EditComponent";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { deleteTodayTask } from "../actions/todaytask";
+import { deleteTodayTask,complteTodayTask } from "../actions/todaytask";
 
 type Props = {
   title: string;
@@ -35,6 +35,9 @@ const TaskComponent = (props: Props) => {
   const deleteTaskBoi = () => {
     dispatch(deleteTodayTask(token, props?.id));
   };
+  const completeTaskBoi = () => {
+    dispatch(complteTodayTask(token,props?.id))
+  }
   return (
     <motion.div
       className="flex flex-col w-full"
@@ -53,7 +56,7 @@ const TaskComponent = (props: Props) => {
           }}
         >
           <div className="flex gap-3 items-start mb-4">
-            <Checkbox className="mt-1" />
+            <Checkbox className="mt-1" onChange = {completeTaskBoi}/>
             <div className="flex flex-col gap-1">
               <Text fontSize="md">{props?.title}</Text>
               <Text fontSize="md" color="gray.500">

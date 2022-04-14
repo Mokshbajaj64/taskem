@@ -138,11 +138,6 @@ router.put(
             title: data?.title,
             description: data?.description,
           });
-          const updatedTask = await Task.findOne({
-            _id: req?.params?.id,
-            userId: userId,
-            isTodayTask: true,
-          });
           const tasks = await Task.find({
             userId: userId,
             isTodayTask: true,
@@ -180,8 +175,12 @@ router.put(
         await Task.findByIdAndUpdate(req?.params?.id, {
           completed: true,
         });
-        const tasksboi = await Task.findById(req?.params?.id);
-        res.json(tasksboi);
+        const tasks = await Task.find({
+            userId: userId,
+            isTodayTask: true,
+            completed: false,
+          });
+          res.json(tasks);
       }
     } catch (error: any) {
       res.json({

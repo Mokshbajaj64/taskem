@@ -21,6 +21,7 @@ const EditComponent = (props: Props) => {
   const token = JSON.parse(localStorage?.getItem("token") as string);
   const updateTaskBoi = () => {
     dispatch(updateTodayTask(updateTaskData, token, props?.id));
+    props?.setIsEdit(false)
   };
   return (
     <div className="flex w-full flex-col gap-5">

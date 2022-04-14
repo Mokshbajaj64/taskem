@@ -13,6 +13,8 @@ export const todaytask = (state = { todayTaskData: null }, action: Action) => {
       return (state = { todayTaskData: action?.data });
     case "UPDATE_TODAY_TASK":
       return (state = { todayTaskData: action?.data });
+    case "COMPLETE_TODAY_TASK":
+      return (state = { todayTaskData: action?.data });
     default:
       return state;
   }

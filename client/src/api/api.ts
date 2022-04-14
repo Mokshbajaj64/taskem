@@ -55,3 +55,9 @@ export const updateTodayTask = (data:{title: string; description: string},token:
     "token":token
   }
 })
+
+export const complteTodayTask = (token: string, taskId:string) => API.put(`/task/today/complete/${taskId}`,{},{
+  headers:{
+    "token":token
+  }
+})
