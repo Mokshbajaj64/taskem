@@ -2,6 +2,7 @@ import express, { Request, Response, Router } from 'express';
 import { body, validationResult } from 'express-validator';
 import isAuthenticated from '../middlewares/isAuthenticated';
 import Task, { TaskModel } from '../models/task.model';
+import ProjectTasks from "../models/projecttasks.model"
 
 const router: Router = express.Router();
 
@@ -559,5 +560,26 @@ router.put(
     }
   }
 );
+
+//get completed tasks
+router.get("/completedtasks",isAuthenticated,async (req:Request,res:Response) => {
+  try {
+      const userId = res?.locals?.userId;
+      const task1 = await Task.find({
+        userId:userId,
+        completed:true
+      })
+      const task2 = await ProjectTasks.find({
+        userId:userId,
+        completed:true
+      })
+      const tasks = Object.assign(task1,task2)
+      res.json(tasks)
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+})
 
 export default router;

@@ -16,6 +16,7 @@ import { getInboxTasks } from "../actions/inboxtask";
 import { getWeeklyTasks } from "../actions/weeklytask";
 import { getProjects } from "../actions/project";
 import { getTags } from "../actions/tag";
+import { getCompletedTasks } from "../actions/completedtasks"
 import { useSelector } from "react-redux";
 
 const AppSidebar = () => {
@@ -38,12 +39,16 @@ const AppSidebar = () => {
   const projectsFetch = async () => {
     dispatch(getProjects(token));
   };
+  const completeTasksFetch = async () => {
+    dispatch(getCompletedTasks(token))
+  }
   useEffect(() => {
     todayTaskFetch();
     inboxTaskFetch();
     weeklyTaskFetch();
     projectsFetch();
     tagsFetch();
+    completeTasksFetch()
   }, [token, dispatch]);
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);

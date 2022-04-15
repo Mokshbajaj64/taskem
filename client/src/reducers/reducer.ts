@@ -8,6 +8,7 @@ import { singleproject } from "./singleproject";
 import { tag } from "./tag";
 import { singletag } from "./singletag";
 import { projecttask } from "./projecttask";
+import { completedtasks } from "./completedtasks"
 
 export default combineReducers({
   user,
@@ -19,4 +20,5 @@ export default combineReducers({
   tag,
   singletag,
   projecttask,
+  completedtasks
 });

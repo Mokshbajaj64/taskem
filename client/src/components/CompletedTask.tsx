@@ -6,11 +6,14 @@ import TaskComponent from "./TaskComponent";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
+import CompletedTaskComponent from "./CompletedTaskComponent"
+import {useSelector} from "react-redux"
 
 const CompletedTask = () => {
   const { colorMode } = useColorMode();
+  const completedtasks = useSelector((data:any) => data?.completedtasks?.completedTaskData)
   return (
-    <div className="pl-[30%] w-full h-full overflow-y-auto p-11 mr-9">
+    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -89,10 +92,10 @@ const CompletedTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-{/*        <TaskComponent />
-        <TaskComponent />
-        <TaskComponent />
-*/}        <AddTaskComponent />
+      {completedtasks?.map((task:any,index:React.Key) => (
+          <CompletedTaskComponent key = {index} title = {task?.title} description = {task?.description}/>
+        ))
+      }
       </div>
     </div>
   );

@@ -243,6 +243,16 @@ const ProjectTask = () => {
               <TaskComponent title = {task?.title} description = {task?.description} id = {task?._id} isProjectTask = {true} projectId = {task?.projectId}/>
             ))}
         <AddTaskComponent isProjectTask = {true} projectId = {project?._id}/>
+        {projecttasks?.length === 0 ? (
+          <div className=" flex w-full justify-center items-center">
+            <div className="flex-col flex w-full items-center justify-center gap-3">
+              <img src = "/svgexport-27.svg"/>
+              <Heading fontSize = "2xl">Be productive, Start creating tasks</Heading>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 {/*      comment modal stuff
 */}      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} data = {project}/>

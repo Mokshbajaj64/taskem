@@ -330,3 +330,9 @@ export const completeProjectTask = (
       token: token,
     },
   });
+
+export const getCompletedTasks = (token: string) => API.get(`/task/completedtasks`,{
+  headers:{
+    "token":token
+  }
+})
