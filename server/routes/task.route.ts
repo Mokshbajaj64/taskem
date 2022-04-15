@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from 'express';
 import { body, validationResult } from 'express-validator';
 import isAuthenticated from '../middlewares/isAuthenticated';
 import Task, { TaskModel } from '../models/task.model';
-import ProjectTasks from "../models/projecttasks.model"
+import ProjectTasks from '../models/projecttasks.model';
 
 const router: Router = express.Router();
 
@@ -183,6 +183,29 @@ router.put(
         });
         res.json(tasks);
       }
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
+
+//search todaytasks
+router.get(
+  '/today/s/:search',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const searchboi = new RegExp(req.params.search, "i");
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isTodayTask:true,
+        title:searchboi,
+        completed:false
+      });
+      res.json(tasks)
     } catch (error: any) {
       res.json({
         error: error.message,
@@ -376,6 +399,29 @@ router.put(
   }
 );
 
+//search inbox tasks
+router.get(
+  '/inbox/s/:search',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const searchboi = new RegExp(req.params.search, "i");
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isInboxTask:true,
+        title:searchboi,
+        completed:false
+      });
+      res.json(tasks)
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
+
 //create a weeklytask
 router.post(
   '/weekly',
@@ -561,25 +607,52 @@ router.put(
   }
 );
 
-//get completed tasks
-router.get("/completedtasks",isAuthenticated,async (req:Request,res:Response) => {
-  try {
+//search weekly tasks
+router.get(
+  '/weekly/s/:search',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const searchboi = new RegExp(req.params.search, "i");
       const userId = res?.locals?.userId;
-      const task1 = await Task.find({
-        userId:userId,
-        completed:true
-      })
-      const task2 = await ProjectTasks.find({
-        userId:userId,
-        completed:true
-      })
-      const tasks = Object.assign(task1,task2)
+      const tasks = await Task.find({
+        userId: userId,
+        isWeeklyTask:true,
+        title:searchboi,
+        completed:false
+      });
       res.json(tasks)
     } catch (error: any) {
       res.json({
         error: error.message,
       });
     }
-})
+  }
+);
+
+//get completed tasks
+router.get(
+  '/completedtasks',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const task1 = await Task.find({
+        userId: userId,
+        completed: true,
+      });
+      const task2 = await ProjectTasks.find({
+        userId: userId,
+        completed: true,
+      });
+      const tasks = [...task1, ...task2];
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
 
 export default router;

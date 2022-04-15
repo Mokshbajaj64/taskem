@@ -116,3 +116,26 @@ export const complteTodayTask =
       });
     }
   };
+
+export const searchTodayTasks = 
+  (token: string, search: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.searchTodayTasks(token, search);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "SEARCH_TODAY_TASK",
+        data,
+      });
+    }
+  };
+

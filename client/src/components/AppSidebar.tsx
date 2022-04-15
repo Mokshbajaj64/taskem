@@ -52,6 +52,7 @@ const AppSidebar = () => {
   }, [token, dispatch]);
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
+  const completedtasks = useSelector((data:any) => data?.completedtasks?.completedTaskData)
   const weeklytask = useSelector(
     (data: any) => data?.weeklytask?.weeklyTaskData
   );
@@ -228,7 +229,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Completed</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                0
+                {completedtasks?.length}
               </Text>
             </motion.div>
             <motion.div
@@ -276,7 +277,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Completed</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                0
+                {completedtasks?.length}
               </Text>
             </motion.div>
             <motion.div

@@ -336,3 +336,21 @@ export const getCompletedTasks = (token: string) => API.get(`/task/completedtask
     "token":token
   }
 })
+
+export const searchTodayTasks = (token: string,search: string) => API.get(`/task/today/s/${search}`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const searchInboxTasks = (token: string,search: string) => API.get(`/task/inbox/s/${search}`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const searchWeeklyTasks = (token:string,search: string) => API.get(`/task/weekly/s/${search}`,{
+  headers:{
+    "token":token
+  }
+})

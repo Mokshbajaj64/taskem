@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Heading,
   IconButton,
@@ -38,8 +38,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import UpdateProfileModal from "./UpdateProfileModal";
 import { FcTodoList } from "react-icons/fc";
+import { searchTodayTasks } from "../actions/todaytask";
+import { searchWeeklyTasks } from "../actions/weeklytask";
+import { searchInboxTasks } from "../actions/inboxtask";
 
 const AppNavbar = () => {
+  const token = JSON.parse(localStorage?.getItem("token") as string);
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,6 +55,7 @@ const AppNavbar = () => {
   };
   const userboi = useSelector((data: any) => data?.user?.authData);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [search, setSearch] = useState("");
   return (
     <motion.div
       initial={{
@@ -75,7 +80,7 @@ const AppNavbar = () => {
             scale: 1.1,
           }}
         >
-           <FiMenu size="28" className="cursor-pointer" /> 
+          <FiMenu size="28" className="cursor-pointer" />
         </motion.div>
         <motion.div
           className="flex items-center gap-3 cursor-pointer"
@@ -107,6 +112,13 @@ const AppNavbar = () => {
           placeholder="Search"
           rounded="full"
           variant="filled"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            window.location.pathname === "/app/today"
+              ? dispatch(searchTodayTasks(token, event?.target?.value))
+              : window.location.pathname === "/app/inbox"
+              ? dispatch(searchInboxTasks(token, event?.target?.value))
+              : dispatch(searchWeeklyTasks(token, event?.target?.value));
+          }}
         />
       </InputGroup>
       <div className="flex items-center gap-6">

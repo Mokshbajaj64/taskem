@@ -15,6 +15,8 @@ export const inboxtask = (state = { inboxTaskData: null }, action: Action) => {
       return (state = { inboxTaskData: action?.data });
     case "COMPLETE_INBOX_TASK":
       return (state = { inboxTaskData: action?.data });
+    case "SEARCH_INBOX_TASK":
+      return (state = { inboxTaskData: action?.data });
     default:
       return state;
   }
