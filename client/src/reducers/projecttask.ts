@@ -13,6 +13,8 @@ export const projecttask = (state = { projectTaskData: null }, action: Action) =
       return (state = { projectTaskData: action?.data });
     case "UPDATE_PROJECT_TASKS":
       return (state = { projectTaskData: action?.data });
+    case "COMPLETE_PROJECT_TASKS":
+      return (state = { projectTaskData: action?.data }); 
     default:
       return state;
   }

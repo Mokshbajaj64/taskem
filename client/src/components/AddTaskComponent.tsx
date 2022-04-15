@@ -8,10 +8,13 @@ import { createTodayTask } from "../actions/todaytask";
 import { useDispatch } from "react-redux";
 import { createInboxTask } from "../actions/inboxtask";
 import { createWeeklyTask } from "../actions/weeklytask";
+import { createProjectTask } from "../actions/projecttask"
 
 type Props = {
   isTodayTask?: boolean;
   isInboxTask?: boolean;
+  isProjectTask?: boolean
+  projectId?: string
 };
 
 const AddTaskComponent = (props: Props) => {
@@ -44,6 +47,13 @@ const AddTaskComponent = (props: Props) => {
       description: "",
     });
   };
+  const addProjectTaskBoi = () => {
+    dispatch(createProjectTask(token,props?.projectId as string,addTaskData))
+    setAddTaskData({
+      title: "",
+      description: "",
+    });
+  }
   return (
     <div className="w-full">
       {addTask ? (
@@ -94,7 +104,7 @@ const AddTaskComponent = (props: Props) => {
                       ? addTodayTaskBoi()
                       : props?.isInboxTask
                       ? addInboxTaskBoi()
-                      : addWeeklyTaskBoi();
+                      : props?.isProjectTask ? addProjectTaskBoi() :addWeeklyTaskBoi();
                   }
                 }}
               >

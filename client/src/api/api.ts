@@ -311,10 +311,21 @@ export const deleteProjectTask = (
 export const updateProjectTask = (
   token: string,
   projectId: string,
-  data: { title: string; description: string; taskId: string },
+  data: { title: string; description: string; },
   taskId: string
 ) =>
   API.put(`projecttask/${projectId}/${taskId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const completeProjectTask = (
+  token: string,
+  projectId: string,
+  taskId: string
+) =>
+  API.put(`projecttask/${projectId}/${taskId}/complete`, {}, {
     headers: {
       token: token,
     },

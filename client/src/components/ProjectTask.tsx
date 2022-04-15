@@ -27,6 +27,7 @@ const ProjectTask = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const project = useSelector((data: any) => data?.singleproject);
+  const projecttasks = useSelector((data:any) => data?.projecttask?.projectTaskData)
   const { colorMode } = useColorMode();
   const {
     isOpen: commentIsOpen,
@@ -238,11 +239,10 @@ const ProjectTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-        {/*        <TaskComponent />
-        <TaskComponent />
-        <TaskComponent />
-*/}{" "}
-        <AddTaskComponent />
+          {projecttasks?.map((task:any,index:React.Key) => (
+              <TaskComponent title = {task?.title} description = {task?.description} id = {task?._id} isProjectTask = {true} projectId = {task?.projectId}/>
+            ))}
+        <AddTaskComponent isProjectTask = {true} projectId = {project?._id}/>
       </div>
 {/*      comment modal stuff
 */}      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} data = {project}/>

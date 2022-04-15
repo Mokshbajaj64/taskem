@@ -78,7 +78,7 @@ export const updateProjectTask =
   (
     token: string,
     projectId: string,
-    databoi: { title: string; description: string; taskId: string },
+    databoi: { title: string; description: string; },
     taskId: string
   ) =>
   async (dispatch: Dispatch) => {
@@ -102,6 +102,29 @@ export const updateProjectTask =
     } else {
       dispatch({
         type: "UPDATE_PROJECT_TASKS",
+        data,
+      });
+    }
+  };
+
+export const completeProjectTask = 
+  (token: string, projectId: string, taskId: string) =>
+  async (dispatch: Dispatch) => {
+    const { data } = await api.completeProjectTask(token, projectId, taskId);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "COMPLETE_PROJECT_TASKS",
         data,
       });
     }

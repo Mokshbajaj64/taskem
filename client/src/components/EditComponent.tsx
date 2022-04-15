@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateTodayTask } from "../actions/todaytask";
 import { updateInboxTask } from "../actions/inboxtask";
 import {updateWeeklyTask} from "../actions/weeklytask"
+import { updateProjectTask } from "../actions/projecttask"
 
 type Props = {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +15,8 @@ type Props = {
   id: string;
   isTodayTask?: boolean;
   isInboxTask?: boolean;
+  isProjectTask?: boolean
+  projectId?: string
 };
 
 const EditComponent = (props: Props) => {
@@ -35,6 +38,10 @@ const EditComponent = (props: Props) => {
     dispatch(updateWeeklyTask(updateTaskData,token,props?.id))
     props?.setIsEdit(false)
   };
+  const updateTaskBoiProject = () => {
+    dispatch(updateProjectTask(token,props?.projectId as string,updateTaskData,props?.id))
+    props?.setIsEdit(false)
+  } 
   return (
     <div className="flex w-full flex-col gap-5">
       <div
@@ -82,7 +89,7 @@ const EditComponent = (props: Props) => {
                 ? updateTaskBoi
                 : props?.isInboxTask
                 ? updateTaskBoiInbox
-                : updateTaskBoiWeekly
+                : props?.isProjectTask ? updateTaskBoiProject : updateTaskBoiWeekly
             }
           >
             Update Task
