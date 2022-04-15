@@ -200,11 +200,12 @@ export const updateProject = (
     },
   });
 
-export const getProject = (token:string,projectId:string) => API.get(`/project/${projectId}`,{
-  headers:{
-    "token":token
-  }
-})
+export const getProject = (token: string, projectId: string) =>
+  API.get(`/project/${projectId}`, {
+    headers: {
+      token: token,
+    },
+  });
 
 export const getTags = (token: string) =>
   API.get("/tag", {
@@ -241,24 +242,80 @@ export const updateTag = (
     },
   });
 
-export const getTag = (token:string,tagId:string) => API.get(`/tag/${tagId}`,{
-  headers:{
-    "token":token
-  }
-})
+export const getTag = (token: string, tagId: string) =>
+  API.get(`/tag/${tagId}`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const commentProject = (token: string, projectId: string, comment: string) => API.put(`/project/${projectId}/comment`,{
-  comment
-},{
-  headers:{
-    "token":token
-  }
-})
+export const commentProject = (
+  token: string,
+  projectId: string,
+  comment: string
+) =>
+  API.put(
+    `/project/${projectId}/comment`,
+    {
+      comment,
+    },
+    {
+      headers: {
+        token: token,
+      },
+    }
+  );
 
-export const commentTag = (token: string, tagId: string, comment: string) => API.put(`/tag/${tagId}/comment`,{
-  comment
-},{
-  headers:{
-    "token":token
-  }
-})
+export const commentTag = (token: string, tagId: string, comment: string) =>
+  API.put(
+    `/tag/${tagId}/comment`,
+    {
+      comment,
+    },
+    {
+      headers: {
+        token: token,
+      },
+    }
+  );
+
+export const getProjectTasks = (token: string, projectId: string) =>
+  API.get(`/projecttask/${projectId}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const createProjectTask = (
+  token: string,
+  projectId: string,
+  data: { title: string; description: string }
+) =>
+  API.post(`/projecttask/${projectId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const deleteProjectTask = (
+  token: string,
+  projectId: string,
+  taskId: string
+) =>
+  API.delete(`/projecttask/${projectId}/${taskId}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const updateProjectTask = (
+  token: string,
+  projectId: string,
+  data: { title: string; description: string; taskId: string },
+  taskId: string
+) =>
+  API.put(`projecttask/${projectId}/${taskId}`, data, {
+    headers: {
+      token: token,
+    },
+  });
