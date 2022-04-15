@@ -354,3 +354,27 @@ export const searchWeeklyTasks = (token:string,search: string) => API.get(`/task
     "token":token
   }
 })
+
+export const filerTodayTaskTime = (token: string) => API.get(`/task/today/f/time`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const filerTodayTaskTitle = (token: string) => API.get(`/task/today/f/title`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const filerInboxTaskTime = (token: string) => API.get(`/task/inbox/f/time`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const filerInboxTaskTitle = (token: string) => API.get(`/task/inbox/f/title`,{
+  headers:{
+    "token":token
+  }
+})

@@ -7,10 +7,18 @@ import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import {
+  filerTodayTaskTime,
+  filerTodayTaskTitle,
+  getTodayTasks,
+} from "../actions/todaytask";
+import { useDispatch } from "react-redux";
 
 const TodayTask = () => {
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
   const { colorMode } = useColorMode();
+  const dispatch = useDispatch();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
   return (
     <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
@@ -37,15 +45,30 @@ const TodayTask = () => {
               </div>
             </MenuButton>
             <MenuList>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(getTodayTasks(token));
+                }}
+              >
                 <MdSort size="25" />
                 <Text fontSize="md">Custom</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(filerTodayTaskTime(token));
+                }}
+              >
                 <BiTime size="25" />
                 <Text fontSize="md">By Time</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(filerTodayTaskTitle(token));
+                }}
+              >
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
               </MenuItem>
@@ -70,15 +93,30 @@ const TodayTask = () => {
               </div>
             </MenuButton>
             <MenuList>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(getTodayTasks(token));
+                }}
+              >
                 <MdSort size="25" />
                 <Text fontSize="md">Custom</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(filerTodayTaskTime(token));
+                }}
+              >
                 <BiTime size="25" />
                 <Text fontSize="md">By Time</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(filerTodayTaskTitle(token));
+                }}
+              >
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
               </MenuItem>
@@ -104,8 +142,10 @@ const TodayTask = () => {
         {todaytask?.length === 0 ? (
           <div className=" flex w-full justify-center items-center">
             <div className="flex-col flex w-full items-center justify-center gap-3">
-              <img src = "/svgexport-27.svg"/>
-              <Heading fontSize = "2xl">Be productive, Start creating tasks</Heading>
+              <img src="/svgexport-27.svg" />
+              <Heading fontSize="2xl">
+                Be productive, Start creating tasks
+              </Heading>
             </div>
           </div>
         ) : (

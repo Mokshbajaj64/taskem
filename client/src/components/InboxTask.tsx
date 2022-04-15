@@ -7,10 +7,18 @@ import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill, BsChatLeftDots } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  filerInboxTaskTime,
+  filerInboxTaskTitle,
+  getInboxTasks,
+} from "../actions/inboxtask";
 
 const InboxTask = () => {
+  const dispatch = useDispatch();
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const { colorMode } = useColorMode();
+  const token = JSON.parse(localStorage?.getItem("token") as string);
   return (
     <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
       <div className="flex sticky items-center w-full justify-between">
@@ -35,15 +43,30 @@ const InboxTask = () => {
                 </div>
               </MenuButton>
               <MenuList>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(getInboxTasks(token));
+                  }}
+                >
                   <MdSort size="25" />
                   <Text fontSize="md">Custom</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(filerInboxTaskTime(token));
+                  }}
+                >
                   <BiTime size="25" />
                   <Text fontSize="md">By Time</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(filerInboxTaskTitle(token));
+                  }}
+                >
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
                 </MenuItem>
@@ -70,15 +93,30 @@ const InboxTask = () => {
                 </div>
               </MenuButton>
               <MenuList>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(getInboxTasks(token));
+                  }}
+                >
                   <MdSort size="25" />
                   <Text fontSize="md">Custom</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(filerInboxTaskTime(token));
+                  }}
+                >
                   <BiTime size="25" />
                   <Text fontSize="md">By Time</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(filerInboxTaskTitle(token));
+                  }}
+                >
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
                 </MenuItem>
@@ -98,15 +136,17 @@ const InboxTask = () => {
             title={task?.title}
             description={task?.description}
             id={task?._id}
-            isInboxTask = {true}
+            isInboxTask={true}
           />
         ))}
-        <AddTaskComponent isInboxTask = {true}/>
+        <AddTaskComponent isInboxTask={true} />
         {inboxtask?.length === 0 ? (
           <div className=" flex w-full justify-center items-center">
             <div className="flex-col flex w-full items-center justify-center gap-3">
-              <img src = "/svgexport-27.svg"/>
-              <Heading fontSize = "2xl">Be productive, Start creating tasks</Heading>
+              <img src="/svgexport-27.svg" />
+              <Heading fontSize="2xl">
+                Be productive, Start creating tasks
+              </Heading>
             </div>
           </div>
         ) : (

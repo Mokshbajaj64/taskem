@@ -17,6 +17,10 @@ export const todaytask = (state = { todayTaskData: null }, action: Action) => {
       return (state = { todayTaskData: action?.data });
     case "SEARCH_TODAY_TASK":
       return (state = { todayTaskData: action?.data });
+    case "FILTER_TODAY_TIME":
+      return (state = { todayTaskData: action?.data });
+    case "FILTER_TODAY_TITLE":
+      return (state = { todayTaskData: action?.data });
     default:
       return state;
   }

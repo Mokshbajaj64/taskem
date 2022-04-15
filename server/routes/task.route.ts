@@ -214,6 +214,44 @@ router.get(
   }
 );
 
+//sort by time todaytasks
+router.get('/today/f/time', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const tasks = await Task.find({
+      userId: userId,
+      isTodayTask: true,
+      completed: false,
+    }).sort({
+      "createdAt":-1
+    })
+    res.json(tasks);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
+
+//sort by title todaytasks
+router.get('/today/f/title', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const tasks = await Task.find({
+      userId: userId,
+      isTodayTask: true,
+      completed: false,
+    }).sort({
+      "title":-1
+    })
+    res.json(tasks);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
+
 //create a inboxtask
 router.post(
   '/inbox',
@@ -421,6 +459,44 @@ router.get(
     }
   }
 );
+
+//sort by time inboxtasks
+router.get('/inbox/f/time', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const tasks = await Task.find({
+      userId: userId,
+      isInboxTask: true,
+      completed: false,
+    }).sort({
+      "createdAt":-1
+    })
+    res.json(tasks);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
+
+//sort by title inboxtasks
+router.get('/inbox/f/title', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const tasks = await Task.find({
+      userId: userId,
+      isInboxTask: true,
+      completed: false,
+    }).sort({
+      "title":-1
+    })
+    res.json(tasks);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
 
 //create a weeklytask
 router.post(
@@ -654,5 +730,44 @@ router.get(
     }
   }
 );
+
+//sort by time weeklytasks
+router.get('/weekly/f/time', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const tasks = await Task.find({
+      userId: userId,
+      isWeeklyTask: true,
+      completed: false,
+    }).sort({
+      "createdAt":-1
+    })
+    res.json(tasks);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
+
+//sort by title weeklytasks
+router.get('/weekly/f/title', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const userId = res?.locals?.userId;
+    const tasks = await Task.find({
+      userId: userId,
+      isWeeklyTask: true,
+      completed: false,
+    }).sort({
+      "title":-1
+    })
+    res.json(tasks);
+  } catch (error: any) {
+    res.json({
+      error: error.message,
+    });
+  }
+});
+
 
 export default router;

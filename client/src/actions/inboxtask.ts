@@ -138,3 +138,48 @@ export const searchInboxTasks =
       });
     }
   };
+
+export const filerInboxTaskTime = 
+  (token: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.filerInboxTaskTime(token);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "FILTER_INBOX_TIME",
+        data,
+      });
+    }
+  };
+
+
+export const filerInboxTaskTitle = 
+  (token: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.filerInboxTaskTitle(token);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "FILTER_INBOX_TITLE",
+        data,
+      });
+    }
+  };
