@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
-      default: 'I love ShittyShit',
+      default: 'I love Taskem',
     },
   },
   {

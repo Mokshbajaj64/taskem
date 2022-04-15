@@ -10,7 +10,7 @@ const AboutHero = () => {
           We do what we love, for the better
         </Heading>
         <Text fontSize="xl" color="gray.500" className="mr-10 md:mr-0">
-          ShittyShit is a task manager that help you stay organized while
+          Taskem is a task manager that help you stay organized while
           boosting your creativity at the same time.Our main goal is to help
           everyone boost productivity and make their life a little less ordinary
         </Text>

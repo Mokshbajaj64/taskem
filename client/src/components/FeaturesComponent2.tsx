@@ -66,7 +66,7 @@ const FeaturesComponent2 = () => {
               <div className="flex flex-col items-start gap-2">
                 <Heading fontSize="2xl">Pomo Timer</Heading>
                 <Text fontSize="xl" color="gray.500">
-                  Practice the Pomodoro Technique in ShittyShit
+                  Practice the Pomodoro Technique in Taskem
                 </Text>
               </div>
             </div>

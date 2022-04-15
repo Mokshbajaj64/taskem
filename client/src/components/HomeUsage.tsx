@@ -27,8 +27,8 @@ const HomeUsage = () => {
                 >
                   <Heading fontSize="4xl">“</Heading>
                   <Heading fontSize="lg">
-                    Personally the reason I like ShittyShit is mainly the
-                    simplicity. It's minimal and clean. ShittyShit is packed
+                    Personally the reason I like Taskem is mainly the
+                    simplicity. It's minimal and clean. Taskem is packed
                     with features but only the ones that are absolutely
                     necessary.
                   </Heading>
@@ -68,7 +68,7 @@ const HomeUsage = () => {
                 >
                   <Heading fontSize="4xl">“</Heading>
                   <Heading fontSize="lg">
-                    ShittyShit is the most functional solution at the moment,
+                    Taskem is the most functional solution at the moment,
                     which can be used at home and in business.
                   </Heading>
                   <Text fontSize="md" color="gray.500" className="mt-6">
@@ -108,7 +108,7 @@ const HomeUsage = () => {
                   <Heading fontSize="4xl">“</Heading>
                   <Heading fontSize="lg">
                     As an ex google, ex facebook, ex enterpreneur, millionaire
-                    ShittyShit helped me alot thanks :)
+                    Taskem helped me alot thanks :)
                   </Heading>
                   <Text fontSize="md" color="gray.500" className="mt-6">
                     Techlead

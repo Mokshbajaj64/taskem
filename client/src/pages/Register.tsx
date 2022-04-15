@@ -21,6 +21,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { register } from "../actions/user";
+import { FcTodoList } from "react-icons/fc";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -72,9 +73,9 @@ const Register = () => {
               navigate("/");
             }}
           >
-            <BsFillEmojiSunglassesFill size={30} color="white" />
+            <FcTodoList size={30} color="white" />
             <Heading as="h5" fontSize="2xl" color="white">
-              ShittyShit
+              Taskem
             </Heading>
           </motion.div>
           <div className="flex items-center gap-4">

@@ -5,6 +5,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ContactModal from "./ContactModal";
+import { FcTodoList } from "react-icons/fc";
 
 const HomeFooter = () => {
   const navigate = useNavigate();
@@ -18,9 +19,9 @@ const HomeFooter = () => {
         </Heading>
         <div className="hidden justify-center items-center md:w-[30%] w-[100%] h-full md:flex">
           <div className="flex flex-col gap-7">
-            <BsEmojiHeartEyesFill size="30" />
+            <FcTodoList size="30" className = "cursor-pointer"/>
             <Text color="gray.500" fontSize="xl">
-              Join millions of people who organize work and life with ShittyShit
+              Join millions of people who organize work and life with Taskem
             </Text>
             <AiFillGithub
               size="34"

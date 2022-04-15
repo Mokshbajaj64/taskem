@@ -12,6 +12,7 @@ import { FaMoon } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import ContactModal from "./ContactModal";
+import { FcTodoList } from "react-icons/fc";
 
 const HomeNavbar = () => {
   const navigate = useNavigate();
@@ -36,9 +37,14 @@ const HomeNavbar = () => {
             scale: 1.1,
           }}
         >
-          <BsFillEmojiHeartEyesFill size={25} />
-          <Heading as="h6" fontSize="2xl" className="md:flex hidden">
-            ShittyShit
+          <FcTodoList size={28} />
+          <Heading
+            as="h6"
+            fontSize="3xl"
+            className="md:flex hidden"
+            fontFamily={"Inconsolata"}
+          >
+            Taskem
           </Heading>
         </motion.div>
         <div className="hidden items-center gap-6 md:flex">

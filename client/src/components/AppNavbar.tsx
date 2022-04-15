@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
 import { FiMenu, FiSettings, FiLogOut } from "react-icons/fi";
 import { ImSearch } from "react-icons/im";
 import { IoAdd } from "react-icons/io5";
@@ -38,6 +37,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import UpdateProfileModal from "./UpdateProfileModal";
+import { FcTodoList } from "react-icons/fc";
 
 const AppNavbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -75,7 +75,7 @@ const AppNavbar = () => {
             scale: 1.1,
           }}
         >
-          <FiMenu size="28" className="cursor-pointer" />
+           <FiMenu size="28" className="cursor-pointer" /> 
         </motion.div>
         <motion.div
           className="flex items-center gap-3 cursor-pointer"
@@ -86,9 +86,14 @@ const AppNavbar = () => {
             scale: 1.1,
           }}
         >
-          <BsFillEmojiHeartEyesFill size={25} />
-          <Heading as="h6" fontSize="2xl" className="md:flex hidden">
-            ShittyShit
+          <FcTodoList size={28} />
+          <Heading
+            as="h6"
+            fontSize="3xl"
+            className="md:flex hidden"
+            fontFamily={"Inconsolata"}
+          >
+            Taskem
           </Heading>
         </motion.div>
       </div>
@@ -132,7 +137,7 @@ const AppNavbar = () => {
                 <Avatar />
                 <div className="flex flex-col items-start gap-1">
                   <Text fontSize="md">
-                    Welcome to ShittyShit :) time to get started!
+                    Welcome to Taskem :) time to get started!
                   </Text>
                   <Text fontSize="sm" color="gray.300">
                     10 hours ago
@@ -144,7 +149,7 @@ const AppNavbar = () => {
                 <Avatar />
                 <div className="flex flex-col items-start gap-1">
                   <Text fontSize="md">
-                    Welcome to ShittyShit :) time to get started!
+                    Welcome to Taskem :) time to get started!
                   </Text>
                   <Text fontSize="sm" color="gray.300">
                     10 hours ago
@@ -190,7 +195,13 @@ const AppNavbar = () => {
           </MenuList>
         </Menu>
       </div>
-      <UpdateProfileModal isOpen={isOpen} onClose={onClose} username = {userboi?.username} email = {userboi?.email} bio =  {userboi?.bio}/>
+      <UpdateProfileModal
+        isOpen={isOpen}
+        onClose={onClose}
+        username={userboi?.username}
+        email={userboi?.email}
+        bio={userboi?.bio}
+      />
     </motion.div>
   );
 };
