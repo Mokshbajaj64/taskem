@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import { motion } from "framer-motion";
@@ -14,6 +14,7 @@ const Tags = () => {
   useEffect(() => {
     dispatch(getTag(token, tagId as string));
   }, [tagId, dispatch, token]);
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <motion.div
       initial={{
@@ -26,10 +27,10 @@ const Tags = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar />
+      <AppNavbar setIsOpen={setIsOpen} isOpen={isOpen} />
       <div className="mt-[80px] w-full flex overflow-hidden">
-        <AppSidebar />
-        <TagsTask />
+        {isOpen ? <AppSidebar /> : null}
+        <TagsTask isOpen={isOpen} />
       </div>
     </motion.div>
   );

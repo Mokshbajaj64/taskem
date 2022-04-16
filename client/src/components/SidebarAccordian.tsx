@@ -22,7 +22,7 @@ const SidebarAccordian = (props: Props) => {
   const [hover, setHover] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const projects = useSelector((data: any) => data?.project?.projectData);
-  const tags = useSelector((data:any) => data?.tag?.tagData)
+  const tags = useSelector((data: any) => data?.tag?.tagData);
   return (
     <AccordionItem
       border="none"
@@ -32,6 +32,7 @@ const SidebarAccordian = (props: Props) => {
       onMouseLeave={() => {
         setHover(false);
       }}
+      className="p-2"
     >
       <h2>
         <AccordionButton
@@ -48,7 +49,7 @@ const SidebarAccordian = (props: Props) => {
             <IconButton
               icon={<IoAdd />}
               aria-label="Add Project"
-              size="sm"
+              size="xs"
               rounded={"full"}
               onClick={() => {
                 onOpen();
@@ -59,13 +60,25 @@ const SidebarAccordian = (props: Props) => {
           )}
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4}>
+      <AccordionPanel>
         {props?.isTag === true
-          ? tags?.map((tag:any,index:React.Key) => (
-              <AccordianComponent isTag={props.isTag} key={index} name = {tag?.name} color = {tag?.color} id = {tag?._id}/>
+          ? tags?.map((tag: any, index: React.Key) => (
+              <AccordianComponent
+                isTag={props.isTag}
+                key={index}
+                name={tag?.name}
+                color={tag?.color}
+                id={tag?._id}
+              />
             ))
           : projects?.map((project: any, index: React.Key) => (
-              <AccordianComponent isTag={props.isTag} key={index} name = {project?.name} color = {project?.color} id = {project?._id}/>
+              <AccordianComponent
+                isTag={props.isTag}
+                key={index}
+                name={project?.name}
+                color={project?.color}
+                id={project?._id}
+              />
             ))}
       </AccordionPanel>
       <CreateProjectModal

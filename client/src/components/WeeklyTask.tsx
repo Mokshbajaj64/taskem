@@ -13,7 +13,11 @@ import {
   getWeeklyTasks,
 } from "../actions/weeklytask";
 
-const WeeklyTask = () => {
+type Props = {
+  isOpen?: boolean;
+};
+
+const WeeklyTask = (props: Props) => {
   const token = JSON.parse(localStorage?.getItem("token") as string);
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
@@ -21,7 +25,13 @@ const WeeklyTask = () => {
     (data: any) => data?.weeklytask?.weeklyTaskData
   );
   return (
-    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
+    <div
+      className={
+        !props.isOpen
+          ? "pl-[10%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+          : "pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+      }
+    >
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -73,10 +83,6 @@ const WeeklyTask = () => {
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
-                <BsFillFlagFill size="22" />
-                <Text fontSize="md">By Priority</Text>
-              </MenuItem>
             </MenuList>
           </Menu>
         ) : (
@@ -94,27 +100,32 @@ const WeeklyTask = () => {
               </div>
             </MenuButton>
             <MenuList>
-              <MenuItem className="flex items-center gap-3" onClick={() => {
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
                   dispatch(getWeeklyTasks(token));
-                }}>
+                }}
+              >
                 <MdSort size="25" />
                 <Text fontSize="md">Custom</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3" onClick={() => {
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
                   dispatch(filerWeeklyTaskTime(token));
-                }}>
+                }}
+              >
                 <BiTime size="25" />
                 <Text fontSize="md">By Time</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3" onClick={() => {
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
                   dispatch(filerWeeklyTaskTitle(token));
-                }}>
+                }}
+              >
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
-              </MenuItem>
-              <MenuItem className="flex items-center gap-3">
-                <BsFillFlagFill size="22" />
-                <Text fontSize="md">By Priority</Text>
               </MenuItem>
             </MenuList>
           </Menu>

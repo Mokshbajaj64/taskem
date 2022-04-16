@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import InboxTask from "../components/InboxTask";
 
 const Inbox = () => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <motion.div
       initial={{
@@ -17,10 +18,10 @@ const Inbox = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar />
+      <AppNavbar setIsOpen={setIsOpen} isOpen={isOpen} />
       <div className="mt-[80px] w-full flex overflow-hidden">
-        <AppSidebar />
-        <InboxTask />
+        {isOpen ? <AppSidebar /> : null}
+        <InboxTask isOpen={isOpen} />
       </div>
     </motion.div>
   );

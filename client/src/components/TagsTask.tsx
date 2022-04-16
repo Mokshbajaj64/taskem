@@ -22,11 +22,15 @@ import EditProjectModal from "./EditProjectModal";
 import { useSelector } from "react-redux";
 import { deleteTag } from "../actions/tag";
 import { useDispatch } from "react-redux";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-const TagsTask = () => {
+type Props = {
+  isOpen?: boolean;
+};
+
+const TagsTask = (props: Props) => {
   const { colorMode } = useColorMode();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const tag = useSelector((data: any) => data?.singletag);
   const {
@@ -52,7 +56,13 @@ const TagsTask = () => {
     navigate("/app/today");
   };
   return (
-    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
+    <div
+      className={
+        !props.isOpen
+          ? "pl-[10%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+          : "pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+      }
+    >
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -106,10 +116,6 @@ const TagsTask = () => {
                 <MenuItem className="flex items-center gap-3">
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
-                </MenuItem>
-                <MenuItem className="flex items-center gap-3">
-                  <BsFillFlagFill size="22" />
-                  <Text fontSize="md">By Priority</Text>
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -194,10 +200,6 @@ const TagsTask = () => {
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
-                  <BsFillFlagFill size="22" />
-                  <Text fontSize="md">By Priority</Text>
-                </MenuItem>
               </MenuList>
             </Menu>
             <Menu>
@@ -245,7 +247,12 @@ const TagsTask = () => {
 */}{" "}
         <AddTaskComponent />
       </div>
-      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} isTag = {true} data = {tag}/>
+      <CommentsModal
+        isOpen={commentIsOpen}
+        onClose={commentOnClose}
+        isTag={true}
+        data={tag}
+      />
       <AlertDialog
         isOpen={deleteIsOpen}
         leastDestructiveRef={cancelRef}
@@ -276,10 +283,10 @@ const TagsTask = () => {
         isOpen={editIsOpen}
         isTag={true}
         onClose={editOnClose}
-        name = {tag?.name}
-        description = {tag?.description}
-        color = {tag?.color}
-        id = {tag?._id}
+        name={tag?.name}
+        description={tag?.description}
+        color={tag?.color}
+        id={tag?._id}
       />
     </div>
   );

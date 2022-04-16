@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import CompletedTask from "../components/CompletedTask";
 
 const Completed = () => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <motion.div
       initial={{
@@ -17,10 +18,10 @@ const Completed = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar />
+      <AppNavbar setIsOpen={setIsOpen} isOpen={isOpen} />
       <div className="mt-[80px] w-full flex overflow-hidden">
-        <AppSidebar />
-        <CompletedTask />
+        {isOpen ? <AppSidebar /> : null}
+        <CompletedTask isOpen={isOpen} />
       </div>
     </motion.div>
   );

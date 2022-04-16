@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import TodayTask from "../components/TodayTask";
 import { motion } from "framer-motion";
 
 const Today = () => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <motion.div
       initial={{
@@ -17,10 +18,10 @@ const Today = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar />
+      <AppNavbar setIsOpen={setIsOpen} isOpen={isOpen} />
       <div className="mt-[80px] w-full flex overflow-hidden">
-        <AppSidebar />
-        <TodayTask />
+        {isOpen ? <AppSidebar /> : null}
+        <TodayTask isOpen={isOpen} />
       </div>
     </motion.div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import { motion } from "framer-motion";
@@ -16,6 +16,7 @@ const Project = () => {
     dispatch(getProject(token, projectId as string));
     dispatch(getProjectTasks(token, projectId as string));
   }, [projectId, dispatch, token]);
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <motion.div
       initial={{
@@ -28,10 +29,15 @@ const Project = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar isProject={true} projectId={projectId} />
+      <AppNavbar
+        isProject={true}
+        projectId={projectId}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
       <div className="mt-[80px] w-full flex overflow-hidden">
-        <AppSidebar />
-        <ProjectTask />
+        {isOpen ? <AppSidebar /> : null}
+        <ProjectTask isOpen={isOpen} />
       </div>
     </motion.div>
   );

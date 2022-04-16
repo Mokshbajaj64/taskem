@@ -28,7 +28,11 @@ import {
   projectTaskFilterTitle,
 } from "../actions/projecttask";
 
-const ProjectTask = () => {
+type Props = {
+  isOpen?: boolean;
+};
+
+const ProjectTask = (props: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const project = useSelector((data: any) => data?.singleproject);
@@ -59,7 +63,13 @@ const ProjectTask = () => {
     navigate("/app/today");
   };
   return (
-    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
+    <div
+      className={
+        !props.isOpen
+          ? "pl-[10%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+          : "pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+      }
+    >
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -128,10 +138,6 @@ const ProjectTask = () => {
                 >
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
-                </MenuItem>
-                <MenuItem className="flex items-center gap-3">
-                  <BsFillFlagFill size="22" />
-                  <Text fontSize="md">By Priority</Text>
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -230,10 +236,6 @@ const ProjectTask = () => {
                 >
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
-                </MenuItem>
-                <MenuItem className="flex items-center gap-3">
-                  <BsFillFlagFill size="22" />
-                  <Text fontSize="md">By Priority</Text>
                 </MenuItem>
               </MenuList>
             </Menu>

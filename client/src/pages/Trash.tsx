@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AppNavbar from "../components/AppNavbar";
 import AppSidebar from "../components/AppSidebar";
 import { motion } from "framer-motion";
 import TrashTask from "../components/TrashTask";
 
 const Trash = () => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <motion.div
       initial={{
@@ -17,10 +18,10 @@ const Trash = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar />
+      <AppNavbar setIsOpen={setIsOpen} isOpen={isOpen} />
       <div className="mt-[80px] w-full flex overflow-hidden">
-        <AppSidebar />
-        <TrashTask />
+        {isOpen ? <AppSidebar /> : null}
+        <TrashTask isOpen={isOpen} />
       </div>
     </motion.div>
   );

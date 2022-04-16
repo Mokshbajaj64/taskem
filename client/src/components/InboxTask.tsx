@@ -14,13 +14,23 @@ import {
   getInboxTasks,
 } from "../actions/inboxtask";
 
-const InboxTask = () => {
+type Props = {
+  isOpen?: boolean;
+};
+
+const InboxTask = (props: Props) => {
   const dispatch = useDispatch();
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const { colorMode } = useColorMode();
   const token = JSON.parse(localStorage?.getItem("token") as string);
   return (
-    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
+    <div
+      className={
+        !props.isOpen
+          ? "pl-[10%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+          : "pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+      }
+    >
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">

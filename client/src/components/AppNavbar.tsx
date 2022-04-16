@@ -48,6 +48,8 @@ import { format } from "timeago.js";
 type Props = {
   isProject?: boolean;
   projectId?: string;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen?: boolean;
 };
 
 const AppNavbar = (props: Props) => {
@@ -87,7 +89,14 @@ const AppNavbar = (props: Props) => {
             scale: 1.1,
           }}
         >
-          <FiMenu size="28" className="cursor-pointer" />
+          <FiMenu
+            size="28"
+            className="cursor-pointer"
+            onClick={() => {
+              //@ts-ignore
+              props?.setIsOpen(!props?.isOpen);
+            }}
+          />
         </motion.div>
         <motion.div
           className="flex items-center gap-3 cursor-pointer"

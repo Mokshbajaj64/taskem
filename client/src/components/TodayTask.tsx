@@ -14,13 +14,23 @@ import {
 } from "../actions/todaytask";
 import { useDispatch } from "react-redux";
 
-const TodayTask = () => {
+type Props = {
+  isOpen?: boolean;
+};
+
+const TodayTask = (props: Props) => {
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
   const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   const token = JSON.parse(localStorage?.getItem("token") as string);
   return (
-    <div className="pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9">
+    <div
+      className={
+        !props.isOpen
+          ? "pl-[10%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+          : "pl-[30%] w-full min-h-[calc(100vh-80px)] h-full p-11 mr-9"
+      }
+    >
       <div className="flex sticky items-center w-full justify-between">
         <div className="flex items-center gap-2">
           <Heading as="h2" fontSize="2xl">
@@ -72,10 +82,6 @@ const TodayTask = () => {
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
-                <BsFillFlagFill size="22" />
-                <Text fontSize="md">By Priority</Text>
-              </MenuItem>
             </MenuList>
           </Menu>
         ) : (
@@ -119,10 +125,6 @@ const TodayTask = () => {
               >
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
-              </MenuItem>
-              <MenuItem className="flex items-center gap-3">
-                <BsFillFlagFill size="22" />
-                <Text fontSize="md">By Priority</Text>
               </MenuItem>
             </MenuList>
           </Menu>
