@@ -69,6 +69,7 @@ const SidebarAccordian = (props: Props) => {
                 name={tag?.name}
                 color={tag?.color}
                 id={tag?._id}
+                description={tag?.description}
               />
             ))
           : projects?.map((project: any, index: React.Key) => (
@@ -78,6 +79,7 @@ const SidebarAccordian = (props: Props) => {
                 name={project?.name}
                 color={project?.color}
                 id={project?._id}
+                description={project?.description}
               />
             ))}
       </AccordionPanel>

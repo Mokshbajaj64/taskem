@@ -19,7 +19,7 @@ import { getTags } from "../actions/tag";
 import { getCompletedTasks } from "../actions/completedtasks";
 import { useSelector } from "react-redux";
 import { getDeletedTasks } from "../actions/deletedtasks";
-import Loader from "../pages/Loader"
+import Loader from "../pages/Loader";
 
 const AppSidebar = () => {
   const [loading, setLoading] = useState(true);
@@ -70,8 +70,9 @@ const AppSidebar = () => {
   const deletedtasks = useSelector(
     (data: any) => data?.deletedtasks?.deletedTasksData
   );
-  return (
-    loading ? <Loader /> :
+  return loading ? (
+    <Loader />
+  ) : (
     <div
       className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
       style={{
@@ -166,7 +167,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Today</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                69
+                {todaytask?.length}
               </Text>
             </motion.div>
             <motion.div
@@ -187,7 +188,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Weekly</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                4
+                {weeklytask?.length}
               </Text>
             </motion.div>
             <motion.div
@@ -208,7 +209,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Inbox</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                5
+                {inboxtask?.length}
               </Text>
             </motion.div>
           </div>
