@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 
 type Props = {
   isTag: boolean;
-  name: string
-  color: string
-  id: string
+  name: string;
+  color: string;
+  id: string;
 };
 
 const AccordianComponent = (props: Props) => {
@@ -18,7 +18,9 @@ const AccordianComponent = (props: Props) => {
     <motion.div
       className="w-full hover:bg-[#21242a] p-4 rounded-md flex items-center justify-between cursor-pointer"
       onClick={() => {
-        props.isTag ? navigate(`/tag/${props?.id}`) : navigate(`/project/${props?.id}`);
+        props.isTag
+          ? navigate(`/tag/${props?.id}`)
+          : navigate(`/project/${props?.id}`);
       }}
       whileHover={{
         scale: 1.06,
@@ -38,7 +40,9 @@ const AccordianComponent = (props: Props) => {
     <motion.div
       className="w-full hover:bg-[#f0f0f0] p-4 rounded-md flex items-center justify-between cursor-pointer"
       onClick={() => {
-        props.isTag ? navigate(`/tag/${props?.id}`) : navigate(`/project/${props?.id}`);
+        props.isTag
+          ? navigate(`/tag/${props?.id}`)
+          : navigate(`/project/${props?.id}`);
       }}
       whileHover={{
         scale: 1.06,

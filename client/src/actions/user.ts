@@ -3,10 +3,11 @@ import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 
 export const login =
-  (databoi: { email: string; password: string }) =>
+  (databoi: { email: string; password: string }, setLoading: any) =>
   async (dispatch: Dispatch) => {
     const { data } = await api.login(databoi);
     if (data?.error) {
+      setLoading(false);
       toast.error(data.error, {
         position: "top-right",
         autoClose: 5000,
@@ -18,6 +19,7 @@ export const login =
         theme: "dark",
       });
     } else {
+      setLoading(false);
       window.location.href = "/app/today";
       dispatch({
         type: "LOGIN",
@@ -27,10 +29,14 @@ export const login =
   };
 
 export const register =
-  (databoi: { username: string; email: string; password: string }) =>
+  (
+    databoi: { username: string; email: string; password: string },
+    setLoading: any
+  ) =>
   async (dispatch: Dispatch) => {
     const { data } = await api.register(databoi);
     if (data?.error) {
+      setLoading(false);
       toast.error(data.error, {
         position: "top-right",
         autoClose: 5000,
@@ -42,6 +48,7 @@ export const register =
         theme: "dark",
       });
     } else {
+      setLoading(false);
       toast.success("User created now login :)", {
         position: "top-right",
         autoClose: 5000,
@@ -57,7 +64,8 @@ export const register =
   };
 
 export const getUser =
-  (token: string, navigate: any) => async (dispatch: Dispatch) => {
+  (token: string, navigate: any, setLoading: any) =>
+  async (dispatch: Dispatch) => {
     const { data } = await api.getUser(token);
     if (data?.error) {
       toast.error(data.error, {
@@ -72,7 +80,9 @@ export const getUser =
       });
       navigate("/login");
       localStorage.removeItem("token");
+      setLoading(false);
     } else {
+      setLoading(false);
       dispatch({
         type: "GET_USER",
         data,

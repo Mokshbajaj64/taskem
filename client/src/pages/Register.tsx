@@ -24,6 +24,7 @@ import { register } from "../actions/user";
 import { FcTodoList } from "react-icons/fc";
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { colorMode, toggleColorMode } = useColorMode();
@@ -35,7 +36,8 @@ const Register = () => {
     password: "",
   });
   const registerBoi = () => {
-    dispatch(register(registerData));
+    setLoading(true);
+    dispatch(register(registerData,setLoading));
   };
   return (
     <motion.div
@@ -79,51 +81,71 @@ const Register = () => {
             </Heading>
           </motion.div>
           <div className="flex items-center gap-4">
-            <motion.div
-              className="flex p-2 bg-purple-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("purple");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-green-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("green");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-red-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("red");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-pink-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("pink");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-blue-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("blue");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
+            {color === "purple" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-purple-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("purple");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "green" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-green-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("green");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "red" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-red-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("red");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "pink" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-pink-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("pink");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "blue" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-blue-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("blue");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
           </div>
         </div>
         <img src="/bg2.svg" className="w-[70%] h-[70%]" />
@@ -229,26 +251,33 @@ const Register = () => {
               </FormHelperText>
             )}
           </FormControl>
-          <motion.div
-            className="flex w-[60%]"
-            whileHover={{
-              scale: 1.05,
-            }}
-          >
-            {registerData?.email?.trim()?.includes("@") &&
-            registerData?.username?.trim()?.length >= 4 &&
-            registerData?.username?.trim()?.length <= 20 &&
-            registerData?.password?.trim()?.length >= 8 &&
-            registerData?.password?.trim()?.length <= 20 ? (
-              <Button colorScheme="blue" width="full" onClick={registerBoi}>
+          {registerData?.email?.trim()?.includes("@") &&
+          registerData?.username?.trim()?.length >= 4 &&
+          registerData?.username?.trim()?.length <= 20 &&
+          registerData?.password?.trim()?.length >= 8 &&
+          registerData?.password?.trim()?.length <= 20 ? (
+            <motion.div
+              className="flex w-[60%]"
+              whileHover={{
+                scale: 1.05,
+              }}
+            >
+              <Button
+                colorScheme="blue"
+                width="full"
+                onClick={registerBoi}
+                isLoading={loading}
+              >
                 Sign up
               </Button>
-            ) : (
+            </motion.div>
+          ) : (
+            <div className="flex w-[60%]">
               <Button colorScheme="blue" width="full" isDisabled={true}>
                 Sign up
               </Button>
-            )}
-          </motion.div>
+            </div>
+          )}
           <div className="flex items-center gap-1">
             <Text size="md">Already have any account?</Text>
             <Text

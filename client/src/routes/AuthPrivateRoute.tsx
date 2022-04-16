@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../actions/user";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import Loader from "../pages/Loader";
 
 const AuthPrivateRoute = ({ children }: any) => {
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
-	const getUserBoi = async () => {
-		try {
-			const token = JSON.parse(localStorage?.getItem("token") as string);
-			if (token) {
-				dispatch(getUser(token, navigate));
-				navigate("/app/today")
-			}
-		} catch (error) {
-			localStorage.removeItem("token");
-			navigate("/login");
-		}
-	};
-	useEffect(() => {
-		getUserBoi();
-	}, [dispatch]);
-	return children
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const getUserBoi = async () => {
+    try {
+      const token = JSON.parse(localStorage?.getItem("token") as string);
+      if (token) {
+        dispatch(getUser(token, navigate, setLoading));
+        navigate("/app/today");
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      localStorage.removeItem("token");
+      navigate("/login");
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getUserBoi();
+  }, [dispatch]);
+  return loading ? <Loader /> : children;
 };
 
 export default AuthPrivateRoute;

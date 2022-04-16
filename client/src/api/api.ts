@@ -378,3 +378,15 @@ export const filerInboxTaskTitle = (token: string) => API.get(`/task/inbox/f/tit
     "token":token
   }
 })
+
+export const filerWeeklyTaskTime = (token: string) => API.get(`/task/weekly/f/time`,{
+  headers:{
+    "token":token
+  }
+})
+
+export const filerWeeklyTaskTitle = (token: string) => API.get(`/task/weekly/f/title`,{
+  headers:{
+    "token":token
+  }
+})

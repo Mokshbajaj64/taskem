@@ -98,7 +98,7 @@ export const updateProject =
     }
   };
 
-export const commentProject = 
+export const commentProject =
   (token: string, projectId: string, comment: string) =>
   async (dispatch: Dispatch) => {
     const { data } = await api.commentProject(token, projectId, comment);

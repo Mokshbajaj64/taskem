@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoTodaySharp, IoCloudDoneSharp } from "react-icons/io5";
 import { Divider, Text, useColorMode } from "@chakra-ui/react";
 import {
@@ -16,7 +16,7 @@ import { getInboxTasks } from "../actions/inboxtask";
 import { getWeeklyTasks } from "../actions/weeklytask";
 import { getProjects } from "../actions/project";
 import { getTags } from "../actions/tag";
-import { getCompletedTasks } from "../actions/completedtasks"
+import { getCompletedTasks } from "../actions/completedtasks";
 import { useSelector } from "react-redux";
 
 const AppSidebar = () => {
@@ -40,19 +40,21 @@ const AppSidebar = () => {
     dispatch(getProjects(token));
   };
   const completeTasksFetch = async () => {
-    dispatch(getCompletedTasks(token))
-  }
+    dispatch(getCompletedTasks(token));
+  };
   useEffect(() => {
     todayTaskFetch();
     inboxTaskFetch();
     weeklyTaskFetch();
     projectsFetch();
     tagsFetch();
-    completeTasksFetch()
+    completeTasksFetch();
   }, [token, dispatch]);
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
-  const completedtasks = useSelector((data:any) => data?.completedtasks?.completedTaskData)
+  const completedtasks = useSelector(
+    (data: any) => data?.completedtasks?.completedTaskData
+  );
   const weeklytask = useSelector(
     (data: any) => data?.weeklytask?.weeklyTaskData
   );

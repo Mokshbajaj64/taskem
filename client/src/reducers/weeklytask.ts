@@ -17,6 +17,10 @@ export const weeklytask = (state = { weeklyTaskData: null }, action: Action) => 
       return (state = { weeklyTaskData: action?.data });
     case "SEARCH_WEEKLY_TASK":
       return (state = { weeklyTaskData: action?.data });
+    case "FILTER_WEEKLY_TIME":
+      return (state = { weeklyTaskData: action?.data });
+    case "FILTER_WEEKLY_TITLE":
+      return (state = { weeklyTaskData: action?.data });
     default:
       return state;
   }

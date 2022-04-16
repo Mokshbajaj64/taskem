@@ -95,7 +95,7 @@ export const updateInboxTask =
     }
   };
 
-export const completeInboxTask = 
+export const completeInboxTask =
   (token: string, taskId: string) => async (dispatch: Dispatch) => {
     const { data } = await api.completeInboxTask(token, taskId);
     if (data?.error) {
@@ -117,7 +117,7 @@ export const completeInboxTask =
     }
   };
 
-export const searchInboxTasks = 
+export const searchInboxTasks =
   (token: string, search: string) => async (dispatch: Dispatch) => {
     const { data } = await api.searchInboxTasks(token, search);
     if (data?.error) {
@@ -139,7 +139,7 @@ export const searchInboxTasks =
     }
   };
 
-export const filerInboxTaskTime = 
+export const filerInboxTaskTime =
   (token: string) => async (dispatch: Dispatch) => {
     const { data } = await api.filerInboxTaskTime(token);
     if (data?.error) {
@@ -161,8 +161,7 @@ export const filerInboxTaskTime =
     }
   };
 
-
-export const filerInboxTaskTitle = 
+export const filerInboxTaskTitle =
   (token: string) => async (dispatch: Dispatch) => {
     const { data } = await api.filerInboxTaskTitle(token);
     if (data?.error) {

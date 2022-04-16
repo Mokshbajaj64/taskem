@@ -98,12 +98,8 @@ export const updateTag =
     }
   };
 
-  export const commentTag =
-  (
-    token: string,
-    tagId: string,
-    comment: string
-  ) =>
+export const commentTag =
+  (token: string, tagId: string, comment: string) =>
   async (dispatch: Dispatch) => {
     const { data } = await api.commentTag(token, tagId, comment);
     if (data?.error) {

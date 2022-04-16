@@ -33,8 +33,10 @@ const Login = () => {
     password: "",
   });
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const loginBoi = () => {
-    dispatch(login(loginData));
+    setLoading(true);
+    dispatch(login(loginData, setLoading));
   };
   return (
     <motion.div
@@ -78,51 +80,71 @@ const Login = () => {
             </Heading>
           </motion.div>
           <div className="flex items-center gap-4">
-            <motion.div
-              className="flex p-2 bg-purple-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("purple");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-green-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("green");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-red-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("red");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-pink-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("pink");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
-            <motion.div
-              className="flex p-2 bg-blue-400 rounded-full cursor-pointer"
-              onClick={() => {
-                setColor("blue");
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-            ></motion.div>
+            {color === "purple" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-purple-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("purple");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "green" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-green-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("green");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "red" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-red-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("red");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "pink" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-pink-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("pink");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
+            {color === "blue" ? (
+              ""
+            ) : (
+              <motion.div
+                className="flex p-2 bg-blue-400 rounded-full cursor-pointer"
+                onClick={() => {
+                  setColor("blue");
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              ></motion.div>
+            )}
           </div>
         </div>
         <img src="/bg1.svg" className="w-[70%] h-[70%]" />
@@ -209,24 +231,31 @@ const Login = () => {
             )}
           </FormControl>
           <Checkbox>Remember me</Checkbox>
-          <motion.div
-            className="flex w-[60%]"
-            whileHover={{
-              scale: 1.05,
-            }}
-          >
-            {loginData?.email?.trim()?.includes("@") &&
-            loginData?.password?.trim()?.length >= 8 &&
-            loginData?.password?.trim()?.length <= 20 ? (
-              <Button colorScheme="blue" width="full" onClick={loginBoi}>
+          {loginData?.email?.trim()?.includes("@") &&
+          loginData?.password?.trim()?.length >= 8 &&
+          loginData?.password?.trim()?.length <= 20 ? (
+            <motion.div
+              className="flex w-[60%]"
+              whileHover={{
+                scale: 1.05,
+              }}
+            >
+              <Button
+                colorScheme="blue"
+                width="full"
+                onClick={loginBoi}
+                isLoading={loading}
+              >
                 Sign in
               </Button>
-            ) : (
+            </motion.div>
+          ) : (
+            <div className="flex w-[60%]">
               <Button colorScheme="blue" width="full" isDisabled={true}>
                 Sign in
               </Button>
-            )}{" "}
-          </motion.div>
+            </div>
+          )}
           <div className="flex items-center gap-1">
             <Text size="md">Don't have any account?</Text>
             <Text

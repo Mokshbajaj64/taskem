@@ -138,3 +138,47 @@ export const searchWeeklyTasks =
       });
     }
   };
+
+export const filerWeeklyTaskTime = 
+  (token: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.filerWeeklyTaskTime(token);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "FILTER_WEEKLY_TIME",
+        data,
+      });
+    }
+  };
+
+export const filerWeeklyTaskTitle = 
+  (token: string) => async (dispatch: Dispatch) => {
+    const { data } = await api.filerWeeklyTaskTitle(token);
+    if (data?.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      dispatch({
+        type: "FILTER_WEEKLY_TITLE",
+        data,
+      });
+    }
+  };

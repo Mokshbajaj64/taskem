@@ -6,9 +6,16 @@ import TaskComponent from "./TaskComponent";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { BsFillFlagFill } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  filerWeeklyTaskTime,
+  filerWeeklyTaskTitle,
+  getWeeklyTasks,
+} from "../actions/weeklytask";
 
 const WeeklyTask = () => {
+  const token = JSON.parse(localStorage?.getItem("token") as string);
+  const dispatch = useDispatch();
   const { colorMode } = useColorMode();
   const weeklytask = useSelector(
     (data: any) => data?.weeklytask?.weeklyTaskData
@@ -39,15 +46,30 @@ const WeeklyTask = () => {
               </div>
             </MenuButton>
             <MenuList>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(getWeeklyTasks(token));
+                }}
+              >
                 <MdSort size="25" />
                 <Text fontSize="md">Custom</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(filerWeeklyTaskTime(token));
+                }}
+              >
                 <BiTime size="25" />
                 <Text fontSize="md">By Time</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem
+                className="flex items-center gap-3"
+                onClick={() => {
+                  dispatch(filerWeeklyTaskTitle(token));
+                }}
+              >
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
               </MenuItem>
@@ -72,15 +94,21 @@ const WeeklyTask = () => {
               </div>
             </MenuButton>
             <MenuList>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem className="flex items-center gap-3" onClick={() => {
+                  dispatch(getWeeklyTasks(token));
+                }}>
                 <MdSort size="25" />
                 <Text fontSize="md">Custom</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem className="flex items-center gap-3" onClick={() => {
+                  dispatch(filerWeeklyTaskTime(token));
+                }}>
                 <BiTime size="25" />
                 <Text fontSize="md">By Time</Text>
               </MenuItem>
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem className="flex items-center gap-3" onClick={() => {
+                  dispatch(filerWeeklyTaskTitle(token));
+                }}>
                 <MdOutlineTitle size="25" />
                 <Text fontSize="md">By Title</Text>
               </MenuItem>
@@ -105,8 +133,10 @@ const WeeklyTask = () => {
         {weeklytask?.length === 0 ? (
           <div className=" flex w-full justify-center items-center">
             <div className="flex-col flex w-full items-center justify-center gap-3">
-              <img src = "/svgexport-27.svg"/>
-              <Heading fontSize = "2xl">Be productive, Start creating tasks</Heading>
+              <img src="/svgexport-27.svg" />
+              <Heading fontSize="2xl">
+                Be productive, Start creating tasks
+              </Heading>
             </div>
           </div>
         ) : (

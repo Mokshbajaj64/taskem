@@ -95,7 +95,7 @@ export const updateTodayTask =
     }
   };
 
-export const complteTodayTask = 
+export const complteTodayTask =
   (token: string, taskId: string) => async (dispatch: Dispatch) => {
     const { data } = await api.complteTodayTask(token, taskId);
     if (data?.error) {
@@ -117,7 +117,7 @@ export const complteTodayTask =
     }
   };
 
-export const searchTodayTasks = 
+export const searchTodayTasks =
   (token: string, search: string) => async (dispatch: Dispatch) => {
     const { data } = await api.searchTodayTasks(token, search);
     if (data?.error) {
@@ -139,7 +139,7 @@ export const searchTodayTasks =
     }
   };
 
-export const filerTodayTaskTime = 
+export const filerTodayTaskTime =
   (token: string) => async (dispatch: Dispatch) => {
     const { data } = await api.filerTodayTaskTime(token);
     if (data?.error) {
@@ -161,7 +161,7 @@ export const filerTodayTaskTime =
     }
   };
 
-export const filerTodayTaskTitle = 
+export const filerTodayTaskTitle =
   (token: string) => async (dispatch: Dispatch) => {
     const { data } = await api.filerTodayTaskTitle(token);
     if (data?.error) {
