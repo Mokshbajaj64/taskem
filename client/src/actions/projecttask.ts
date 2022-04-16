@@ -123,6 +123,16 @@ export const completeProjectTask =
         theme: "dark",
       });
     } else {
+      toast.success("Task completed, cheers :)", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       dispatch({
         type: "COMPLETE_PROJECT_TASKS",
         data,

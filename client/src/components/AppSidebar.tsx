@@ -19,8 +19,11 @@ import { getTags } from "../actions/tag";
 import { getCompletedTasks } from "../actions/completedtasks";
 import { useSelector } from "react-redux";
 import { getDeletedTasks } from "../actions/deletedtasks";
+import Loader from "../pages/Loader"
 
 const AppSidebar = () => {
+  const [loading, setLoading] = useState(true);
+  console.log(loading);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
@@ -54,6 +57,7 @@ const AppSidebar = () => {
     tagsFetch();
     completeTasksFetch();
     deletedTasksFetch();
+    setLoading(false);
   }, [token, dispatch]);
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
@@ -67,6 +71,7 @@ const AppSidebar = () => {
     (data: any) => data?.deletedtasks?.deletedTasksData
   );
   return (
+    loading ? <Loader /> :
     <div
       className="w-[23%] overflow-y-auto fixed h-[calc(100vh-80px)]"
       style={{

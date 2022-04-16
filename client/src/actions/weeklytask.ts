@@ -95,7 +95,7 @@ export const updateWeeklyTask =
     }
   };
 
-export const completeWeeklyTask = 
+export const completeWeeklyTask =
   (token: string, taskId: string) => async (dispatch: Dispatch) => {
     const { data } = await api.completeWeeklyTask(token, taskId);
     if (data?.error) {
@@ -110,6 +110,16 @@ export const completeWeeklyTask =
         theme: "dark",
       });
     } else {
+      toast.success("Task completed, cheers :)", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       dispatch({
         type: "COMPLETE_WEEKLY_TASK",
         data,
@@ -117,7 +127,7 @@ export const completeWeeklyTask =
     }
   };
 
-export const searchWeeklyTasks = 
+export const searchWeeklyTasks =
   (token: string, search: string) => async (dispatch: Dispatch) => {
     const { data } = await api.searchWeeklyTasks(token, search);
     if (data?.error) {
@@ -139,7 +149,7 @@ export const searchWeeklyTasks =
     }
   };
 
-export const filerWeeklyTaskTime = 
+export const filerWeeklyTaskTime =
   (token: string) => async (dispatch: Dispatch) => {
     const { data } = await api.filerWeeklyTaskTime(token);
     if (data?.error) {
@@ -161,7 +171,7 @@ export const filerWeeklyTaskTime =
     }
   };
 
-export const filerWeeklyTaskTitle = 
+export const filerWeeklyTaskTitle =
   (token: string) => async (dispatch: Dispatch) => {
     const { data } = await api.filerWeeklyTaskTitle(token);
     if (data?.error) {

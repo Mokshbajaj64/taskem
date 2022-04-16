@@ -9,6 +9,7 @@ import {
   Avatar,
   Text,
   Divider,
+  Tooltip,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +43,7 @@ import { searchTodayTasks } from "../actions/todaytask";
 import { searchWeeklyTasks } from "../actions/weeklytask";
 import { searchInboxTasks } from "../actions/inboxtask";
 import { projectTasksSearch } from "../actions/projecttask";
+import { format } from "timeago.js";
 
 type Props = {
   isProject?: boolean;
@@ -135,49 +137,44 @@ const AppNavbar = (props: Props) => {
         />
       </InputGroup>
       <div className="flex items-center gap-6">
-        <IconButton
-          aria-label="Add tasks"
-          icon={<IoAdd size="24" className="cursor-pointer" />}
-        />
-        <IconButton
-          aria-label="Dark mode"
-          icon={colorMode === "light" ? <FaMoon /> : <BsSunFill />}
-          onClick={() => {
-            toggleColorMode();
-          }}
-        />
+        <Tooltip label="Add task">
+          <IconButton
+            aria-label="Add tasks"
+            icon={<IoAdd size="24" className="cursor-pointer" />}
+          />
+        </Tooltip>
+        <Tooltip label={colorMode === "light" ? "Dark mode" : "Light mode"}>
+          <IconButton
+            aria-label="Dark mode"
+            icon={colorMode === "light" ? <FaMoon /> : <BsSunFill />}
+            onClick={() => {
+              toggleColorMode();
+            }}
+          />
+        </Tooltip>
         <Popover>
-          <PopoverTrigger>
-            <IconButton
-              aria-label="Notifications"
-              icon={<AiOutlineBell size="24" className="cursor-pointer" />}
-            />
-          </PopoverTrigger>
+          <Tooltip label="Notifications">
+            <PopoverTrigger>
+              <IconButton
+                aria-label="Notifications"
+                icon={<AiOutlineBell size="24" className="cursor-pointer" />}
+              />
+            </PopoverTrigger>
+          </Tooltip>
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
             <PopoverHeader>Notifications!</PopoverHeader>
             <PopoverBody className="flex flex-col gap-2">
-              <div className="flex gap-4 cursor-pointer">
+              <div className="flex gap-4 cursor-pointer p-1 w-full">
                 <Avatar />
                 <div className="flex flex-col items-start gap-1">
                   <Text fontSize="md">
-                    Welcome to Taskem :) time to get started!
+                    Welcome, {userboi?.username}! Your journey toward being
+                    productive begins today!
                   </Text>
                   <Text fontSize="sm" color="gray.300">
-                    10 hours ago
-                  </Text>
-                </div>
-              </div>
-              <Divider />
-              <div className="flex gap-4 cursor-pointer">
-                <Avatar />
-                <div className="flex flex-col items-start gap-1">
-                  <Text fontSize="md">
-                    Welcome to Taskem :) time to get started!
-                  </Text>
-                  <Text fontSize="sm" color="gray.300">
-                    10 hours ago
+                    {format(userboi?.createdAt)}
                   </Text>
                 </div>
               </div>
@@ -185,9 +182,11 @@ const AppNavbar = (props: Props) => {
           </PopoverContent>
         </Popover>
         <Menu>
-          <MenuButton>
-            <Avatar name={userboi?.username} className="cursor-pointer" />
-          </MenuButton>
+          <Tooltip label={userboi?.username}>
+            <MenuButton>
+              <Avatar name={userboi?.username} className="cursor-pointer" />
+            </MenuButton>
+          </Tooltip>
           <MenuList>
             <MenuItem
               className="flex gap-4 p-2 rounded-2xl"

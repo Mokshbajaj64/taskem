@@ -19,6 +19,16 @@ export const login =
         theme: "dark",
       });
     } else {
+      toast.success("Logged in successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setLoading(false);
       window.location.href = "/app/today";
       dispatch({
@@ -49,7 +59,7 @@ export const register =
       });
     } else {
       setLoading(false);
-      toast.success("User created now login :)", {
+      toast.success("User created successfully now login :)", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

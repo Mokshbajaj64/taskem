@@ -4,6 +4,7 @@ import {
   IconButton,
   useColorMode,
   useDisclosure,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
 import { BsFillEmojiHeartEyesFill } from "react-icons/bs";
@@ -119,14 +120,16 @@ const HomeNavbar = () => {
             scale: 1.1,
           }}
         >
-          <IconButton
-            aria-label="Dark mode"
-            icon={colorMode === "light" ? <FaMoon /> : <BsSunFill />}
-            onClick={() => {
-              toggleColorMode();
-            }}
-            className="mr-2 md:mr-8 ml-3 md:ml-0"
-          />
+          <Tooltip label={colorMode === "light" ? "Dark mode" : "Light mode"}>
+            <IconButton
+              aria-label="Dark mode"
+              icon={colorMode === "light" ? <FaMoon /> : <BsSunFill />}
+              onClick={() => {
+                toggleColorMode();
+              }}
+              className="mr-2 md:mr-8 ml-3 md:ml-0"
+            />
+          </Tooltip>
         </motion.div>
         <motion.div
           animate={{

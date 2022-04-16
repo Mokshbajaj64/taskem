@@ -11,6 +11,7 @@ import {
   useColorMode,
   InputGroup,
   InputRightElement,
+  Tooltip
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import "../App.css";
@@ -151,6 +152,7 @@ const Login = () => {
       </div>
       <div className="w-[56%] flex flex-col justify-center gap-8">
         <div className="w-[80%]">
+        <Tooltip label={colorMode === "light" ? "Dark mode" : "Light mode"}>
           <IconButton
             aria-label="Dark mode"
             icon={colorMode === "light" ? <FaMoon /> : <BsSunFill />}
@@ -159,6 +161,7 @@ const Login = () => {
               toggleColorMode();
             }}
           />
+          </Tooltip>
         </div>
         <div className="flex flex-col items-start">
           <Heading as="h3" fontSize={"4xl"}>
