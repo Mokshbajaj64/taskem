@@ -41,6 +41,7 @@ router.post(
           userId: userId,
           isTodayTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -60,6 +61,7 @@ router.get('/today', isAuthenticated, async (req: Request, res: Response) => {
       userId: userId,
       isTodayTask: true,
       completed: false,
+      deleted: false,
     });
     res.json(tasks);
   } catch (error: any) {
@@ -80,17 +82,21 @@ router.delete(
         _id: req?.params?.id,
         userId: userId,
         isTodayTask: true,
+        deleted: false,
       });
       if (task === null) {
         res.json({
           error: 'Task not found',
         });
       } else {
-        await Task.findByIdAndDelete(req?.params?.id);
+        await Task.findByIdAndUpdate(req?.params?.id, {
+          deleted: true,
+        });
         const tasks = await Task.find({
           userId: userId,
           isTodayTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -123,6 +129,7 @@ router.put(
         _id: req?.params?.id,
         userId: userId,
         isTodayTask: true,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -143,6 +150,7 @@ router.put(
             userId: userId,
             isTodayTask: true,
             completed: false,
+            deleted: false,
           });
           res.json(tasks);
         }
@@ -167,6 +175,7 @@ router.put(
         userId: userId,
         isTodayTask: true,
         completed: false,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -180,6 +189,7 @@ router.put(
           userId: userId,
           isTodayTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -197,15 +207,16 @@ router.get(
   isAuthenticated,
   async (req: Request, res: Response) => {
     try {
-      const searchboi = new RegExp(req.params.search, "i");
+      const searchboi = new RegExp(req.params.search, 'i');
       const userId = res?.locals?.userId;
       const tasks = await Task.find({
         userId: userId,
-        isTodayTask:true,
-        title:searchboi,
-        completed:false
+        isTodayTask: true,
+        title: searchboi,
+        completed: false,
+        deleted: false,
       });
-      res.json(tasks)
+      res.json(tasks);
     } catch (error: any) {
       res.json({
         error: error.message,
@@ -215,42 +226,52 @@ router.get(
 );
 
 //sort by time todaytasks
-router.get('/today/f/time', isAuthenticated, async (req: Request, res: Response) => {
-  try {
-    const userId = res?.locals?.userId;
-    const tasks = await Task.find({
-      userId: userId,
-      isTodayTask: true,
-      completed: false,
-    }).sort({
-      "createdAt":-1
-    })
-    res.json(tasks);
-  } catch (error: any) {
-    res.json({
-      error: error.message,
-    });
+router.get(
+  '/today/f/time',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isTodayTask: true,
+        completed: false,
+        deleted: false,
+      }).sort({
+        createdAt: -1,
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
-});
+);
 
 //sort by title todaytasks
-router.get('/today/f/title', isAuthenticated, async (req: Request, res: Response) => {
-  try {
-    const userId = res?.locals?.userId;
-    const tasks = await Task.find({
-      userId: userId,
-      isTodayTask: true,
-      completed: false,
-    }).sort({
-      "title":-1
-    })
-    res.json(tasks);
-  } catch (error: any) {
-    res.json({
-      error: error.message,
-    });
+router.get(
+  '/today/f/title',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isTodayTask: true,
+        completed: false,
+        deleted: false,
+      }).sort({
+        title: -1,
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
-});
+);
 
 //create a inboxtask
 router.post(
@@ -287,6 +308,7 @@ router.post(
           userId: userId,
           isInboxTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -306,6 +328,7 @@ router.get('/inbox', isAuthenticated, async (req: Request, res: Response) => {
       userId: userId,
       isInboxTask: true,
       completed: false,
+      deleted: false,
     });
     res.json(tasks);
   } catch (error: any) {
@@ -326,17 +349,21 @@ router.delete(
         _id: req?.params?.id,
         userId: userId,
         isInboxTask: true,
+        deleted: false,
       });
       if (task === null) {
         res.json({
           error: 'Task not found',
         });
       } else {
-        await Task.findByIdAndDelete(req?.params?.id);
+        await Task.findByIdAndUpdate(req?.params?.id, {
+          deleted: true,
+        });
         const tasks = await Task.find({
           userId: userId,
           isInboxTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -369,6 +396,7 @@ router.put(
         _id: req?.params?.id,
         userId: userId,
         isInboxTask: true,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -389,6 +417,7 @@ router.put(
             userId: userId,
             isInboxTask: true,
             completed: false,
+            deleted: false,
           });
           res.json(tasks);
         }
@@ -413,6 +442,7 @@ router.put(
         userId: userId,
         isInboxTask: true,
         completed: false,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -426,6 +456,7 @@ router.put(
           userId: userId,
           isInboxTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -443,15 +474,16 @@ router.get(
   isAuthenticated,
   async (req: Request, res: Response) => {
     try {
-      const searchboi = new RegExp(req.params.search, "i");
+      const searchboi = new RegExp(req.params.search, 'i');
       const userId = res?.locals?.userId;
       const tasks = await Task.find({
         userId: userId,
-        isInboxTask:true,
-        title:searchboi,
-        completed:false
+        isInboxTask: true,
+        title: searchboi,
+        completed: false,
+        deleted: false,
       });
-      res.json(tasks)
+      res.json(tasks);
     } catch (error: any) {
       res.json({
         error: error.message,
@@ -461,42 +493,52 @@ router.get(
 );
 
 //sort by time inboxtasks
-router.get('/inbox/f/time', isAuthenticated, async (req: Request, res: Response) => {
-  try {
-    const userId = res?.locals?.userId;
-    const tasks = await Task.find({
-      userId: userId,
-      isInboxTask: true,
-      completed: false,
-    }).sort({
-      "createdAt":-1
-    })
-    res.json(tasks);
-  } catch (error: any) {
-    res.json({
-      error: error.message,
-    });
+router.get(
+  '/inbox/f/time',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isInboxTask: true,
+        completed: false,
+        deleted: false,
+      }).sort({
+        createdAt: -1,
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
-});
+);
 
 //sort by title inboxtasks
-router.get('/inbox/f/title', isAuthenticated, async (req: Request, res: Response) => {
-  try {
-    const userId = res?.locals?.userId;
-    const tasks = await Task.find({
-      userId: userId,
-      isInboxTask: true,
-      completed: false,
-    }).sort({
-      "title":-1
-    })
-    res.json(tasks);
-  } catch (error: any) {
-    res.json({
-      error: error.message,
-    });
+router.get(
+  '/inbox/f/title',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isInboxTask: true,
+        completed: false,
+        deleted: false,
+      }).sort({
+        title: -1,
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
-});
+);
 
 //create a weeklytask
 router.post(
@@ -533,6 +575,7 @@ router.post(
           userId: userId,
           isWeeklyTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -552,6 +595,7 @@ router.get('/weekly', isAuthenticated, async (req: Request, res: Response) => {
       userId: userId,
       isWeeklyTask: true,
       completed: false,
+      deleted: false,
     });
     res.json(tasks);
   } catch (error: any) {
@@ -572,17 +616,21 @@ router.delete(
         _id: req?.params?.id,
         userId: userId,
         isWeeklyTask: true,
+        deleted: false,
       });
       if (task === null) {
         res.json({
           error: 'Task not found',
         });
       } else {
-        await Task.findByIdAndDelete(req?.params?.id);
+        await Task.findByIdAndUpdate(req?.params?.id, {
+          deleted: true,
+        });
         const tasks = await Task.find({
           userId: userId,
           isWeeklyTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -615,6 +663,7 @@ router.put(
         _id: req?.params?.id,
         userId: userId,
         isWeeklyTask: true,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -635,6 +684,7 @@ router.put(
             userId: userId,
             isWeeklyTask: true,
             completed: false,
+            deleted: false,
           });
           res.json(tasks);
         }
@@ -659,6 +709,7 @@ router.put(
         userId: userId,
         isWeeklyTask: true,
         completed: false,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -672,6 +723,7 @@ router.put(
           userId: userId,
           isWeeklyTask: true,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -689,15 +741,16 @@ router.get(
   isAuthenticated,
   async (req: Request, res: Response) => {
     try {
-      const searchboi = new RegExp(req.params.search, "i");
+      const searchboi = new RegExp(req.params.search, 'i');
       const userId = res?.locals?.userId;
       const tasks = await Task.find({
         userId: userId,
-        isWeeklyTask:true,
-        title:searchboi,
-        completed:false
+        isWeeklyTask: true,
+        title: searchboi,
+        completed: false,
+        deleted: false,
       });
-      res.json(tasks)
+      res.json(tasks);
     } catch (error: any) {
       res.json({
         error: error.message,
@@ -716,10 +769,39 @@ router.get(
       const task1 = await Task.find({
         userId: userId,
         completed: true,
+        deleted: false,
       });
       const task2 = await ProjectTasks.find({
         userId: userId,
         completed: true,
+        deleted: false,
+      });
+      const tasks = [...task1, ...task2];
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
+  }
+);
+
+//get deleted tasks
+router.get(
+  '/deletedtasks',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const task1 = await Task.find({
+        userId: userId,
+        completed: false,
+        deleted: true,
+      });
+      const task2 = await ProjectTasks.find({
+        userId: userId,
+        completed: false,
+        deleted: true,
       });
       const tasks = [...task1, ...task2];
       res.json(tasks);
@@ -732,42 +814,51 @@ router.get(
 );
 
 //sort by time weeklytasks
-router.get('/weekly/f/time', isAuthenticated, async (req: Request, res: Response) => {
-  try {
-    const userId = res?.locals?.userId;
-    const tasks = await Task.find({
-      userId: userId,
-      isWeeklyTask: true,
-      completed: false,
-    }).sort({
-      "createdAt":-1
-    })
-    res.json(tasks);
-  } catch (error: any) {
-    res.json({
-      error: error.message,
-    });
+router.get(
+  '/weekly/f/time',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isWeeklyTask: true,
+        completed: false,
+        deleted: false,
+      }).sort({
+        createdAt: -1,
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
-});
+);
 
 //sort by title weeklytasks
-router.get('/weekly/f/title', isAuthenticated, async (req: Request, res: Response) => {
-  try {
-    const userId = res?.locals?.userId;
-    const tasks = await Task.find({
-      userId: userId,
-      isWeeklyTask: true,
-      completed: false,
-    }).sort({
-      "title":-1
-    })
-    res.json(tasks);
-  } catch (error: any) {
-    res.json({
-      error: error.message,
-    });
+router.get(
+  '/weekly/f/title',
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    try {
+      const userId = res?.locals?.userId;
+      const tasks = await Task.find({
+        userId: userId,
+        isWeeklyTask: true,
+        completed: false,
+        deleted: false,
+      }).sort({
+        title: -1,
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res.json({
+        error: error.message,
+      });
+    }
   }
-});
-
+);
 
 export default router;

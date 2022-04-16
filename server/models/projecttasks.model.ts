@@ -5,7 +5,8 @@ export interface ProjectTaskModel extends mongoose.Document {
   description: string;
   userId: string;
   completed: boolean;
-  projectId: string
+  deleted: boolean;
+  projectId: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,15 +27,22 @@ const ProjectTasks = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project"
-    }
+      ref: 'Project',
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const ProjectTasksBoi = mongoose.model<ProjectTaskModel>('ProjectTasks', ProjectTasks);
+const ProjectTasksBoi = mongoose.model<ProjectTaskModel>(
+  'ProjectTasks',
+  ProjectTasks
+);
 export default ProjectTasksBoi;

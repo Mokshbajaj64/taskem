@@ -20,7 +20,7 @@ import { useDispatch } from "react-redux";
 import { deleteTodayTask, complteTodayTask } from "../actions/todaytask";
 import { deleteInboxTask, completeInboxTask } from "../actions/inboxtask";
 import { deleteWeeklyTask, completeWeeklyTask } from "../actions/weeklytask";
-import { deleteProjectTask,completeProjectTask } from "../actions/projecttask"
+import { deleteProjectTask, completeProjectTask } from "../actions/projecttask";
 
 type Props = {
   title: string;
@@ -29,7 +29,7 @@ type Props = {
   projectId?: string;
   isTodayTask?: boolean;
   isInboxTask?: boolean;
-  isProjectTask?: boolean
+  isProjectTask?: boolean;
 };
 
 const TaskComponent = (props: Props) => {
@@ -60,11 +60,11 @@ const TaskComponent = (props: Props) => {
     dispatch(completeWeeklyTask(token, props?.id));
   };
   const deleteProjectTaskBoi = () => {
-    dispatch(deleteProjectTask(token,props?.projectId as string,props?.id))
-  }
+    dispatch(deleteProjectTask(token, props?.projectId as string, props?.id));
+  };
   const completeProjectTaskBoi = () => {
-    dispatch(completeProjectTask(token,props?.projectId as string, props?.id))
-  }
+    dispatch(completeProjectTask(token, props?.projectId as string, props?.id));
+  };
   return (
     <motion.div
       className="flex flex-col w-full"
@@ -90,7 +90,9 @@ const TaskComponent = (props: Props) => {
                   ? completeTaskBoi
                   : props?.isInboxTask
                   ? completeTaskBoiInbox
-                  : props?.isProjectTask ? completeProjectTaskBoi : completeTaskBoiWeekly
+                  : props?.isProjectTask
+                  ? completeProjectTaskBoi
+                  : completeTaskBoiWeekly
               }
             />
             <div className="flex flex-col gap-1">
@@ -155,8 +157,8 @@ const TaskComponent = (props: Props) => {
           id={props?.id}
           isTodayTask={props?.isTodayTask}
           isInboxTask={props?.isInboxTask}
-          projectId = {props?.projectId}
-          isProjectTask = {props?.isProjectTask}
+          projectId={props?.projectId}
+          isProjectTask={props?.isProjectTask}
         />
       )}
       <Divider />
@@ -188,7 +190,9 @@ const TaskComponent = (props: Props) => {
                     ? deleteTaskBoi()
                     : props?.isInboxTask
                     ? deleteTaskBoiInbox()
-                    : props?.isProjectTask ? deleteProjectTaskBoi() : deleteTaskBoiWeekly();
+                    : props?.isProjectTask
+                    ? deleteProjectTaskBoi()
+                    : deleteTaskBoiWeekly();
                 }}
               >
                 Delete

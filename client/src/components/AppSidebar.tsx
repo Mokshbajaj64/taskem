@@ -18,6 +18,7 @@ import { getProjects } from "../actions/project";
 import { getTags } from "../actions/tag";
 import { getCompletedTasks } from "../actions/completedtasks";
 import { useSelector } from "react-redux";
+import { getDeletedTasks } from "../actions/deletedtasks";
 
 const AppSidebar = () => {
   const navigate = useNavigate();
@@ -42,6 +43,9 @@ const AppSidebar = () => {
   const completeTasksFetch = async () => {
     dispatch(getCompletedTasks(token));
   };
+  const deletedTasksFetch = async () => {
+    dispatch(getDeletedTasks(token));
+  };
   useEffect(() => {
     todayTaskFetch();
     inboxTaskFetch();
@@ -49,6 +53,7 @@ const AppSidebar = () => {
     projectsFetch();
     tagsFetch();
     completeTasksFetch();
+    deletedTasksFetch();
   }, [token, dispatch]);
   const inboxtask = useSelector((data: any) => data?.inboxtask?.inboxTaskData);
   const todaytask = useSelector((data: any) => data?.todaytask?.todayTaskData);
@@ -57,6 +62,9 @@ const AppSidebar = () => {
   );
   const weeklytask = useSelector(
     (data: any) => data?.weeklytask?.weeklyTaskData
+  );
+  const deletedtasks = useSelector(
+    (data: any) => data?.deletedtasks?.deletedTasksData
   );
   return (
     <div
@@ -252,7 +260,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Trash</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                2
+                {deletedtasks?.length}
               </Text>
             </motion.div>
           </div>
@@ -300,7 +308,7 @@ const AppSidebar = () => {
                 <Text fontSize="md">Trash</Text>
               </div>
               <Text fontSize="md" color="gray.500">
-                2
+                {deletedtasks?.length}
               </Text>
             </motion.div>
           </div>

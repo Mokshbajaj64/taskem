@@ -1,10 +1,9 @@
-import User from '../models/user.model';
 import ProjectTasks, { ProjectTaskModel } from '../models/projecttasks.model';
-import { omit } from 'lodash';
 import { body, validationResult } from 'express-validator';
 import express, { Request, Response, Router } from 'express';
 import isAuthenticated from '../middlewares/isAuthenticated';
 import Project from '../models/project.model';
+
 const router: Router = express.Router();
 
 //create a projecttask
@@ -47,6 +46,7 @@ router.post(
             userId: userId,
             projectId: projectId,
             completed: false,
+            deleted: false,
           });
           res.json(tasks);
         }
@@ -70,6 +70,7 @@ router.get(
         userId: userId,
         projectId: projectId,
         completed: false,
+        deleted: false,
       });
       res.json(tasks);
     } catch (error: any) {
@@ -93,17 +94,21 @@ router.delete(
         projectId: projectId,
         completed: false,
         _id: taskId,
+        deleted: false,
       });
       if (task === null) {
         res.json({
           error: 'Task not found',
         });
       } else {
-        await ProjectTasks.findByIdAndDelete(taskId);
+        await ProjectTasks.findByIdAndUpdate(taskId, {
+          deleted: true,
+        });
         const tasks = await ProjectTasks.find({
           userId: userId,
           projectId: projectId,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -138,6 +143,7 @@ router.put(
         projectId: projectId,
         completed: false,
         _id: taskId,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -158,6 +164,7 @@ router.put(
             userId: userId,
             projectId: projectId,
             completed: false,
+            deleted: false,
           });
           res.json(tasks);
         }
@@ -184,6 +191,7 @@ router.put(
         projectId: projectId,
         completed: false,
         _id: taskId,
+        deleted: false,
       });
       if (task === null) {
         res.json({
@@ -197,6 +205,7 @@ router.put(
           userId: userId,
           projectId: projectId,
           completed: false,
+          deleted: false,
         });
         res.json(tasks);
       }
@@ -222,6 +231,7 @@ router.get(
         title: searchboi,
         completed: false,
         projectId: projectId,
+        deleted: false,
       });
       res.json(tasks);
     } catch (error: any) {
@@ -244,6 +254,7 @@ router.get(
         userId: userId,
         projectId: projectId,
         completed: false,
+        deleted: false,
       }).sort({
         createdAt: -1,
       });
@@ -268,6 +279,7 @@ router.get(
         userId: userId,
         projectId: projectId,
         completed: false,
+        deleted: false,
       }).sort({
         title: -1,
       });

@@ -429,3 +429,10 @@ export const projectTaskFilterTitle = (token: string, projectId: string) =>
       token: token,
     },
   });
+
+export const getDeletedTasks = (token: string) =>
+  API.get(`/task/deletedtasks`, {
+    headers: {
+      token: token,
+    },
+  });

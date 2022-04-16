@@ -8,6 +8,7 @@ export interface TaskModel extends mongoose.Document {
   isInboxTask: boolean;
   isWeeklyTask: boolean;
   completed: boolean;
+  deleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -34,6 +35,10 @@ const TaskSchema = new mongoose.Schema(
       type: Boolean,
     },
     completed: {
+      type: Boolean,
+      default: false,
+    },
+    deleted: {
       type: Boolean,
       default: false,
     },
