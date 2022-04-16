@@ -41,8 +41,14 @@ import { FcTodoList } from "react-icons/fc";
 import { searchTodayTasks } from "../actions/todaytask";
 import { searchWeeklyTasks } from "../actions/weeklytask";
 import { searchInboxTasks } from "../actions/inboxtask";
+import { projectTasksSearch } from "../actions/projecttask";
 
-const AppNavbar = () => {
+type Props = {
+  isProject?: boolean;
+  projectId?: string;
+};
+
+const AppNavbar = (props: Props) => {
   const token = JSON.parse(localStorage?.getItem("token") as string);
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
@@ -55,7 +61,6 @@ const AppNavbar = () => {
   };
   const userboi = useSelector((data: any) => data?.user?.authData);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [search, setSearch] = useState("");
   return (
     <motion.div
       initial={{
@@ -117,6 +122,14 @@ const AppNavbar = () => {
               ? dispatch(searchTodayTasks(token, event?.target?.value))
               : window.location.pathname === "/app/inbox"
               ? dispatch(searchInboxTasks(token, event?.target?.value))
+              : props?.isProject
+              ? dispatch(
+                  projectTasksSearch(
+                    token,
+                    props?.projectId as string,
+                    event?.target?.value
+                  )
+                )
               : dispatch(searchWeeklyTasks(token, event?.target?.value));
           }}
         />

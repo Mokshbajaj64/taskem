@@ -311,7 +311,7 @@ export const deleteProjectTask = (
 export const updateProjectTask = (
   token: string,
   projectId: string,
-  data: { title: string; description: string; },
+  data: { title: string; description: string },
   taskId: string
 ) =>
   API.put(`projecttask/${projectId}/${taskId}`, data, {
@@ -325,68 +325,107 @@ export const completeProjectTask = (
   projectId: string,
   taskId: string
 ) =>
-  API.put(`projecttask/${projectId}/${taskId}/complete`, {}, {
+  API.put(
+    `projecttask/${projectId}/${taskId}/complete`,
+    {},
+    {
+      headers: {
+        token: token,
+      },
+    }
+  );
+
+export const getCompletedTasks = (token: string) =>
+  API.get(`/task/completedtasks`, {
     headers: {
       token: token,
     },
   });
 
-export const getCompletedTasks = (token: string) => API.get(`/task/completedtasks`,{
-  headers:{
-    "token":token
-  }
-})
+export const searchTodayTasks = (token: string, search: string) =>
+  API.get(`/task/today/s/${search}`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const searchTodayTasks = (token: string,search: string) => API.get(`/task/today/s/${search}`,{
-  headers:{
-    "token":token
-  }
-})
+export const searchInboxTasks = (token: string, search: string) =>
+  API.get(`/task/inbox/s/${search}`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const searchInboxTasks = (token: string,search: string) => API.get(`/task/inbox/s/${search}`,{
-  headers:{
-    "token":token
-  }
-})
+export const searchWeeklyTasks = (token: string, search: string) =>
+  API.get(`/task/weekly/s/${search}`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const searchWeeklyTasks = (token:string,search: string) => API.get(`/task/weekly/s/${search}`,{
-  headers:{
-    "token":token
-  }
-})
+export const filerTodayTaskTime = (token: string) =>
+  API.get(`/task/today/f/time`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const filerTodayTaskTime = (token: string) => API.get(`/task/today/f/time`,{
-  headers:{
-    "token":token
-  }
-})
+export const filerTodayTaskTitle = (token: string) =>
+  API.get(`/task/today/f/title`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const filerTodayTaskTitle = (token: string) => API.get(`/task/today/f/title`,{
-  headers:{
-    "token":token
-  }
-})
+export const filerInboxTaskTime = (token: string) =>
+  API.get(`/task/inbox/f/time`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const filerInboxTaskTime = (token: string) => API.get(`/task/inbox/f/time`,{
-  headers:{
-    "token":token
-  }
-})
+export const filerInboxTaskTitle = (token: string) =>
+  API.get(`/task/inbox/f/title`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const filerInboxTaskTitle = (token: string) => API.get(`/task/inbox/f/title`,{
-  headers:{
-    "token":token
-  }
-})
+export const filerWeeklyTaskTime = (token: string) =>
+  API.get(`/task/weekly/f/time`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const filerWeeklyTaskTime = (token: string) => API.get(`/task/weekly/f/time`,{
-  headers:{
-    "token":token
-  }
-})
+export const filerWeeklyTaskTitle = (token: string) =>
+  API.get(`/task/weekly/f/title`, {
+    headers: {
+      token: token,
+    },
+  });
 
-export const filerWeeklyTaskTitle = (token: string) => API.get(`/task/weekly/f/title`,{
-  headers:{
-    "token":token
-  }
-})
+export const projectTasksSearch = (
+  token: string,
+  projectId: string,
+  search: string
+) =>
+  API.get(`/projecttask/${projectId}/s/${search}`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const projectTaskFilterTime = (token: string, projectId: string) =>
+  API.get(`/projecttask/${projectId}/f/time`, {
+    headers: {
+      token: token,
+    },
+  });
+
+export const projectTaskFilterTitle = (token: string, projectId: string) =>
+  API.get(`/projecttask/${projectId}/f/title`, {
+    headers: {
+      token: token,
+    },
+  });

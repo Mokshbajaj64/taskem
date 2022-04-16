@@ -22,12 +22,19 @@ import EditProjectModal from "./EditProjectModal";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteProject } from "../actions/project";
 import { useNavigate } from "react-router-dom";
+import {
+  getProjectTasks,
+  projectTaskFilterTime,
+  projectTaskFilterTitle,
+} from "../actions/projecttask";
 
 const ProjectTask = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const project = useSelector((data: any) => data?.singleproject);
-  const projecttasks = useSelector((data:any) => data?.projecttask?.projectTaskData)
+  const projecttasks = useSelector(
+    (data: any) => data?.projecttask?.projectTaskData
+  );
   const { colorMode } = useColorMode();
   const {
     isOpen: commentIsOpen,
@@ -95,15 +102,30 @@ const ProjectTask = () => {
                 </div>
               </MenuButton>
               <MenuList>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(getProjectTasks(token, project?._id));
+                  }}
+                >
                   <MdSort size="25" />
                   <Text fontSize="md">Custom</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(projectTaskFilterTime(token, project?._id));
+                  }}
+                >
                   <BiTime size="25" />
                   <Text fontSize="md">By Time</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(projectTaskFilterTitle(token, project?._id));
+                  }}
+                >
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
                 </MenuItem>
@@ -182,15 +204,30 @@ const ProjectTask = () => {
                 </div>
               </MenuButton>
               <MenuList>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(getProjectTasks(token, project?._id));
+                  }}
+                >
                   <MdSort size="25" />
                   <Text fontSize="md">Custom</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(projectTaskFilterTime(token, project?._id));
+                  }}
+                >
                   <BiTime size="25" />
                   <Text fontSize="md">By Time</Text>
                 </MenuItem>
-                <MenuItem className="flex items-center gap-3">
+                <MenuItem
+                  className="flex items-center gap-3"
+                  onClick={() => {
+                    dispatch(projectTaskFilterTitle(token, project?._id));
+                  }}
+                >
                   <MdOutlineTitle size="25" />
                   <Text fontSize="md">By Title</Text>
                 </MenuItem>
@@ -239,23 +276,36 @@ const ProjectTask = () => {
         )}
       </div>
       <div className="flex flex-col w-full items-start mt-5 gap-4">
-          {projecttasks?.map((task:any,index:React.Key) => (
-              <TaskComponent title = {task?.title} description = {task?.description} id = {task?._id} isProjectTask = {true} projectId = {task?.projectId}/>
-            ))}
-        <AddTaskComponent isProjectTask = {true} projectId = {project?._id}/>
+        {projecttasks?.map((task: any, index: React.Key) => (
+          <TaskComponent
+            title={task?.title}
+            description={task?.description}
+            id={task?._id}
+            isProjectTask={true}
+            projectId={task?.projectId}
+          />
+        ))}
+        <AddTaskComponent isProjectTask={true} projectId={project?._id} />
         {projecttasks?.length === 0 ? (
           <div className=" flex w-full justify-center items-center">
             <div className="flex-col flex w-full items-center justify-center gap-3">
-              <img src = "/svgexport-27.svg"/>
-              <Heading fontSize = "2xl">Be productive, Start creating tasks</Heading>
+              <img src="/svgexport-27.svg" />
+              <Heading fontSize="2xl">
+                Be productive, Start creating tasks
+              </Heading>
             </div>
           </div>
         ) : (
           ""
         )}
       </div>
-{/*      comment modal stuff
-*/}      <CommentsModal isOpen={commentIsOpen} onClose={commentOnClose} data = {project}/>
+      {/*      comment modal stuff
+       */}{" "}
+      <CommentsModal
+        isOpen={commentIsOpen}
+        onClose={commentOnClose}
+        data={project}
+      />
       {/* dleete project modal stuff */}
       <AlertDialog
         isOpen={deleteIsOpen}
@@ -287,10 +337,10 @@ const ProjectTask = () => {
         isOpen={editIsOpen}
         isTag={false}
         onClose={editOnClose}
-        name = {project?.name}
-        description = {project?.description}
-        color = {project?.color}
-        id = {project?._id}
+        name={project?.name}
+        description={project?.description}
+        color={project?.color}
+        id={project?._id}
       />
     </div>
   );

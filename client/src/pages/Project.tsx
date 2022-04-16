@@ -6,7 +6,7 @@ import ProjectTask from "../components/ProjectTask";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProject } from "../actions/singleproject";
-import { getProjectTasks } from "../actions/projecttask"
+import { getProjectTasks } from "../actions/projecttask";
 
 const Project = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Project = () => {
   const { projectId } = useParams();
   useEffect(() => {
     dispatch(getProject(token, projectId as string));
-    dispatch(getProjectTasks(token, projectId as string))
+    dispatch(getProjectTasks(token, projectId as string));
   }, [projectId, dispatch, token]);
   return (
     <motion.div
@@ -28,7 +28,7 @@ const Project = () => {
         opacity: 0,
       }}
     >
-      <AppNavbar />
+      <AppNavbar isProject={true} projectId={projectId} />
       <div className="mt-[80px] w-full flex overflow-hidden">
         <AppSidebar />
         <ProjectTask />
