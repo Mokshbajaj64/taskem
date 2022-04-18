@@ -32,3 +32,5 @@ Taskem is a task manager that helps you stay organized while boosting your creat
 
 ## Contibutors
 ### [Itatchi](https://github.com/ItachiBoi) - For playtesting :)
+
+It is mobile responsive but I recommend to use in pc for a better experience :)
