@@ -29,3 +29,6 @@ Taskem is a task manager that helps you stay organized while boosting your creat
 ### Available in both dark and light mode (images are kinda blue idk why check website instead of seeing images)
 <img src = "https://github.com/VarunLanjhara/OnlyUwU/blob/main/public/TaskemImage/1.png" alt = "">
 <img src = "https://github.com/VarunLanjhara/OnlyUwU/blob/main/public/TaskemImage/2.png" alt = "">
+
+## Contibutors
+### [Itatchi](https://github.com/ItachiBoi) - For playtesting :)
